@@ -38,7 +38,7 @@ class Lieu
     private $longitude;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Ville::class)
+     * @ORM\ManyToOne(targetEntity=Ville::class, cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $ville;
