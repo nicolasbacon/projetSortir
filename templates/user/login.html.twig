@@ -1,0 +1,22 @@
+{% extends'layout' %}
+
+{% block main %}
+    <div class="login">
+        <form method="post">
+            <label for="username">Identifiant : </label>
+            <input type="text" name="_username" id="username">
+
+            <label for="password">mot de passe :</label>
+            <input type="password" name="_password" id="password">
+
+            <input type="checkbox" id="remember_me" name="_remember_me" checked/>
+            <label for="remember_me">Ce souvenir de moi</label>
+
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
