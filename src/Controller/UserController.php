@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/register" name="user_register")
+     * @Route("/register", name="user_register")
      */
     public function register(Request $request, EntityManagerInterface $em)
     {
