@@ -23,6 +23,11 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $username;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $nom;
 
     /**
@@ -187,10 +192,23 @@ class User implements UserInterface
         return null;
     }
 
+    /**
+     * @return mixed
+     */
     public function getUsername()
     {
-        // TODO: Implement getUsername() method.
+        return $this->username;
     }
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username): void
+    {
+        $this->username = $username;
+    }
+
+
 
     public function eraseCredentials(){}
 
@@ -221,4 +239,7 @@ class User implements UserInterface
 
         return $this;
     }
+
+
+
 }

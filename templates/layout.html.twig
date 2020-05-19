@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Bucket-list{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset ("css/app.css") }}">
+
+    <link rel="icon" href="{{ asset('img/favicon.png') }}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <a class="site-title" href="{{ path('accueil') }}" title="Bucket-List | Accueil">
+            <img src="{{ asset('img/logo.png') }}" alt="Bucket-List"> Bucket-List
+        </a>
+        {% include('inc/nav.html.twig') %}
+    </header>
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+    <footer>
+        &copy; BollobArt -- {{ "now"|date("Y") }}
+        By Fabián Alexis (https://github.com/fabianalexisinostroza/Antu) [<a
+                href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>], <a
+                href="https://commons.wikimedia.org/wiki/File%3AAntu_color-fill.svg">via Wikimedia
+            Commons</a>
+    </footer>
+</div>
+</body>
+</html>
