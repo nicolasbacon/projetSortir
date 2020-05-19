@@ -72,6 +72,12 @@ class Sortie
      */
     private $organisateur;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Lieu::class, cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $lieu;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
@@ -142,12 +148,12 @@ class Sortie
         return $this;
     }
 
-    public function getInfosSortie(): ?Lieu
+    public function getInfosSortie(): string
     {
         return $this->infosSortie;
     }
 
-    public function setInfosSortie(?Lieu $infosSortie): self
+    public function setInfosSortie(string $infosSortie): self
     {
         $this->infosSortie = $infosSortie;
 
@@ -211,6 +217,18 @@ class Sortie
     public function setOrganisateur(?User $organisateur): self
     {
         $this->organisateur = $organisateur;
+
+        return $this;
+    }
+
+    public function getLieu(): ?Lieu
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(?Lieu $lieu): self
+    {
+        $this->lieu = $lieu;
 
         return $this;
     }
