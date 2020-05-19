@@ -24,7 +24,7 @@ security:
 
     encoders:
         App\Entity\User:
-            algorithm: bcrypt
+            algorithm: 'bcrypt'
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
