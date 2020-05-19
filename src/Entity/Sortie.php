@@ -45,8 +45,7 @@ class Sortie
     private $nbInscriptionsMax;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Lieu::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="text")
      */
     private $infosSortie;
 

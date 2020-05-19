@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0,">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %}Bucket-list{% endblock %}</title>
+    <title>{% block title %}Sortir.com{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset ("css/app.css") }}">
 
@@ -14,9 +14,6 @@
 <body>
 <div class="container">
     <header>
-        <a class="site-title" href="{{ path('accueil') }}" title="Bucket-List | Accueil">
-            <img src="{{ asset('img/logo.png') }}" alt="Bucket-List"> Bucket-List
-        </a>
         {% include('inc/nav.html.twig') %}
     </header>
     {% for label, messages in app.flashes %}
