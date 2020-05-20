@@ -62,12 +62,12 @@ class Sortie
     private $campus;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="sorties")
+     * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="sorties")
      */
     private $participants;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\ManyToOne(targetEntity=Participant::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $organisateur;
