@@ -31,8 +31,8 @@ class SortieType extends AbstractType
                 'choice_label' => 'nom'))
             ->add('lieu', EntityType::class, array(
                 'class' => Lieu::class,
-                'choice_label' => 'nom'))
-
+                'choice_label' => 'nom',
+                ))
         ;
     }
 
