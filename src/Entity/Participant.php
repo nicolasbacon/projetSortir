@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements UserInterface
+class Participant implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -76,101 +76,90 @@ class User implements UserInterface
         $this->sorties = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getNom()
     {
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom(string $nom)
     {
         $this->nom = $nom;
 
         return $this;
     }
 
-    public function getPrenom(): ?string
+    public function getPrenom()
     {
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setPrenom(string $prenom)
     {
         $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getTelephone(): ?int
+    public function getTelephone()
     {
         return $this->telephone;
     }
 
-    public function setTelephone(int $telephone): self
+    public function setTelephone(int $telephone)
     {
         $this->telephone = $telephone;
 
         return $this;
     }
 
-    public function getMail(): ?string
+    public function getMail()
     {
         return $this->mail;
     }
 
-    public function setMail(string $mail): self
+    public function setMail(string $mail)
     {
         $this->mail = $mail;
 
         return $this;
     }
 
-    public function getMotPasse(): ?string
-    {
-        return $this->motPasse;
-    }
 
-    public function setMotPasse(string $motPasse): self
-    {
-        $this->motPasse = $motPasse;
-
-        return $this;
-    }
-
-    public function getAdministrateur(): ?bool
+    public function getAdministrateur()
     {
         return $this->administrateur;
     }
 
-    public function setAdministrateur(bool $administrateur): self
+    public function setAdministrateur($administrateur)
     {
         $this->administrateur = $administrateur;
 
         return $this;
     }
 
-    public function getActif(): ?bool
+    public function getActif()
     {
         return $this->actif;
     }
 
-    public function setActif(bool $actif): self
+    public function setActif( $actif)
     {
         $this->actif = $actif;
 
         return $this;
     }
 
-    public function getCampus(): ?Campus
+    public function getCampus()
     {
         return $this->campus;
     }
 
-    public function setCampus(?Campus $campus): self
+    public function setCampus( $campus)
     {
         $this->campus = $campus;
 
@@ -187,10 +176,20 @@ class User implements UserInterface
         return $this->motPasse;
     }
 
+    public function setPassword($motPasse)
+    {
+        $this->motPasse = $motPasse;
+
+        return $this;
+    }
     public function getSalt()
     {
         return null;
     }
+
+
+    public function eraseCredentials(){}
+
 
     /**
      * @return mixed
@@ -198,19 +197,18 @@ class User implements UserInterface
     public function getUsername()
     {
         return $this->username;
+
     }
 
     /**
      * @param mixed $username
      */
-    public function setUsername($username): void
+    public function setUsername($username)
     {
         $this->username = $username;
+
+        return $this;
     }
-
-
-
-    public function eraseCredentials(){}
 
     /**
      * @return Collection|Sortie[]

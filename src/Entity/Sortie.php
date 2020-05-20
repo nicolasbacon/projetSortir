@@ -184,14 +184,14 @@ class Sortie
     }
 
     /**
-     * @return Collection|User[]
+     * @return Collection|Participant[]
      */
     public function getParticipants(): Collection
     {
         return $this->participants;
     }
 
-    public function addParticipant(User $participant): self
+    public function addParticipant(Participant $participant): self
     {
         if (!$this->participants->contains($participant)) {
             $this->participants[] = $participant;
@@ -200,7 +200,7 @@ class Sortie
         return $this;
     }
 
-    public function removeParticipant(User $participant): self
+    public function removeParticipant(Participant $participant): self
     {
         if ($this->participants->contains($participant)) {
             $this->participants->removeElement($participant);
@@ -209,12 +209,12 @@ class Sortie
         return $this;
     }
 
-    public function getOrganisateur(): ?User
+    public function getOrganisateur(): ?Participant
     {
         return $this->organisateur;
     }
 
-    public function setOrganisateur(?User $organisateur): self
+    public function setOrganisateur(?Participant $organisateur): self
     {
         $this->organisateur = $organisateur;
 

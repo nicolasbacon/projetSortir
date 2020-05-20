@@ -2,23 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\User;
+use App\Entity\Participant;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RegisterType extends AbstractType
+class ParticipantType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
-            ->add('username')
-            ->add('nom')
-            ->add('prenom')
-            ->add('telephone')
+            ->add('username', TextType::class)
+            ->add('nom', TextType::class)
+            ->add('prenom', TextType::class)
+            ->add('telephone', IntegerType::class)
             ->add('mail', EmailType::class)
             ->add('motPasse', RepeatedType::class, [
                 'type' => PasswordType::class,
@@ -27,17 +30,17 @@ class RegisterType extends AbstractType
                 'first_options'  => ['label' => 'Mot de passe'],
                 'second_options' => ['label' => 'Confirmation de mot de passe'],
             ])
-            ->add('administrateur')
+            /*->add('administrateur')
             ->add('actif')
             ->add('campus')
-            ->add('sorties')
+            ->add('sorties')*/
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => Participant::class,
         ]);
     }
 }
