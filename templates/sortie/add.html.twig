@@ -5,9 +5,17 @@
     {# afficher le formulaire #}
 
     {{ form_start(sortieForm) }}
+
+    {{ form_label(form.task, 'My Custom Task Label') }}
     {{ form_widget(sortieForm) }}
     <button type="submit">Enregistrer</button>
     {{ form_end(sortieForm) }}
+
+
+
+
+
+
 
 {% endblock %}
 
