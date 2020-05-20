@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Etat;
+use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Form\SortieType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,6 +28,8 @@ class SortieController extends AbstractController
      */
     public function addSortie(EntityManagerInterface $em, Request $request)
     {
+        $lieux = $em->getRepository(Lieu::class)->findAll();
+
         //@todo : traiter le formulaire
 
         $etat = new Etat();
@@ -48,7 +51,8 @@ class SortieController extends AbstractController
             return $this->redirectToRoute('add_sortie');
         }
         return $this->render('sortie/add.html.twig', [
-            'sortieForm' => $sortieForm->createView()
+            'sortieForm' => $sortieForm->createView(),
+            'lieux' => $lieux,
         ]);
     }
 }
