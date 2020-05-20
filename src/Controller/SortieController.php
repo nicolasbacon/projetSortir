@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Form\SortieType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,7 +28,11 @@ class SortieController extends AbstractController
     public function addSortie(EntityManagerInterface $em, Request $request)
     {
         //@todo : traiter le formulaire
+        $etat = new Etat();
+        $etat->setLibelle('Cree');
+       // $user = $this->getUser()->;
         $sortie = new Sortie();
+        $sortie->setEtat($etat);
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);

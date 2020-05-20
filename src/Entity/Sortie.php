@@ -50,7 +50,7 @@ class Sortie
     private $infosSortie;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Etat::class)
+     * @ORM\ManyToOne(targetEntity=Etat::class, cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $etat;
@@ -148,12 +148,12 @@ class Sortie
         return $this;
     }
 
-    public function getInfosSortie(): string
+    public function getInfosSortie(): ?string
     {
         return $this->infosSortie;
     }
 
-    public function setInfosSortie(string $infosSortie): self
+    public function setInfosSortie(?string $infosSortie): self
     {
         $this->infosSortie = $infosSortie;
 
