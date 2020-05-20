@@ -67,21 +67,58 @@ footer {
     padding: 20px 0;
     text-align: center;
 }
+
 .flash {
     padding: 20px;
     display: block;
     font-size: 24px;
     font-weight: bold;
 }
+
 .flash-success {
     background-color: #6b9311;
     color: #333333;
 }
+
 .flash-error {
     background-color: red;
     color: black;
 }
 
+.imageLogo {
+    width: 100px;
+    max-width: 100%;
+    height: auto;
+}
+
+.imageLogo {
+    width: 100px;
+    max-width: 100%;
+    height: auto;
+}
+
+.titreLogo {
+    display: grid;
+}
+
+.logo {
+    grid-column: 1/3;
+    display: block;
+    margin: auto 10px auto;
+}
+
 .bouton-plus {
     width: 25px;
+}
+
+.titre {
+    grid-column: 2/3;
+    margin: auto auto auto 10px;
+    font-size: 75px;
+}
+
+.by {
+    grid-column: 3/3;
+    font-size: small;
+    margin-block-start: auto;
 }
