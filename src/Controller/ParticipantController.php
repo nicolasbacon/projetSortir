@@ -15,6 +15,21 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class ParticipantController extends AbstractController
 {
     /**
+     * @Route("/detail/{id}", name="participant_detail",
+     *     requirements={"id":"\d+"})
+     */
+    public function detail(EntityManagerInterface $em, $id)
+    {
+        $repo = $em->getRepository(Participant::class);
+
+        $participant = $repo->find($id);
+
+        return $this->render('participant\afficher.html.twig',[
+            "participant" => $participant,
+        ]);
+    }
+
+    /**
      * @Route("/modifier", name="participant_modifier")
      * @param Request $request
      * @param EntityManagerInterface $em
