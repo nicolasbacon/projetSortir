@@ -9,11 +9,18 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset ("css/app.css") }}">
 
-    <link rel="icon" href="{{ asset('img/favicon.png') }}">
+    <link rel="icon" href="{{ asset('img/logo2.png') }}">
 </head>
 <body>
 <div class="container">
     <header>
+        <div class="titreLogo">
+        <a class="logo" href="{{ path('home') }}" title="Eni Sortie | Accueil">
+            <img class="imageLogo" src="{{ asset('img/logo2.png') }}" alt="Eni Sortie" >
+        </a>
+        <p class="titre">Sortir.com <p class="by">By Eni école informatique</p></p>
+
+        </div>
         {% include('inc/nav.html.twig') %}
     </header>
     {% for label, messages in app.flashes %}
