@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+
+{% block main %}
+    <h2>Créer un lieu!</h2>
+    {# afficher le formulaire #}
+
+    {{ form_start(lieuForm) }}
+    {{ form_widget(lieuForm) }}
+    <button type="submit">Enregistrer</button>
+    {{ form_end(lieuForm) }}
+
+{% endblock %}
+
+{% block title %}Ajout d'un lieu ! | {{ parent() }}{% endblock %}

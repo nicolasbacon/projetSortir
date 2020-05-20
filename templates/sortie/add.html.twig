@@ -8,6 +8,7 @@
 
     {{ form_label(form.task, 'My Custom Task Label') }}
     {{ form_widget(sortieForm) }}
+    <a href="{{ path('lieu_add') }}" ><img src="{{ asset('images/plus.png') }}" alt="" class="bouton-plus"></a>
     <button type="submit">Enregistrer</button>
     {{ form_end(sortieForm) }}
 
