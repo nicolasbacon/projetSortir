@@ -28,10 +28,15 @@ class SortieController extends AbstractController
     public function addSortie(EntityManagerInterface $em, Request $request)
     {
         //@todo : traiter le formulaire
+
         $etat = new Etat();
         $etat->setLibelle('Cree');
+
         $sortie = new Sortie();
         $sortie->setEtat($etat);
+
+        $sortie->setOrganisateur($this->getUser());
+
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
