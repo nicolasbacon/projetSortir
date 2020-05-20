@@ -50,7 +50,7 @@ class Sortie
     private $infosSortie;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Etat::class)
+     * @ORM\ManyToOne(targetEntity=Etat::class, cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $etat;
@@ -77,6 +77,22 @@ class Sortie
      * @ORM\JoinColumn(nullable=false)
      */
     private $lieu;
+
+    /**
+     * @return mixed
+     */
+    public function getLieu()
+    {
+        return $this->lieu;
+    }
+
+    /**
+     * @param mixed $lieu
+     */
+    public function setLieu($lieu): void
+    {
+        $this->lieu = $lieu;
+    }
 
     public function __construct()
     {
@@ -148,12 +164,12 @@ class Sortie
         return $this;
     }
 
-    public function getInfosSortie(): string
+    public function getInfosSortie(): ?string
     {
         return $this->infosSortie;
     }
 
-    public function setInfosSortie(string $infosSortie): self
+    public function setInfosSortie(?string $infosSortie): self
     {
         $this->infosSortie = $infosSortie;
 
@@ -217,18 +233,6 @@ class Sortie
     public function setOrganisateur(?Participant $organisateur): self
     {
         $this->organisateur = $organisateur;
-
-        return $this;
-    }
-
-    public function getLieu(): ?Lieu
-    {
-        return $this->lieu;
-    }
-
-    public function setLieu(?Lieu $lieu): self
-    {
-        $this->lieu = $lieu;
 
         return $this;
     }
