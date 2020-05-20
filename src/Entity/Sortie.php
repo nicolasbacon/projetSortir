@@ -72,6 +72,28 @@ class Sortie
      */
     private $organisateur;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Lieu::class, cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $lieu;
+
+    /**
+     * @return mixed
+     */
+    public function getLieu()
+    {
+        return $this->lieu;
+    }
+
+    /**
+     * @param mixed $lieu
+     */
+    public function setLieu($lieu): void
+    {
+        $this->lieu = $lieu;
+    }
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
