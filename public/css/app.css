@@ -116,3 +116,7 @@ footer {
 .bouton-plus {
     width: 25px;
 }
+
+label {
+    width: 120px;
+}
