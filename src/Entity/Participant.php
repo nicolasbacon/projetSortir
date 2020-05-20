@@ -41,6 +41,22 @@ class Participant implements UserInterface
     private $telephone;
 
     /**
+     * @return mixed
+     */
+    public function getMotPasse()
+    {
+        return $this->motPasse;
+    }
+
+    /**
+     * @param mixed $motPasse
+     */
+    public function setMotPasse($motPasse): void
+    {
+        $this->motPasse = $motPasse;
+    }
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $mail;
