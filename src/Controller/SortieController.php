@@ -30,7 +30,6 @@ class SortieController extends AbstractController
         //@todo : traiter le formulaire
         $etat = new Etat();
         $etat->setLibelle('Cree');
-       // $user = $this->getUser()->;
         $sortie = new Sortie();
         $sortie->setEtat($etat);
         $sortieForm = $this->createForm(SortieType::class, $sortie);

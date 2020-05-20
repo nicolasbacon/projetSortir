@@ -3,7 +3,7 @@ security:
     providers:
         our_db_provider:
             entity:
-                class: App\Entity\User
+                class: App\Entity\Participant
                 property: username
 
     firewalls:
@@ -23,7 +23,7 @@ security:
                 target: home
 
     encoders:
-        App\Entity\User:
+        App\Entity\Participant:
             algorithm: 'bcrypt'
 
     access_control:
