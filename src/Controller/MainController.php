@@ -14,11 +14,17 @@ class MainController extends AbstractController
      */
     public function home(EntityManagerInterface $em)
     {
-        $sorties = $em->getRepository(Sortie::class)->findAll();
+        $user = $this->getUser();
+        $sortieRepo = $em->getRepository(Sortie::class);
+        $campusRepo = $em->getRepository(Campus::class);
+
+        $sorties = $sortieRepo->findByCampus($user->getCampus()->getId());
+        $allCampus = $campusRepo->findAll();
 
         return $this->render('main/accueil.html.twig', [
             'controller_name' => 'MainController',
             "sorties" => $sorties,
+            "allCampus" => $allCampus,
         ]);
     }
 }
