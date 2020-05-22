@@ -11,8 +11,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @UniqueEntity(fields={"username})
- * @UniqueEntity(fields={"email})
+ * @UniqueEntity(fields={"username"})
+ * @UniqueEntity(fields={"mail"})
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class Participant implements UserInterface

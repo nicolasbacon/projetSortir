@@ -54,7 +54,7 @@ class ParticipantController extends AbstractController
             $password = $passwordEncoder->encodePassword($participant, $participant->getPassword());
             $participant->setPassword($password);
 
-            $em = $this->getDoctrine()->getManager();
+
             $em->persist($participant);
             $em->flush();
 
