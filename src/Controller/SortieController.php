@@ -13,15 +13,26 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SortieController extends AbstractController
 {
+
     /**
-     * @Route("/sortie", name="sortie")
+     * @Route("/sortie/{id}", name="sortie_detail", requirements={"id": "\d+"},
+     *     methods={"GET"})
      */
-    public function index()
+    public function detail($id, Request $request)
     {
-        return $this->render('sortie.html.twig', [
-            'controller_name' => 'SortieController',
+        //récupérer la sortie en BDD:
+        $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepository->find($id);
+
+        if (empty($sortie)){
+            throw $this->createNotFoundException("Cette sortie n'existe pas!");
+        }
+
+        return $this->render('sortie/sortie.html.twig', [
+            "sortie" => $sortie
         ]);
     }
+
 
     /**
      * @Route("/sortie/add", name="add_sortie")

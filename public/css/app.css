@@ -117,8 +117,15 @@ footer {
     width: 25px;
 }
 
+.afficherSortie label {
+    display: flex;
+    align-items: flex-start;
+}
+
+.afficherProfil label {
+    width: 120px;
+}
+
 label {
     width: 150px;
 }
-
-
