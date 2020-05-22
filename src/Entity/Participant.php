@@ -6,9 +6,13 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @UniqueEntity(fields={"username})
+ * @UniqueEntity(fields={"email})
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class Participant implements UserInterface
@@ -21,52 +25,54 @@ class Participant implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez remplir ce champs")
+     * @Assert\Length(max=255, maxMessage="255 charactères maximum !")
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
 
     /**
+     * @Assert\NotBlank(message="Veuillez remplir ce champs")
+     * @Assert\Length(max=255, maxMessage="255 charactères maximum !")
      * @ORM\Column(type="string", length=255)
      */
     private $nom;
 
     /**
+     * @Assert\NotBlank(message="Veuillez remplir ce champs")
+     * @Assert\Length(max=255, maxMessage="255 charactères maximum !")
      * @ORM\Column(type="string", length=255)
      */
     private $prenom;
 
     /**
+     *
      * @ORM\Column(type="integer", nullable=true)
      */
     private $telephone;
 
     /**
+     * @Assert\NotBlank(message="Veuillez remplir ce champs")
      * @return mixed
      */
-    public function getMotPasse()
-    {
-        return $this->motPasse;
-    }
+
 
     /**
-     * @param mixed $motPasse
-     */
-    public function setMotPasse($motPasse): void
-    {
-        $this->motPasse = $motPasse;
-    }
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez remplir ce champs")
+     * @Assert\Length(max=255, maxMessage="255 charactères maximum !")
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $mail;
 
     /**
+     * @Assert\NotBlank(message="Veuillez remplir ce champs")
+     * @Assert\Length(max=255, maxMessage="255 charactères maximum !")
      * @ORM\Column(type="string", length=255)
      */
     private $motPasse;
 
     /**
+     * @Assert\NotBlank(message="Veuillez remplir ce champs")
      * @ORM\Column(type="boolean")
      */
     private $administrateur;
@@ -95,6 +101,18 @@ class Participant implements UserInterface
     public function getId()
     {
         return $this->id;
+    }
+    public function getMotPasse()
+    {
+        return $this->motPasse;
+    }
+
+    /**
+     * @param mixed $motPasse
+     */
+    public function setMotPasse($motPasse): void
+    {
+        $this->motPasse = $motPasse;
     }
 
     public function getNom()
@@ -184,7 +202,11 @@ class Participant implements UserInterface
 
     public function getRoles()
     {
-        return ["ROLE_USER"];
+        if ($this->getAdministrateur()) {
+            return ["ROLE_ADMIN"];
+        }else{
+            return ["ROLE_USER"];
+        }
     }
 
     public function getPassword()
