@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block main %}
+    <h1>Gerer les campus</h1>
+
+    <table class="table table-dark table-responsive">
+        <thead>
+        <tr>
+            <th scope="col">Campus</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for camp in campus %}
+        <tr>
+            <th scope="row">{{ camp.nom }}</th>
+            <td>Modifier - Supprimer</td>
+        </tr>
+        {% endfor %}
+        {{ form_start(campusForm) }}
+        <tr>
+            <th scope="row">{{ form_widget(campusForm.nom) }}</th>
+            <td><input type="submit" value="Ajouter"/></td>
+        </tr>
+        {{ form_end(campusForm)}}
+        </tbody>
+    </table>
+{% endblock %}

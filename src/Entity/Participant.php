@@ -41,22 +41,6 @@ class Participant implements UserInterface
     private $telephone;
 
     /**
-     * @return mixed
-     */
-    public function getMotPasse()
-    {
-        return $this->motPasse;
-    }
-
-    /**
-     * @param mixed $motPasse
-     */
-    public function setMotPasse($motPasse): void
-    {
-        $this->motPasse = $motPasse;
-    }
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $mail;
@@ -90,6 +74,7 @@ class Participant implements UserInterface
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
+        $this->roles = new ArrayCollection();
     }
 
     public function getId()
@@ -145,6 +130,15 @@ class Participant implements UserInterface
         return $this;
     }
 
+    public function getMotPasse()
+    {
+        return $this->motPasse;
+    }
+
+    public function setMotPasse($motPasse): void
+    {
+        $this->motPasse = $motPasse;
+    }
 
     public function getAdministrateur()
     {
@@ -184,7 +178,12 @@ class Participant implements UserInterface
 
     public function getRoles()
     {
-        return ["ROLE_USER"];
+        if ($this->getAdministrateur()) {
+            return ["ROLE_ADMIN"];
+        }else{
+            return ["ROLE_USER"];
+        }
+
     }
 
     public function getPassword()
