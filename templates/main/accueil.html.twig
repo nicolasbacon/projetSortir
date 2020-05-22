@@ -3,7 +3,25 @@
 {% block title %}Accueil{% endblock %}
 
 {% block main %}
-    <h1>Salut</h1>
+    <h1>Filtrer les sorties</h1>
+
+    <div>
+        <select name="campus" id="campus">
+            {% for campus in allCampus %}
+                <option value="{{ campus.nom }}">{{ campus.nom }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label for="researh">Le nom de la sortie contient : </label>
+        <input type="search" id="researh">
+    </div>
+    <div>
+        <label for="date">Entre : </label>
+        <input type="date" id="date">
+        <label for="date">et </label>
+        <input type="date" id="date">
+    </div>
 
     <table class="table table-dark table-responsive">
         <thead>
@@ -30,7 +48,7 @@
                     <td>{{ sortie.etat.libelle }}</td>
                     <td> Inscrit?</td>
                     <td><a href="{{ path('participant_detail',{'id':sortie.organisateur.id}) }}">{{ sortie.organisateur.username }}</a></td>
-                    <td><a href="">Afficher</a></td>
+                    <td><a href="{{ path('sortie_detail',{'id':sortie.id}) }}">Afficher</a></td>
                 </tr>
 
         {% endfor %}

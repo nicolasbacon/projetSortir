@@ -117,14 +117,14 @@ footer {
     width: 25px;
 }
 
-.afficherSortie label {
+.afficherSortie > label {
     display: flex;
     align-items: flex-start;
 
 
 }
 
-.afficherProfil label {
+.afficherProfil > label {
     width: 120px;
     margin: 10px auto 10px auto;
     text-align: center;
