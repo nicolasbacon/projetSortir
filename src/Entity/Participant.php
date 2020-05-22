@@ -25,21 +25,21 @@ class Participant implements UserInterface
     private $id;
 
     /**
-     * @Assert\NotBlank(message="Veuillez remplir ce champs")
+     * @Assert\NotBlank(message="Veuillez remplir le champ pseudonyme")
      * @Assert\Length(max=255, maxMessage="255 charactères maximum !")
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
 
     /**
-     * @Assert\NotBlank(message="Veuillez remplir ce champs")
+     * @Assert\NotBlank(message="Veuillez remplir le champ nom")
      * @Assert\Length(max=255, maxMessage="255 charactères maximum !")
      * @ORM\Column(type="string", length=255)
      */
     private $nom;
 
     /**
-     * @Assert\NotBlank(message="Veuillez remplir ce champs")
+     * @Assert\NotBlank(message="Veuillez remplir le champ prénom")
      * @Assert\Length(max=255, maxMessage="255 charactères maximum !")
      * @ORM\Column(type="string", length=255)
      */
@@ -50,38 +50,22 @@ class Participant implements UserInterface
      */
     private $telephone;
 
-    /**
-     * @return mixed
-     */
-    public function getMotPasse()
-    {
-        return $this->motPasse;
-    }
 
     /**
-     * @param mixed $motPasse
-     */
-    public function setMotPasse($motPasse): void
-    {
-        $this->motPasse = $motPasse;
-    }
-
-    /**
-     * @Assert\NotBlank(message="Veuillez remplir ce champs")
+     * @Assert\NotBlank(message="Veuillez remplir le champ e-mail")
      * @Assert\Length(max=255, maxMessage="255 charactères maximum !")
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $mail;
 
     /**
-     * @Assert\NotBlank(message="Veuillez remplir ce champs")
+     * @Assert\NotBlank(message="Veuillez remplir le champ mot de passe")
      * @Assert\Length(max=255, maxMessage="255 charactères maximum !")
      * @ORM\Column(type="string", length=255)
      */
     private $motPasse;
 
     /**
-     * @Assert\NotBlank(message="Veuillez remplir ce champs")
      * @ORM\Column(type="boolean")
      */
     private $administrateur;
@@ -165,10 +149,12 @@ class Participant implements UserInterface
         return $this->motPasse;
     }
 
+
     public function setMotPasse($motPasse): void
     {
         $this->motPasse = $motPasse;
     }
+
 
     public function getAdministrateur()
     {
