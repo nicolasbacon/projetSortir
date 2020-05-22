@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class ParticipantController extends AbstractController
 {
@@ -47,14 +46,13 @@ class ParticipantController extends AbstractController
         $registerForm->handleRequest($request);
 
         if ($registerForm->isSubmitted() && $registerForm->isValid()) {
-            $participant->setAdministrateur(false);
             $participant->setActif(true);
 
 
             $password = $passwordEncoder->encodePassword($participant, $participant->getPassword());
             $participant->setPassword($password);
 
-            $em = $this->getDoctrine()->getManager();
+
             $em->persist($participant);
             $em->flush();
 
@@ -96,8 +94,6 @@ class ParticipantController extends AbstractController
      */
     public function login()
     {
-
-
         return $this->render('participant/login.html.twig', []);
     }
 

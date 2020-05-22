@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block main %}
+    <h1>Gerer les villes</h1>
+
+    <table class="table table-dark table-responsive">
+        <thead>
+        <tr>
+            <th scope="col">Ville</th>
+            <th scope="col">Code Postal</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ville in villes %}
+            <tr>
+                <th scope="row">{{ ville.nom }}</th>
+                <td>{{ ville.codePostal }}</td>
+                <td>Modifier - Supprimer</td>
+            </tr>
+        {% endfor %}
+        {{ form_start(villeForm) }}
+        <tr>
+            <th scope="row">{{ form_widget(villeForm.nom) }}</th>
+            <td>{{ form_widget(villeForm.codePostal) }}</td>
+            <td><input type="submit" value="Ajouter"/></td>
+        </tr>
+        {{ form_end(villeForm)}}
+        </tbody>
+    </table>
+{% endblock %}
