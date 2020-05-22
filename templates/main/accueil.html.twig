@@ -30,7 +30,7 @@
                     <td>{{ sortie.etat.libelle }}</td>
                     <td> Inscrit?</td>
                     <td><a href="{{ path('participant_detail',{'id':sortie.organisateur.id}) }}">{{ sortie.organisateur.username }}</a></td>
-                    <td><a href="">Afficher</a></td>
+                    <td><a href="{{ path('sortie_detail',{'id':sortie.id}) }}">Afficher</a></td>
                 </tr>
 
         {% endfor %}
