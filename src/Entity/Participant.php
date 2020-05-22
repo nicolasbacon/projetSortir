@@ -46,16 +46,25 @@ class Participant implements UserInterface
     private $prenom;
 
     /**
-     *
      * @ORM\Column(type="integer", nullable=true)
      */
     private $telephone;
 
     /**
-     * @Assert\NotBlank(message="Veuillez remplir ce champs")
      * @return mixed
      */
+    public function getMotPasse()
+    {
+        return $this->motPasse;
+    }
 
+    /**
+     * @param mixed $motPasse
+     */
+    public function setMotPasse($motPasse): void
+    {
+        $this->motPasse = $motPasse;
+    }
 
     /**
      * @Assert\NotBlank(message="Veuillez remplir ce champs")
@@ -101,18 +110,6 @@ class Participant implements UserInterface
     public function getId()
     {
         return $this->id;
-    }
-    public function getMotPasse()
-    {
-        return $this->motPasse;
-    }
-
-    /**
-     * @param mixed $motPasse
-     */
-    public function setMotPasse($motPasse): void
-    {
-        $this->motPasse = $motPasse;
     }
 
     public function getNom()
@@ -163,6 +160,15 @@ class Participant implements UserInterface
         return $this;
     }
 
+    public function getMotPasse()
+    {
+        return $this->motPasse;
+    }
+
+    public function setMotPasse($motPasse): void
+    {
+        $this->motPasse = $motPasse;
+    }
 
     public function getAdministrateur()
     {
