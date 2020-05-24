@@ -1,40 +1,43 @@
 {% extends 'layout.html.twig' %}
 
 {% block main %}
-    <h2>Sortie : {{ sortie.nom }}</h2>
-    <br>
-    <div class="afficherSortie">
-        <div class="col-lg-6 col-md-6 col-sm-6">
-            <div>
-                <label for="dateDebut">Date et heure de la sortie : </label>
-                <input type="text" id="dateDebut" value="{{ sortie.dateHeureDebut | date ('d/m/Y H:i') }}" readonly>
-            </div>
-            <div>
-                <label for="dateLimiteInscription">Date limite d'inscription : </label>
-                <input type="text" id="dateLimiteInscription" value="{{ sortie.dateLimiteInscription | date('d/m/Y') }}" readonly>
 
+    <h2 class="sortieTitle">Sortie : {{ sortie.nom }}</h2>
+    <br>
+    <div class="grid">
+        <div class="afficherSortie">
+            <div class="child1AfficherSortie">
+                <div>
+                    <label for="dateDebut">Date et heure de la sortie : </label>
+                    <input type="text" id="dateDebut" value="{{ sortie.dateHeureDebut | date ('d/m/Y H:i') }}" readonly>
+                </div>
+                <div>
+                    <label for="dateLimiteInscription">Date limite d'inscription : </label>
+                    <input type="text" id="dateLimiteInscription" value="{{ sortie.dateLimiteInscription | date('d/m/Y') }}" readonly>
+
+                </div>
+                <div>
+                    <label for="placesMax">Nombre de places : </label>
+                    <input type="text" id="placesMax" value="{{ sortie.nbInscriptionsMax }}" readonly>
+                </div>
+                <div>
+                    <label for="duree">Durée : </label>
+                    <input type="text" id="duree" value="{{ sortie.duree | date('H:i') }}" readonly> minutes
+                </div>
+                <div>
+                    <label for="infosSortie">Description et infos : </label>
+                    <input type="text" id="infosSortie" value="{{ sortie.infosSortie }}" readonly>
+                </div>
             </div>
-            <div>
-                <label for="placesMax">Nombre de places : </label>
-                <input type="text" id="placesMax" value="{{ sortie.nbInscriptionsMax }}" readonly>
-            </div>
-            <div>
-                <label for="duree">Durée : </label>
-                <input type="text" id="duree" value="{{ sortie.duree | date('H:i') }}" readonly> minutes
-            </div>
-            <div>
-                <label for="infosSortie">Description et infos : </label>
-                <input type="text" id="infosSortie" value="{{ sortie.infosSortie }}" readonly>
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6">
-            <div>
-                <label for="campus">Campus : </label>
-                <input type="text" id="campus" value="{{ sortie.campus.nom }}" readonly>
-            </div>
-            <div>
-                <label for="lieu">Lieu : </label>
-                <input type="text" id="lieu" value="{{ sortie.lieu.nom }}" readonly>
+            <div class="child2AfficherSortie">
+                <div>
+                    <label for="campus">Campus : </label>
+                    <input type="text" id="campus" value="{{ sortie.campus.nom }}" readonly>
+                </div>
+                <div>
+                    <label for="lieu">Lieu : </label>
+                    <input type="text" id="lieu" value="{{ sortie.lieu.nom }}" readonly>
+                </div>
             </div>
         </div>
     </div>
