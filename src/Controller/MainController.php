@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\Sortie;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +18,6 @@ class MainController extends AbstractController
         $user = $this->getUser();
         $sortieRepo = $em->getRepository(Sortie::class);
         $campusRepo = $em->getRepository(Campus::class);
-
         $sorties = $sortieRepo->findByCampus($user->getCampus()->getId());
         $allCampus = $campusRepo->findAll();
 

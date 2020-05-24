@@ -129,3 +129,7 @@ footer {
 label {
     width: 150px;
 }
+
+.search-button > button{
+    color: #000 !important;
+}
