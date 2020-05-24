@@ -1,28 +1,31 @@
 {% extends 'layout.html.twig' %}
 
 {% block main %}
-    <h1>{{ participant.username }}</h1>
+    <div class="grid">
+        <h1 class="pseudo">{{ participant.username }}</h1>
 
-    <div class="afficherProfil">
-        <div>
-            <label for="prenom">Prenom : </label>
-            <input type="text" id="prenom" value="{{ participant.prenom }}" readonly>
-        </div>
-        <div>
-            <label for="nom">Nom : </label>
-            <input type="text" id="nom" value="{{ participant.nom }}" readonly>
-        </div>
-        <div>
-            <label for="telephone">Telephone : </label>
-            <input type="text" id="telephone" value="{{ participant.telephone }}" readonly>
-        </div>
-        <div>
-            <label for="email">Email : </label>
-            <input type="text" id="email" value="{{ participant.mail }}" readonly>
-        </div>
-        <div>
-            <label for="campus">Campus : </label>
-            <input type="text" id="campus" value="{{ participant.campus.nom }}" readonly>
+        <div class="afficherProfil">
+            <div class="ligne">
+                <label for="prenom">Prenom : </label>
+                <strong>{{ participant.prenom | capitalize }}</strong>
+
+            </div>
+            <div class="ligne">
+                <label for="nom">Nom : </label>
+                <strong>{{ participant.nom | capitalize }}</strong>
+            </div>
+            <div class="ligne">
+                <label for="telephone">Telephone : </label>
+                <strong> {{ participant.telephone }}</strong>
+            </div>
+            <div class="ligne">
+                <label for="email">Email : </label>
+                <strong> {{ participant.mail }}</strong>
+            </div>
+            <div class="ligne">
+                <label for="campus">Campus : </label>
+                <strong> {{ participant.campus.nom | capitalize }}</strong>
+            </div>
         </div>
     </div>
 {% endblock %}

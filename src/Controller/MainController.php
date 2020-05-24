@@ -15,10 +15,15 @@ class MainController extends AbstractController
      */
     public function home(EntityManagerInterface $em)
     {
-        $user = $this->getUser();
         $sortieRepo = $em->getRepository(Sortie::class);
         $campusRepo = $em->getRepository(Campus::class);
-        $sorties = $sortieRepo->findByCampus($user->getCampus()->getId());
+        $user = $this->getUser();
+        if ($user != null) {
+            $sorties = $sortieRepo->findByCampus($user->getCampus()->getId());
+        }
+       else{
+           $sorties = $sortieRepo->findAll();
+       }
         $allCampus = $campusRepo->findAll();
 
         return $this->render('main/accueil.html.twig', [

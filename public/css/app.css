@@ -120,6 +120,8 @@ footer {
 .afficherSortie > label {
     display: flex;
     align-items: flex-start;
+
+
 }
 
 .afficherProfil > label {
@@ -128,6 +130,26 @@ footer {
 
 label {
     width: 150px;
+}
+.pseudo
+{
+    margin: 10px auto 10px auto;
+    text-align: center;
+    grid-column: 3/5;
+
+}
+.grid{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto;
+    grid-auto-rows: minmax(100px, auto);
+    grid-auto-columns: minmax(200px, auto);
+
+}
+.afficherProfil{
+    margin: 10px auto 10px auto;
+    grid-column: 2/6;
+    grid-row: 2;
 }
 
 .search-button > button{
