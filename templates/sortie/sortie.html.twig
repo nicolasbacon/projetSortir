@@ -38,6 +38,23 @@
                     <label for="lieu">Lieu : </label>
                     <input type="text" id="lieu" value="{{ sortie.lieu.nom }}" readonly>
                 </div>
+                <div>
+                    <label for="rue">Rue : </label>
+                    <input type="text" id="rue" value="{{ sortie.lieu.rue }}" readonly>
+                </div>
+                <div>
+                    <label for="codePostal">Code Postal : </label>
+                    <input type="text" id="codePostal" value="{{ sortie.lieu.ville.codePostal }}" readonly>
+                </div>
+                <div>
+                    <label for="latitude">Latitude : </label>
+                    <input type="text" id="latitude" value="{{ sortie.lieu.latitude }}" readonly>
+                </div>
+                <div>
+                    <label for="longitude">Longitude : </label>
+                    <input type="text" id="longitude" value="{{ sortie.lieu.longitude }}" readonly>
+                </div>
+
             </div>
 
     </div>
