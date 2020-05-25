@@ -1,0 +1,72 @@
+{% extends 'layout.html.twig' %}
+
+{% block main %}
+    <h2 class="sortieTitle">Modifier une sortie : {{ sortie.nom }}</h2>
+    <br>
+    <div class="grid">
+
+        <div class="child1AfficherSortie">
+            <div>
+                <label for="dateDebut">Date et heure de la sortie : </label>
+                <input type="text" id="dateDebut" value="{{ sortie.dateHeureDebut | date ('d/m/Y H:i') }}">
+            </div>
+            <div>
+                <label for="dateLimiteInscription">Date limite d'inscription : </label>
+                <input type="text" id="dateLimiteInscription" value="{{ sortie.dateLimiteInscription | date('d/m/Y') }}">
+
+            </div>
+            <div>
+                <label for="placesMax">Nombre de places : </label>
+                <input type="text" id="placesMax" value="{{ sortie.nbInscriptionsMax }}">
+            </div>
+            <div>
+                <label for="duree">Durée : </label>
+                <input type="text" id="duree" value="{{ sortie.duree | date('H:i') }}">
+            </div>
+            <div>
+                <label for="infosSortie">Description et infos : </label>
+                <input type="text" id="infosSortie" value="{{ sortie.infosSortie }}">
+            </div>
+        </div>
+        <div class="child2AfficherSortie">
+            <div>
+                <label for="campus">Campus : </label>
+                <input type="text" id="campus" value="{{ sortie.campus.nom }}">
+            </div>
+            <div>
+                <label for="lieu">Lieu : </label>
+                <input type="text" id="lieu" value="{{ sortie.lieu.nom }}">
+                <a href="{{ path('lieu_add') }}" title="Ajouter un lieu"><img src="{{ asset('images/plus.png') }}" alt="Ajouter un lieu" class="bouton-plus"></a>
+            </div>
+            <div>
+                <label for="rue">Rue : </label>
+                <input type="text" id="rue" value="{{ sortie.lieu.rue }}">
+            </div>
+            <div>
+                <label for="codePostal">Code Postal : </label>
+                <input type="text" id="codePostal" value="{{ sortie.lieu.ville.codePostal }}">
+            </div>
+            <div>
+                <label for="latitude">Latitude : </label>
+                <input type="text" id="latitude" value="{{ sortie.lieu.latitude }}">
+            </div>
+            <div>
+                <label for="longitude">Longitude : </label>
+                <input type="text" id="longitude" value="{{ sortie.lieu.longitude }}">
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+    <div class="button">
+        <button class="btn btn-secondary active" type="submit">Enregistrer</button>
+        <button class="btn btn-secondary active" type="submit">Publier la sortie</button>
+        <button class="btn btn-secondary active" type="">Supprimer la sortie</button>
+        <button class="btn btn-secondary active" type="reset">Annuler</button>
+    </div>
+
+{% endblock %}
+
+{% block title %}Modifier une sortie ! | {{ parent() }}{% endblock %}

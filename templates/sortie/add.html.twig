@@ -3,7 +3,7 @@
 {% block main %}
     <h2 class="sortieTitle">Créer une sortie!</h2>
     {# afficher le formulaire #}
-    <div class="grid">
+    <div class="grid2">
         <div class="child1AddSortie">
             {{ form_start(sortieForm) }}
 
@@ -11,9 +11,10 @@
             {{ form_widget(sortieForm.nom) }}
             {{ form_errors(sortieForm.nom) }}
 
-            {{ form_label(sortieForm.dateHeureDebut, 'Date et heure de la sortie : ') }}
+            {{ form_label(sortieForm.dateHeureDebut, 'Date/heure de la sortie : ') }}
             {{ form_widget(sortieForm.dateHeureDebut) }}
             {{ form_errors(sortieForm.dateHeureDebut) }}
+
 
             {{ form_label(sortieForm.dateLimiteInscription, 'Date limite d\'inscription : ') }}
             {{ form_widget(sortieForm.dateLimiteInscription) }}
@@ -36,13 +37,21 @@
         </div>
         <div class="child2AddSortie">
             {{ form_row(sortieForm.campus) }}
-            {{ form_row(sortieForm.lieu) }}
+
+            {{ form_label(sortieForm.lieu, 'Lieu : ') }}
+            {{ form_widget(sortieForm.lieu) }}
+            {{ form_errors(sortieForm.lieu) }}
             <a href="{{ path('lieu_add') }}" title="Ajouter un lieu"><img src="{{ asset('images/plus.png') }}" alt="Ajouter un lieu" class="bouton-plus"></a>
         </div>
 
 
     </div>
-    <button type="submit">Enregistrer</button>
+    <div class="button">
+        <button class="btn btn-secondary active" type="submit">Enregistrer</button>
+        <button class="btn btn-secondary active" type="submit">Publier la sortie</button>
+        <button class="btn btn-secondary active" type="reset">Annuler</button>
+    </div>
+
     {{ form_end(sortieForm) }}
 
 {% endblock %}

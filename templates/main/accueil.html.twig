@@ -3,49 +3,45 @@
 {% block title %}Accueil{% endblock %}
 
 {% block main %}
-    <h1 class="filtreSortie">Filtrer les sorties | {{ campus }}</h1>
+    <h1 class="filtreSortie">Filtrer les sorties</h1>
 
-    <form action="" method="post">
+    {{ form_start(researchForm) }}
     <div class="accueil">
         <div class="child1Accueil">
             <div>
-                <label for="campus">Campus : </label>
-                <select name="campus" id="campus">
-                    {% for campus in allCampus %}
-                        <option value="{{ campus.nom }}">{{ campus.nom }}</option>
-                    {% endfor %}
-                </select>
+                {{ form_label(researchForm.campus) }}
+                {{ form_widget(researchForm.campus) }}
             </div>
             <div class="research">
-                 <label for="researh">Le nom de la sortie contient : </label>
-                 <input type="search" id="researh" placeholder="search">
+                {{ form_label(researchForm.research) }}
+                {{ form_widget(researchForm.research) }}
             </div>
             <div class="dateSortie">
-                 <label for="date">Entre : </label>
-                 <input type="date" id="date" placeholder="  /  /">
-                 <label for="date">et </label>
-                 <input type="date" id="date" placeholder="  /  /">
+                {{ form_label(researchForm.dateDebut) }}
+                {{ form_widget(researchForm.dateDebut) }}
+                {{ form_label(researchForm.dateFin) }}
+                {{ form_widget(researchForm.dateFin) }}
             </div>
         </div>
         <div class="child2Accueil">
-            <input type="checkbox" id="organisateur" name="organisateur">
-            <label for="organisateur">Sorties dont je suis l'organisateur/trice</label><br>
+            {{ form_widget(researchForm.organisateur) }}
+            {{ form_label(researchForm.organisateur) }}<br>
 
-            <input type="checkbox" id="inscrit" name="inscrit">
-            <label for="inscrit">Sorties auxquelles je suis inscrit/e</label><br>
+            {{ form_widget(researchForm.inscrit) }}
+            {{ form_label(researchForm.inscrit) }}<br>
 
-            <input type="checkbox" id="nonInscrit" name="nonInscrit">
-            <label for="nonInscrit">Sorties auxquelles je ne suis pas inscrit/e</label><br>
+            {{ form_widget(researchForm.nonInscrit) }}
+            {{ form_label(researchForm.nonInscrit) }}<br>
 
-            <input type="checkbox" id="sortiePasse" name="sortiePasse">
-            <label for="sortiePasse">Sorties passées</label><br>
+            {{ form_widget(researchForm.sortiePasse) }}
+            {{ form_label(researchForm.sortiePasse) }}<br>
 
             <div class="search-button">
                 <button class="btn btn-secondary active" type="submit" value="rechercher">Rechercher</button>
             </div>
         </div>
     </div>
-    </form>
+    {{ form_end(researchForm) }}
 
     <table class="table table-dark table-responsive">
      <thead>
