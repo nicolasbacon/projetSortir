@@ -3,62 +3,87 @@
 {% block title %}Accueil{% endblock %}
 
 {% block main %}
-    <h1>Filtrer les sorties</h1>
+    <h1 class="filtreSortie">Filtrer les sorties</h1>
 
-    <div>
-        <select name="campus" id="campus">
-            {% for campus in allCampus %}
-                <option value="{{ campus.nom }}">{{ campus.nom }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div>
-        <label for="researh">Le nom de la sortie contient : </label>
-        <input type="search" id="researh">
-    </div>
-    <div>
-        <label for="date">Entre : </label>
-        <input type="date" id="date">
-        <label for="date">et </label>
-        <input type="date" id="date">
+    <div class="accueil">
+        <div class="child1Accueil">
+            <div>
+                <label for="campus">Campus : </label>
+                <select name="campus" id="campus">
+                    {% for campus in allCampus %}
+                        <option value="{{ campus.nom }}">{{ campus.nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="research">
+                 <label for="researh">Le nom de la sortie contient : </label>
+                 <input type="search" id="researh" placeholder="search">
+            </div>
+            <div class="dateSortie">
+                 <label for="date">Entre : </label>
+                 <input type="date" id="date" placeholder="  /  /">
+                 <label for="date">et </label>
+                 <input type="date" id="date" placeholder="  /  /">
+            </div>
+        </div>
+        <div class="child2Accueil">
+            <input type="checkbox" id="organisateur" name="organisateur">
+            <label for="organisateur">Sorties dont je suis l'organisateur/trice</label><br>
+
+            <input type="checkbox" id="inscrit" name="inscrit">
+            <label for="inscrit">Sorties auxquelles je suis inscrit/e</label><br>
+
+            <input type="checkbox" id="nonInscrit" name="nonInscrit">
+            <label for="nonInscrit">Sorties auxquelles je ne suis pas inscrit/e</label><br>
+
+            <input type="checkbox" id="sortiePasse" name="sortiePasse">
+            <label for="sortiePasse">Sorties passées</label><br>
+
+            <div class="search-button">
+                <button class="btn btn-secondary active" type="submit" value="rechercher">Rechercher</button>
+            </div>
+        </div>
+
+
+
     </div>
 
     <table class="table table-dark table-responsive">
-        <thead>
-        <tr>
-            <th scope="col">Nom de la sortie</th>
-            <th scope="col">Date de la sortie</th>
-            <th scope="col">Clôture</th>
-            <th scope="col">Inscrits/Places</th>
-            <th scope="col">Etat</th>
-            <th scope="col">Inscrit</th>
-            <th scope="col">Organisateur</th>
-            <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for sortie in sorties %}
+     <thead>
+     <tr>
+         <th scope="col">Nom de la sortie</th>
+         <th scope="col">Date de la sortie</th>
+         <th scope="col">Clôture</th>
+         <th scope="col">Inscrits/Places</th>
+         <th scope="col">Etat</th>
+         <th scope="col">Inscrit</th>
+         <th scope="col">Organisateur</th>
+         <th scope="col">Actions</th>
+     </tr>
+     </thead>
+     <tbody>
+     {% for sortie in sorties %}
 
 
-                <tr>
-                    <th scope="row">{{ sortie.nom }}</th>
-                    <td>{{ sortie.dateHeureDebut | date ('d/m/Y H:i')}}</td>
-                    <td>{{ sortie.dateLimiteInscription | date('d/m/Y') }}</td>
-                    <td>{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
-                    <td>{{ sortie.etat.libelle }}</td>
-                    <td> Inscrit?</td>
-                    <td><a href="{{ path('participant_detail',{'id':sortie.organisateur.id}) }}">{{ sortie.organisateur.username }}</a></td>
-                    <td><a href="{{ path('sortie_detail',{'id':sortie.id}) }}">Afficher</a></td>
-                </tr>
+         <tr>
+             <th scope="row">{{ sortie.nom }}</th>
+             <td>{{ sortie.dateHeureDebut | date ('d/m/Y H:i')}}</td>
+             <td>{{ sortie.dateLimiteInscription | date('d/m/Y') }}</td>
+             <td>{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
+             <td>{{ sortie.etat.libelle }}</td>
+             <td> Inscrit?</td>
+             <td><a href="{{ path('participant_detail',{'id':sortie.organisateur.id}) }}">{{ sortie.organisateur.username }}</a></td>
+             <td><a href="{{ path('sortie_detail',{'id':sortie.id}) }}">Afficher</a></td>
+         </tr>
 
-        {% endfor %}
-
-
+ {% endfor %}
 
 
-        </tbody>
-    </table>
-    <div class="add-button">
-    <button class="btn btn-secondary active"><a href="{{ path('add_sortie') }}">Ajouter une sortie</a></button>
-    </div>
+
+
+ </tbody>
+</table>
+<div class="add-button">
+<button class="btn btn-secondary active"><a href="{{ path('add_sortie') }}">Ajouter une sortie</a></button>
+</div>
 {% endblock %}

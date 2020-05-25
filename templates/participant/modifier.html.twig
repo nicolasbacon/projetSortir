@@ -1,12 +1,15 @@
 {% extends 'layout.html.twig' %}
 
 {% block main %}
-    <h1>Votre profil</h1>
-
-    {{ form_start(registerForm) }}
-    {{ form_widget(registerForm) }}
-    <button type="submit">Envoyer</button>
-    {{ form_end(registerForm) }}
+    <div class="grid">
+        <h1 class="pseudo">Votre profil</h1>
+        <div class="afficherProfil">
+            {{ form_start(registerForm) }}
+            {{ form_widget(registerForm) }}
+            <button type="submit">Envoyer</button>
+            {{ form_end(registerForm) }}
+        </div>
+    </div>
 {% endblock %}
 
 {% block title %}modifier Profil{% endblock %}
