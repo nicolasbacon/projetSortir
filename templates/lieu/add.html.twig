@@ -1,14 +1,45 @@
 {% extends 'layout.html.twig' %}
 
 {% block main %}
-    <h2>Créer un lieu!</h2>
-    {# afficher le formulaire #}
-
-    {{ form_start(lieuForm) }}
-    {{ form_widget(lieuForm) }}
-    <button type="submit">Enregistrer</button>
-    {{ form_end(lieuForm) }}
-
+    <div class="grid">
+        <h2 class="pseudo">Créer un lieu!</h2>
+        {# afficher le formulaire #}
+        <div class="afficherProfil">
+        {{ form_start(lieuForm) }}
+            <div>
+                {{ form_label(lieuForm.nom, 'Nom de la sortie : ') }}
+                {{ form_widget(lieuForm.nom) }}
+                {{ form_errors(lieuForm.nom) }}
+            </div>
+            <div>
+                {{ form_label(lieuForm.ville.codePostal, 'Code Postal : ') }}
+                {{ form_widget(lieuForm.ville.codePostal) }}
+                {{ form_errors(lieuForm.ville.codePostal) }}
+            </div>
+            <div>
+                {{ form_label(lieuForm.ville, 'Ville : ') }}
+                {{ form_widget(lieuForm.ville) }}
+                {{ form_errors(lieuForm.ville) }}
+            </div>
+            <div>
+                {{ form_label(lieuForm.rue, 'Rue : ') }}
+                {{ form_widget(lieuForm.rue) }}
+                {{ form_errors(lieuForm.rue) }}
+            </div>
+            <div>
+                {{ form_label(lieuForm.latitude, 'Latitude : ') }}
+                {{ form_widget(lieuForm.latitude) }}
+                {{ form_errors(lieuForm.latitude) }}
+            </div>
+            <div>
+                {{ form_label(lieuForm.longitude, 'Longitude : ') }}
+                {{ form_widget(lieuForm.longitude) }}
+                {{ form_errors(lieuForm.longitude) }}
+            </div>
+        <button type="submit">Enregistrer</button>
+        {{ form_end(lieuForm) }}
+        </div>
+    </div>
 {% endblock %}
 
 {% block title %}Ajout d'un lieu ! | {{ parent() }}{% endblock %}
