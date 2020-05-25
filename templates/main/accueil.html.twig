@@ -10,9 +10,9 @@
         <div class="child1Accueil">
             <div>
                 <label for="campus">Campus : </label>
-                <select name="campus" id="campus1" onchange="test(this.value)">
+                <select name="campus" id="campus">
                     {% for campus in allCampus %}
-                        <option value="{{ campus.nom }}" >{{ campus.nom }}</option>
+                        <option value="{{ campus.nom }}">{{ campus.nom }}</option>
                     {% endfor %}
                 </select>
             </div>
