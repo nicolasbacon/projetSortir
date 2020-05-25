@@ -165,10 +165,14 @@ label {
     width: inherit;
 }
 .child1AfficherSortie{
-
+    margin: 10px auto 10px auto;
+    grid-column: 1/4;
+    grid-row: 2;
 }
 .child2AfficherSortie{
-
+    margin: 10px auto 10px auto;
+    grid-column: 4/7;
+    grid-row: 2;
 }
 
 .accueil{
