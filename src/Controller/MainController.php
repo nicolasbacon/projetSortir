@@ -42,30 +42,29 @@ class MainController extends AbstractController
         $user = $this->getUser();
 
         $sorties = [];
-
-        if ($user != null && $campus==null) {
-            $sorties += $sortieRepo->findByCampus($user->getCampus()->getId());
-        }
-        if ($organisateur !=null){
-            $sorties=($sortieRepo->findByOrganisateur($organisateur));
-        }
-        if ($incrit !=null){
-            $sorties += $sortieRepo->findByParticipant($incrit);
-        }
-        if ($nonInscrit !=null){
-            $sorties += $sortieRepo->findByNonInscrit($nonInscrit);
-        }
-        if ($sortiePasse !=null){
-            $sorties += $sortieRepo->findBySortiePasse();
-
         $campus = null;
 
         if($researchForm->isSubmitted() && $researchForm->isValid()) {
             $campus = $researchForm->get('campus')->getData();
 
             $sorties = $sortieRepo->findByCampus($campus->getId());
-
+            if ($organisateur !=null){
+                $sorties=($sortieRepo->findByOrganisateur($organisateur));
+            }
+            if ($incrit !=null){
+                $sorties += $sortieRepo->findByParticipant($incrit);
+            }
+            if ($nonInscrit !=null){
+                $sorties += $sortieRepo->findByNonInscrit($nonInscrit);
+            }
+            if ($sortiePasse !=null) {
+                $sorties += $sortieRepo->findBySortiePasse();
+            }
         }
+
+
+
+
         //Si il est connecter
         else if ($user != null) {
             //On recupere les sorties de son campus
