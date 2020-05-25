@@ -9,7 +9,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use function Sodium\add;
 
 class MainController extends AbstractController
 {
@@ -61,7 +60,6 @@ class MainController extends AbstractController
             "sorties" => $sorties,
             "allCampus" => $allCampus,
             "researchForm" => $researchForm->createView(),
-            'campus' => $campus,
         ]);
     }
 }
