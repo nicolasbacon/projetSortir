@@ -2,7 +2,7 @@
 
 {% block main %}
     <div class="grid">
-        <h2 class="pseudo">Créer un lieu!</h2>
+        <h2 class="titrePage">Créer un lieu!</h2>
         {# afficher le formulaire #}
         <div class="afficherProfil">
         {{ form_start(lieuForm) }}
@@ -17,9 +17,9 @@
                 {{ form_errors(lieuForm.ville.codePostal) }}
             </div>
             <div>
-                {{ form_label(lieuForm.ville, 'Ville : ') }}
-                {{ form_widget(lieuForm.ville) }}
-                {{ form_errors(lieuForm.ville) }}
+                {{ form_label(lieuForm.ville.nom, 'Ville : ') }}
+                {{ form_widget(lieuForm.ville.nom) }}
+                {{ form_errors(lieuForm.ville.nom) }}
             </div>
             <div>
                 {{ form_label(lieuForm.rue, 'Rue : ') }}
