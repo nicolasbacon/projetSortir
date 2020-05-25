@@ -66,4 +66,44 @@ class SortieController extends AbstractController
             'lieux' => $lieux,
         ]);
     }
+
+
+    /**
+     * @Route("/modifierSortie/{id}", name="modifier_sortie", requirements={"id": "\d+"},
+     *     methods={"GET"})
+     */
+    public function modifierSortie($id, Request $request)
+    {
+        //récupérer la sortie en BDD:
+        $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepository->find($id);
+
+        if (empty($sortie)){
+            throw $this->createNotFoundException("Cette sortie n'existe pas!");
+        }
+
+        return $this->render('sortie/modifierSortie.html.twig', [
+            "sortie" => $sortie
+        ]);
+    }
+
+    /**
+     * @Route("/annulerSortie/{id}", name="annuler_sortie", requirements={"id": "\d+"},
+     *     methods={"GET"})
+     */
+    public function annulerSortie($id, Request $request)
+    {
+        //récupérer la sortie en BDD:
+        $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepository->find($id);
+
+        if (empty($sortie)){
+            throw $this->createNotFoundException("Cette sortie n'existe pas!");
+        }
+
+        return $this->render('sortie/annulerSortie.html.twig', [
+            "sortie" => $sortie
+        ]);
+    }
+
 }

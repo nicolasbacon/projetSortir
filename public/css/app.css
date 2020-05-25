@@ -127,7 +127,7 @@ label {
     width: 150px;
 }
 
-.pseudo
+.titrePage
 {
     margin: 10px auto 10px auto;
     text-align: center;
@@ -232,4 +232,17 @@ label {
     grid-auto-rows: minmax(100px, auto);
     grid-auto-columns: minmax(200px, auto);
 
+}
+.button > button{
+    color: #000 !important;
+}
+
+.button {
+    text-align: center;
+}
+
+.annulerSortie{
+    margin: 10px auto 10px auto;
+    grid-column: 2/6;
+    grid-row: 2;
 }
