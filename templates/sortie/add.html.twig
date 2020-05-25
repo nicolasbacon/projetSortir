@@ -3,7 +3,7 @@
 {% block main %}
     <h2 class="sortieTitle">Créer une sortie!</h2>
     {# afficher le formulaire #}
-    <div class="grid">
+    <div class="grid2">
         <div class="child1AddSortie">
             {{ form_start(sortieForm) }}
 
@@ -11,7 +11,7 @@
             {{ form_widget(sortieForm.nom) }}
             {{ form_errors(sortieForm.nom) }}
 
-            {{ form_label(sortieForm.dateHeureDebut, 'Date et heure de la sortie : ') }}
+            {{ form_label(sortieForm.dateHeureDebut, 'Date/heure de la sortie : ') }}
             {{ form_widget(sortieForm.dateHeureDebut) }}
             {{ form_errors(sortieForm.dateHeureDebut) }}
 
