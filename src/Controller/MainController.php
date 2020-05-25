@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Campus;
 use App\Entity\Sortie;
-use App\Form\ResearchType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +20,12 @@ class MainController extends AbstractController
 
         $researchForm->handleRequest($request);
 
+        $organisateur = $request->get('organisateur');
+        var_dump($organisateur);
+        $incrit = $request->get('inscrit');
+        $nonInscrit = $request->get('nonInscrit');
+        $sortiePasse = $request->get('sortiePasse');
+
         // Recuperation du formulaire de recherche
         /**
         $campus = $request->request->get('campus');
@@ -36,14 +41,30 @@ class MainController extends AbstractController
         //Recuperation du user en session
         $user = $this->getUser();
 
+        $sorties = [];
         $campus = null;
 
         if($researchForm->isSubmitted() && $researchForm->isValid()) {
             $campus = $researchForm->get('campus')->getData();
 
             $sorties = $sortieRepo->findByCampus($campus->getId());
-
+            if ($organisateur !=null){
+                $sorties=($sortieRepo->findByOrganisateur($organisateur));
+            }
+            if ($incrit !=null){
+                $sorties += $sortieRepo->findByParticipant($incrit);
+            }
+            if ($nonInscrit !=null){
+                $sorties += $sortieRepo->findByNonInscrit($nonInscrit);
+            }
+            if ($sortiePasse !=null) {
+                $sorties += $sortieRepo->findBySortiePasse();
+            }
         }
+
+
+
+
         //Si il est connecter
         else if ($user != null) {
             //On recupere les sorties de son campus

@@ -32,6 +32,28 @@ class SortieRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function findByNonInscrit($participant)
+    {
+        $qb = $this->createQueryBuilder('s');
+        $qb->andWhere('s.participant != :participant')
+            ->setParameter('participant', $participant)
+        ;
+
+        $query = $qb->getQuery();
+        return $query->getResult();
+    }
+
+    public function findBySortiePasse()
+    {
+        $qb = $this->createQueryBuilder('s');
+        $qb->leftJoin('s.etat', 'e')
+            ->andWhere('s.etat != Passe') ;
+
+
+
+        $query = $qb->getQuery();
+        return $query->getResult();
+    }
 
     /*
     public function findOneBySomeField($value): ?Sortie
