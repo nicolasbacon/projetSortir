@@ -61,12 +61,12 @@ class MainController extends AbstractController
                 }
             }
             //Verifie si organisateur
-            if ($organisateur != false){
+            if ($organisateur){
                 foreach ($sorties as $key => $sortie) {
                     if ($user =! $sortie->getOrganisateur()) unset($sorties[$key]);
                 }
             }
-            if ($incrit != false){
+            if ($incrit){
                 foreach ($sorties as $key => $sortie) {
                     $participe = false;
                     foreach ($sortie->getParticipants() as $participant) {
@@ -75,7 +75,7 @@ class MainController extends AbstractController
                     if ($participe == false) unset($sorties[$key]);
                 }
             }
-            if ($nonInscrit != false){
+            if ($nonInscrit){
                 foreach ($sorties as $key => $sortie) {
                     $participe = false;
                     foreach ($sortie->getParticipants() as $participant) {
@@ -84,7 +84,7 @@ class MainController extends AbstractController
                     if ($participe == true) unset($sorties[$key]);
                 }
             }
-            if ($sortiePasse != false) {
+            if ($sortiePasse) {
                 $now = new \DateTime();
                 foreach ($sorties as $key => $sortie) {
                     if ($now > $sortie->getDateHeureDebut()) unset($sorties[$key]);
