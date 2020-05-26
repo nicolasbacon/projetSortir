@@ -6,7 +6,12 @@
         <div class="afficherProfil">
             {{ form_start(registerForm) }}
             {{ form_widget(registerForm) }}
-            <button type="submit">Envoyer</button>
+
+            <div class="button">
+                <button class="btn btn-secondary active" type="submit">Enregistrer</button>
+                <button class="btn btn-secondary active" type="submit"><a href="{{ path('home') }}">Annuler</a></button>
+            </div>
+
             {{ form_end(registerForm) }}
         </div>
     </div>

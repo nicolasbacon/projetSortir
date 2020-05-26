@@ -48,8 +48,10 @@
     </div>
     <div class="button">
         <button class="btn btn-secondary active" type="submit">Enregistrer</button>
-        <button class="btn btn-secondary active" type="submit">Publier la sortie</button>
-        <button class="btn btn-secondary active" type="reset">Annuler</button>
+        {% if sortie.etat.libelle == 'Cree' %}
+            <button class="btn btn-secondary active" type="submit">Publier la sortie</button>
+        {% endif %}
+        <button class="btn btn-secondary active" type="submit"><a href="{{ path('home') }}">Annuler</a></button>
     </div>
 
     {{ form_end(sortieForm) }}
