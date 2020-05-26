@@ -64,7 +64,7 @@ class SortieController extends AbstractController
         if($lieuForm->isSubmitted() && $lieuForm->isValid()) {
             $em->persist($lieu);
             $em->flush();
-            $this->addFlash('success', 'Le lieu a été ajoutée !');
+            $this->addFlash('success', 'Le lieu a été ajouté !');
             $lieux[] = $lieu;
         }
 
@@ -103,18 +103,18 @@ class SortieController extends AbstractController
             throw $this->createNotFoundException("Cette sortie n'existe pas!");
         }
         else {
-            if ($sortie->getOrganisateur() != $this->getUser()) throw $this->createAccessDeniedException("Vous n'ète pas l\'organisateur de cette sortie");
+            if ($sortie->getOrganisateur() != $this->getUser()) throw $this->createAccessDeniedException("Vous n'êtes pas l\'organisateur de cette sortie");
 
             if($lieuForm->isSubmitted() && $lieuForm->isValid()) {
                 $em->persist($lieu);
                 $em->flush();
-                $this->addFlash('success', 'Le lieu a été ajoutée !');
+                $this->addFlash('success', 'Le lieu a été ajouté !');
                 $lieux[] = $lieu;
             }
 
             if($sortieModifForm->isSubmitted() && $sortieModifForm->isValid()) {
                 $etat = new Etat();
-                $etat->setLibelle('Publiée');
+                $etat->setLibelle('Publiee');
                 $sortie->setEtat($etat);
 
                 $em->persist($sortie);
@@ -146,7 +146,7 @@ class SortieController extends AbstractController
         else {
             if($sortieAnulForm->isSubmitted() && $sortieAnulForm->isValid()) {
                 $etat = new Etat();
-                $etat->setLibelle('Annulée');
+                $etat->setLibelle('Annulee');
                 $sortie->setEtat($etat);
 
                 $em->persist($sortie);
@@ -159,5 +159,7 @@ class SortieController extends AbstractController
             'sortieAnulForm' => $sortieAnulForm->createView(),
         ]);
     }
+
+
 
 }

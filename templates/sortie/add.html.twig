@@ -41,6 +41,16 @@
             {{ form_label(sortieForm.lieu, 'Lieu : ') }}
             {{ form_widget(sortieForm.lieu) }}
             {{ form_errors(sortieForm.lieu) }}
+
+            {{ form_start(lieuForm) }}
+            <input type="image" src="{{ asset('images/plus.png') }}" width="25" height="25">
+            {{ form_row(lieuForm.ville) }}
+            {{ form_row(lieuForm.nom) }}
+            {{ form_row(lieuForm.latitude) }}
+            {{ form_row(lieuForm.longitude) }}
+            {{ form_end(lieuForm) }}
+
+
         </div>
 
 
@@ -52,12 +62,7 @@
         <button class="btn btn-secondary active" type="submit"><a href="{{ path('home') }}">Annuler</a></button>
     </div>
     {{ form_end(sortieForm) }}
-        <div class="child3AddSortie ">
-            {{ form_start(lieuForm) }}
-            <button id="bouton-plus" type="submit"><img src="{{ asset('images/plus.png') }}" alt="Ajouter un lieu" class="bouton-plus"></button>
-            {{ form_widget(lieuForm) }}
-            {{ form_end(lieuForm) }}
-        </div>
+
     </div>
 
 
