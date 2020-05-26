@@ -26,6 +26,13 @@ class Etat
     {
         return $this->id;
     }
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
 
     public function getLibelle(): ?string
     {
