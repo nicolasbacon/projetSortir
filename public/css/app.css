@@ -251,6 +251,32 @@ label {
     grid-column: 2/6;
     grid-row: 2;
 }
+
+.modif {
+    display: grid;
+    grid-template-areas:    "colLeft colRight"
+                            "button button";
+
+}
+
+.modifCol1 {
+    grid-area: colLeft;
+    grid-template-areas:    "nom"
+                            "dateSortie"
+                            "dateInsc"
+                            "nbrPlace"
+                            "duree"
+                            "desc";
+}
+
+.modifCol2 {
+    grid-area: colRight;
+}
+
+.modifButton {
+    grid-area: button;
+}
+
 .msgFull{
     border: white;
     background-color: darkred;
