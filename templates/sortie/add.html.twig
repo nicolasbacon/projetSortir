@@ -54,7 +54,7 @@
     {{ form_end(sortieForm) }}
         <div class="child3AddSortie ">
             {{ form_start(lieuForm) }}
-            <button type="submit"><img src="{{ asset('images/plus.png') }}" alt="Ajouter un lieu" class="bouton-plus"></button>
+            <button id="bouton-plus" type="submit"><img src="{{ asset('images/plus.png') }}" alt="Ajouter un lieu" class="bouton-plus"></button>
             {{ form_widget(lieuForm) }}
             {{ form_end(lieuForm) }}
         </div>

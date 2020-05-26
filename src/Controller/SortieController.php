@@ -75,6 +75,7 @@ class SortieController extends AbstractController
             return $this->redirectToRoute('add_sortie');
         }
         return $this->render('sortie/add.html.twig', [
+            'sortie' => $sortie,
             'sortieForm' => $sortieForm->createView(),
             'lieuForm' => $lieuForm->createView(),
             'lieux' => $lieux,
@@ -108,7 +109,7 @@ class SortieController extends AbstractController
             }
         }
         return $this->render('sortie/modifierSortie.html.twig', [
-            "sortie" => $sortie,
+            'sortie' => $sortie,
             'sortieModifForm' => $sortieModifForm->createView(),
         ]);
     }
