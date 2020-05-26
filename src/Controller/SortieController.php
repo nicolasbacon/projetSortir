@@ -6,6 +6,7 @@ use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Form\LieuType;
+use App\Form\SortieAnnuleeType;
 use App\Form\SortieType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -82,40 +83,65 @@ class SortieController extends AbstractController
 
 
     /**
-     * @Route("/modifierSortie/{id}", name="modifier_sortie", requirements={"id": "\d+"},
-     *     methods={"GET"})
+     * @Route("/modifierSortie/{id}", name="modifier_sortie", requirements={"id": "\d+"})
      */
-    public function modifierSortie($id, Request $request)
+    public function modifierSortie($id, Request $request, EntityManagerInterface $em)
     {
         //récupérer la sortie en BDD:
         $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
         $sortie = $sortieRepository->find($id);
 
+        $sortieModifForm = $this->createForm(SortieType::class, $sortie);
+        $sortieModifForm->handleRequest($request);
+
         if (empty($sortie)){
             throw $this->createNotFoundException("Cette sortie n'existe pas!");
         }
+        else {
+            if($sortieModifForm->isSubmitted() && $sortieModifForm->isValid()) {
+                $etat = new Etat();
+                $etat->setLibelle('Publiée');
+                $sortie->setEtat($etat);
 
+                $em->persist($sortie);
+                $em->flush();
+            }
+        }
         return $this->render('sortie/modifierSortie.html.twig', [
-            "sortie" => $sortie
+            "sortie" => $sortie,
+            'sortieModifForm' => $sortieModifForm->createView(),
         ]);
     }
 
     /**
-     * @Route("/annulerSortie/{id}", name="annuler_sortie", requirements={"id": "\d+"},
-     *     methods={"GET"})
+     * @Route("/annulerSortie/{id}", name="annuler_sortie", requirements={"id": "\d+"})
      */
-    public function annulerSortie($id, Request $request)
+    public function annulerSortie($id, Request $request, EntityManagerInterface $em)
     {
         //récupérer la sortie en BDD:
         $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
         $sortie = $sortieRepository->find($id);
 
+        $sortieAnulForm = $this->createForm(SortieAnnuleeType::class, $sortie);
+        $sortieAnulForm->handleRequest($request);
+
         if (empty($sortie)){
             throw $this->createNotFoundException("Cette sortie n'existe pas!");
         }
+        else {
+            if($sortieAnulForm->isSubmitted() && $sortieAnulForm->isValid()) {
+                $etat = new Etat();
+                $etat->setLibelle('Annulée');
+                $sortie->setEtat($etat);
+
+                $em->persist($sortie);
+                $em->flush();
+            }
+        }
 
         return $this->render('sortie/annulerSortie.html.twig', [
-            "sortie" => $sortie
+            'sortie' => $sortie,
+            'sortieAnulForm' => $sortieAnulForm->createView(),
         ]);
     }
 

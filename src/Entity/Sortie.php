@@ -50,6 +50,11 @@ class Sortie
     private $infosSortie;
 
     /**
+     * @ORM\Column(type="text")
+     */
+    private $motif;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Etat::class, cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -236,4 +241,21 @@ class Sortie
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMotif()
+    {
+        return $this->motif;
+    }
+
+    /**
+     * @param mixed $motif
+     */
+    public function setMotif($motif): void
+    {
+        $this->motif = $motif;
+    }
+
 }

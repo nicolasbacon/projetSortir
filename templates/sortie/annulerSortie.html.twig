@@ -25,16 +25,21 @@
                     <label for="lieu">Lieu : </label>
                     <input type="text" id="lieu" value="{{ sortie.lieu.nom }}" readonly>
                 </div>
-     <form action="" method="post">
+                {{ form_start(sortieAnulForm) }}
                 <div>
-                    <label for="motif">Motif : </label>
-                    <textarea id="motif" rows="5" cols="19"></textarea>
-
+                    {{ form_label(sortieAnulForm.motif) }}
+                    {{ form_widget(sortieAnulForm.motif) }}
                 </div>
-     </form>
+                <div class="button">
+                    <button class="btn btn-secondary active" type="submit">Enregistrer</button>
+                    <button class="btn btn-secondary active" type="submit"><a href="{{ path('home') }}">Annuler</a></button>
+                </div>
+                {{ form_end(sortieAnulForm) }}
             </div>
 
     </div>
+
+
 {% endblock %}
 
 {% block title %}Annuler une sortie ! | {{ parent() }}{% endblock %}
