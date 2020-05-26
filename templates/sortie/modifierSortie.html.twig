@@ -1,71 +1,76 @@
 {% extends 'layout.html.twig' %}
 
 {% block main %}
-    <h2 class="sortieTitle">Modifier une sortie : {{ sortie.nom }}</h2>
+    <h2 class="sortieTitle">Modifier une sortie</h2>
     <br>
+
     <div class="grid">
+        <div class="child1AddSortie">
+            {{ form_start(sortieModifForm) }}
 
-        <div class="child1AfficherSortie">
-            <div>
-                <label for="dateDebut">Date et heure de la sortie : </label>
-                <input type="text" id="dateDebut" value="{{ sortie.dateHeureDebut | date ('d/m/Y H:i') }}">
-            </div>
-            <div>
-                <label for="dateLimiteInscription">Date limite d'inscription : </label>
-                <input type="text" id="dateLimiteInscription" value="{{ sortie.dateLimiteInscription | date('d/m/Y') }}">
+            {{ form_label(sortieModifForm.nom, 'Nom de la sortie : ') }}
+            {{ form_widget(sortieModifForm.nom) }}
+            {{ form_errors(sortieModifForm.nom) }}
 
-            </div>
-            <div>
-                <label for="placesMax">Nombre de places : </label>
-                <input type="text" id="placesMax" value="{{ sortie.nbInscriptionsMax }}">
-            </div>
-            <div>
-                <label for="duree">Durée : </label>
-                <input type="text" id="duree" value="{{ sortie.duree | date('H:i') }}">
-            </div>
-            <div>
-                <label for="infosSortie">Description et infos : </label>
-                <input type="text" id="infosSortie" value="{{ sortie.infosSortie }}">
-            </div>
+            {{ form_label(sortieModifForm.dateHeureDebut, 'Date/heure de la sortie : ') }}
+            {{ form_widget(sortieModifForm.dateHeureDebut) }}
+            {{ form_errors(sortieModifForm.dateHeureDebut) }}
+
+
+            {{ form_label(sortieModifForm.dateLimiteInscription, 'Date limite d\'inscription : ') }}
+            {{ form_widget(sortieModifForm.dateLimiteInscription) }}
+            {{ form_errors(sortieModifForm.dateLimiteInscription) }}
+
+            {{ form_label(sortieModifForm.nbInscriptionsMax, 'Nombre de places : ') }}
+            {{ form_widget(sortieModifForm.nbInscriptionsMax) }}
+            {{ form_errors(sortieModifForm.nbInscriptionsMax) }}
+
+
+            {{ form_label(sortieModifForm.duree, 'Durée : ') }}
+            {{ form_widget(sortieModifForm.duree) }}
+            {{ form_errors(sortieModifForm.duree) }}
+
+
+            {{ form_label(sortieModifForm.infosSortie, 'Description et infos : ') }}
+            {{ form_widget(sortieModifForm.infosSortie) }}
+            {{ form_errors(sortieModifForm.infosSortie) }}
+
         </div>
-        <div class="child2AfficherSortie">
-            <div>
-                <label for="campus">Campus : </label>
-                <input type="text" id="campus" value="{{ sortie.campus.nom }}">
-            </div>
-            <div>
-                <label for="lieu">Lieu : </label>
-                <input type="text" id="lieu" value="{{ sortie.lieu.nom }}">
-                <a href="{{ path('lieu_add') }}" title="Ajouter un lieu"><img src="{{ asset('images/plus.png') }}" alt="Ajouter un lieu" class="bouton-plus"></a>
-            </div>
-            <div>
-                <label for="rue">Rue : </label>
-                <input type="text" id="rue" value="{{ sortie.lieu.rue }}">
-            </div>
-            <div>
-                <label for="codePostal">Code Postal : </label>
-                <input type="text" id="codePostal" value="{{ sortie.lieu.ville.codePostal }}">
-            </div>
-            <div>
-                <label for="latitude">Latitude : </label>
-                <input type="text" id="latitude" value="{{ sortie.lieu.latitude }}">
-            </div>
-            <div>
-                <label for="longitude">Longitude : </label>
-                <input type="text" id="longitude" value="{{ sortie.lieu.longitude }}">
-            </div>
+        <div class="child2AddSortie">
+            {{ form_row(sortieModifForm.campus) }}
+
+            {{ form_label(sortieModifForm.lieu, 'Lieu : ') }}
+            {{ form_widget(sortieModifForm.lieu) }}
+            {{ form_errors(sortieModifForm.lieu) }}
+
+            {{ form_start(lieuForm) }}
+            <input type="image" src="{{ asset('images/plus.png') }}" width="25" height="25">
+            {{ form_row(lieuForm.ville) }}
+            {{ form_row(lieuForm.nom) }}
+            {{ form_row(lieuForm.latitude) }}
+            {{ form_row(lieuForm.longitude) }}
+            {{ form_end(lieuForm) }}
 
         </div>
 
-    </div>
 
     </div>
     <div class="button">
         <button class="btn btn-secondary active" type="submit">Enregistrer</button>
-        <button class="btn btn-secondary active" type="submit">Publier la sortie</button>
-        <button class="btn btn-secondary active" type="">Supprimer la sortie</button>
-        <button class="btn btn-secondary active" type="reset">Annuler</button>
+        {% if sortie.etat.libelle == 'Cree' %}
+            <button class="btn btn-secondary active" type="submit">Publier la sortie</button>
+        {% endif %}
+        <button class="btn btn-secondary active" type="submit"><a href="{{ path('annuler_sortie',{'id':sortie.id}) }}">Supprimer la sortie</a></button>
+        <button class="btn btn-secondary active" type="submit"><a href="{{ path('home') }}">Annuler</a></button>
     </div>
+
+    {{ form_end(sortieModifForm) }}
+
+
+
+
+
+
 
 {% endblock %}
 

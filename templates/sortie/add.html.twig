@@ -41,18 +41,25 @@
             {{ form_label(sortieForm.lieu, 'Lieu : ') }}
             {{ form_widget(sortieForm.lieu) }}
             {{ form_errors(sortieForm.lieu) }}
-            <a href="{{ path('lieu_add') }}" title="Ajouter un lieu"><img src="{{ asset('images/plus.png') }}" alt="Ajouter un lieu" class="bouton-plus"></a>
         </div>
 
 
-    </div>
     <div class="button">
         <button class="btn btn-secondary active" type="submit">Enregistrer</button>
-        <button class="btn btn-secondary active" type="submit">Publier la sortie</button>
-        <button class="btn btn-secondary active" type="reset">Annuler</button>
+        {% if sortie.etat.libelle == 'Cree' %}
+            <button class="btn btn-secondary active" type="submit">Publier la sortie</button>
+        {% endif %}
+        <button class="btn btn-secondary active" type="submit"><a href="{{ path('home') }}">Annuler</a></button>
+    </div>
+    {{ form_end(sortieForm) }}
+        <div class="child3AddSortie ">
+            {{ form_start(lieuForm) }}
+            <button type="submit"><img src="{{ asset('images/plus.png') }}" alt="Ajouter un lieu" class="bouton-plus"></button>
+            {{ form_widget(lieuForm) }}
+            {{ form_end(lieuForm) }}
+        </div>
     </div>
 
-    {{ form_end(sortieForm) }}
 
 {% endblock %}
 
