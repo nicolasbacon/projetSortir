@@ -62,26 +62,43 @@
         {% if app.user.id == sortie.organisateur.id %}
             <button class="btn btn-secondary active" href="href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</button>
         {% else %}
-            {% if sortie.participants | length == 0 %}
-                {{ form_start(inscritForm) }}
-                <button class="btn btn-secondary active" type="submit">S'inscrire</button>
-                {{ form_end(inscritForm) }}
-            {% endif %}
+            {% set date = false %}
+            {% if sortie.dateLimiteInscription > "now" %}
+                {% set date = true %}
+            {% endif%}
+
+            {% set nb = false %}
+            {% if sortie.nbInscriptionsMax > sortie.participants |length %}
+                {% set nb = true %}
+            {% endif%}
+
             {% set particip = false %}
             {% for participant in sortie.participants %}
                     {% if app.user.username == participant.username %}
                         {% set particip = true %}
                     {% endif %}
             {% endfor %}
-            {% if particip %}
+
+            {% if particip and nb%}
                 {{ form_start(desinscritForm) }}
                 <button class="btn btn-secondary active" type="submit">Se désister</button>
                 {{ form_end(desinscritForm) }}
-            {% else %}
+            {% endif %}
+
+            {% if nb and date %}
                 {{ form_start(inscritForm) }}
                 <button class="btn btn-secondary active" type="submit">S'inscrire</button>
                 {{ form_end(inscritForm) }}
             {% endif %}
+
+            {% if nb ==false %}
+                <p class="msgFull">Le nombre d'inscrits pour cette sortie a été atteint</p>
+            {% endif %}
+
+            {% if date == false%}
+                <p class="msgFull">La date limite d'inscription a été atteinte</p>
+            {% endif %}
+
         {% endif %}
         <button class="btn btn-secondary active" type="reset">Annuler</button>
 

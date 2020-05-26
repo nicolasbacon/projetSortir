@@ -254,3 +254,8 @@ label {
     grid-column: 2/6;
     grid-row: 2;
 }
+.msgFull{
+    border: white;
+    background-color: darkred;
+    color: white;
+}

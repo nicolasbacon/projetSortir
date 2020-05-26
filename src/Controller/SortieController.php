@@ -105,6 +105,7 @@ class SortieController extends AbstractController
             'sortieForm' => $sortieForm->createView(),
             'lieuForm' => $lieuForm->createView(),
             'lieux' => $lieux,
+            "sortie" => $sortie,
         ]);
     }
 
