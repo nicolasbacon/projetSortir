@@ -42,6 +42,7 @@
             {{ form_label(sortieModifForm.lieu, 'Lieu : ') }}
             {{ form_widget(sortieModifForm.lieu) }}
             {{ form_errors(sortieModifForm.lieu) }}
+            {{ form_end(sortieModifForm) }}
 
             {{ form_start(lieuForm) }}
             <input type="image" src="{{ asset('images/plus.png') }}" width="25" height="25">
@@ -50,10 +51,7 @@
             {{ form_row(lieuForm.latitude) }}
             {{ form_row(lieuForm.longitude) }}
             {{ form_end(lieuForm) }}
-
         </div>
-
-
     </div>
     <div class="button">
         <button class="btn btn-secondary active" type="submit">Enregistrer</button>
@@ -63,12 +61,6 @@
         <button class="btn btn-secondary active" type="submit"><a href="{{ path('annuler_sortie',{'id':sortie.id}) }}">Supprimer la sortie</a></button>
         <button class="btn btn-secondary active" type="submit"><a href="{{ path('home') }}">Annuler</a></button>
     </div>
-
-    {{ form_end(sortieModifForm) }}
-
-
-
-
 
 
 

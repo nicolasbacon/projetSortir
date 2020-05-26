@@ -1,0 +1,75 @@
+{% extends 'layout.html.twig' %}
+
+{% block main %}
+
+    <div class="modif">
+        <div class="modifCol1">
+            {{ form_start(sortieModifForm) }}
+            <div class="nom">
+                {{ form_label(sortieModifForm.nom, 'Nom de la sortie : ') }}
+                {{ form_widget(sortieModifForm.nom) }}
+                {{ form_errors(sortieModifForm.nom) }}
+            </div>
+
+            <div class="dateSortie">
+                {{ form_label(sortieModifForm.dateHeureDebut, 'Date/heure de la sortie : ') }}
+                {{ form_widget(sortieModifForm.dateHeureDebut) }}
+                {{ form_errors(sortieModifForm.dateHeureDebut) }}
+            </div>
+
+            <div class="dateInsc">
+                {{ form_label(sortieModifForm.dateLimiteInscription, 'Date limite d\'inscription : ') }}
+                {{ form_widget(sortieModifForm.dateLimiteInscription) }}
+                {{ form_errors(sortieModifForm.dateLimiteInscription) }}
+            </div>
+
+            <div class="nbrPlace">
+                {{ form_label(sortieModifForm.nbInscriptionsMax, 'Nombre de places : ') }}
+                {{ form_widget(sortieModifForm.nbInscriptionsMax) }}
+                {{ form_errors(sortieModifForm.nbInscriptionsMax) }}
+            </div>
+
+            <div class="duree">
+                {{ form_label(sortieModifForm.duree, 'Durée : ') }}
+                {{ form_widget(sortieModifForm.duree) }}
+                {{ form_errors(sortieModifForm.duree) }}
+            </div>
+
+            <div class="desc">
+                {{ form_label(sortieModifForm.infosSortie, 'Description et infos : ') }}
+                {{ form_widget(sortieModifForm.infosSortie) }}
+                {{ form_errors(sortieModifForm.infosSortie) }}
+            </div>
+
+            <div class="modifButton">
+                <button class="btn btn-secondary active" type="submit">Enregistrer</button>
+                {% if sortie.etat.libelle == 'Cree' %}
+                    <button class="btn btn-secondary active" type="submit" name="publier" value="publier">Publier la sortie</button>
+                {% endif %}
+            </div>
+
+
+        </div>
+
+        <div class="modifCol2">
+            {{ form_row(sortieModifForm.campus) }}
+
+            {{ form_label(sortieModifForm.lieu, 'Lieu : ') }}
+            {{ form_widget(sortieModifForm.lieu) }}
+            {{ form_errors(sortieModifForm.lieu) }}
+
+            {{ form_end(sortieModifForm) }}
+
+            {{ form_start(lieuForm) }}
+            <input type="image" src="{{ asset('images/plus.png') }}" width="25" height="25">
+            {{ form_row(lieuForm.nom) }}
+            {{ form_row(lieuForm.latitude) }}
+            {{ form_row(lieuForm.longitude) }}
+            {{ form_end(lieuForm) }}
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block title %}Modifier une sortie ! | {{ parent() }}{% endblock %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
+use App\Form\LieuModifType;
 use App\Form\LieuType;
 use App\Form\SortieAnnuleeType;
 use App\Form\SortieType;
@@ -87,13 +88,17 @@ class SortieController extends AbstractController
      */
     public function modifierSortie($id, Request $request, EntityManagerInterface $em)
     {
+
         //récupérer la sortie en BDD:
         $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $etatRepository = $em->getRepository(Etat::class);
+
         $sortie = $sortieRepository->find($id);
+
         $lieu = $sortie->getLieu();
 
         $sortieModifForm = $this->createForm(SortieType::class, $sortie);
-        $lieuForm = $this->createForm(LieuType::class, $lieu);
+        $lieuForm = $this->createForm(LieuModifType::class, $lieu);
 
         $sortieModifForm->handleRequest($request);
         $lieuForm->handleRequest($request);
@@ -112,15 +117,15 @@ class SortieController extends AbstractController
             }
 
             if($sortieModifForm->isSubmitted() && $sortieModifForm->isValid()) {
-                $etat = new Etat();
-                $etat->setLibelle('Publiée');
-                $sortie->setEtat($etat);
-
-                $em->persist($sortie);
-                $em->flush();
+                if (isset($_POST['publier'])) {
+                    $etat = $etatRepository->find(2);
+                    $sortie->setEtat($etat);
+                    $em->persist($sortie);
+                    $em->flush();
+                }
             }
         }
-        return $this->render('sortie/modifierSortie.html.twig', [
+        return $this->render('sortie/modifier2.html.twig', [
             'sortie' => $sortie,
             'sortieModifForm' => $sortieModifForm->createView(),
             'lieuForm' => $lieuForm->createView(),
