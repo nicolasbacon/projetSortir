@@ -8,54 +8,82 @@
 
             <div class="child1AfficherSortie">
                 <div>
-                    <label for="dateDebut">Date et heure de la sortie : </label>
-                    <input type="text" id="dateDebut" value="{{ sortie.dateHeureDebut | date ('d/m/Y H:i') }}" readonly>
+                    <label>Date et heure de la sortie : </label>
+                    <strong>{{ sortie.dateHeureDebut | date ('d/m/Y H:i') }}</strong>
                 </div>
                 <div>
-                    <label for="dateLimiteInscription">Date limite d'inscription : </label>
-                    <input type="text" id="dateLimiteInscription" value="{{ sortie.dateLimiteInscription | date('d/m/Y') }}" readonly>
+                    <label>Date limite d'inscription : </label>
+                    <strong> {{ sortie.dateLimiteInscription | date('d/m/Y') }}</strong>
 
                 </div>
                 <div>
-                    <label for="placesMax">Nombre de places : </label>
-                    <input type="text" id="placesMax" value="{{ sortie.nbInscriptionsMax }}" readonly>
+                    <label>Nombre de places : </label>
+                    <strong> {{ sortie.nbInscriptionsMax }}</strong>
                 </div>
                 <div>
-                    <label for="duree">Durée : </label>
-                    <input type="text" id="duree" value="{{ sortie.duree | date('H:i') }}" readonly> minutes
+                    <label>Durée : </label>
+                    <strong> {{ sortie.duree | date('H:i') }}</strong>
                 </div>
                 <div>
-                    <label for="infosSortie">Description et infos : </label>
-                    <input type="text" id="infosSortie" value="{{ sortie.infosSortie }}" readonly>
+                    <label>Description et infos : </label>
+                    <strong> {{ sortie.infosSortie | capitalize }}</strong>
                 </div>
             </div>
             <div class="child2AfficherSortie">
                 <div>
-                    <label for="campus">Campus : </label>
-                    <input type="text" id="campus" value="{{ sortie.campus.nom }}" readonly>
+                    <label>Campus : </label>
+                    <strong> {{ sortie.campus.nom  | capitalize}}</strong>
                 </div>
                 <div>
-                    <label for="lieu">Lieu : </label>
-                    <input type="text" id="lieu" value="{{ sortie.lieu.nom }}" readonly>
+                    <label>Lieu : </label>
+                    <strong> {{ sortie.lieu.nom | capitalize }}</strong>
                 </div>
                 <div>
-                    <label for="rue">Rue : </label>
-                    <input type="text" id="rue" value="{{ sortie.lieu.rue }}" readonly>
+                    <label>Rue : </label>
+                    <strong>  {{ sortie.lieu.rue | capitalize }}</strong>
                 </div>
                 <div>
-                    <label for="codePostal">Code Postal : </label>
-                    <input type="text" id="codePostal" value="{{ sortie.lieu.ville.codePostal }}" readonly>
+                    <label>Code Postal : </label>
+                    <strong> {{ sortie.lieu.ville.codePostal }}</strong>
                 </div>
                 <div>
-                    <label for="latitude">Latitude : </label>
-                    <input type="text" id="latitude" value="{{ sortie.lieu.latitude }}" readonly>
+                    <label>Latitude : </label>
+                    <strong> {{ sortie.lieu.latitude }}</strong>
                 </div>
                 <div>
-                    <label for="longitude">Longitude : </label>
-                    <input type="text" id="longitude" value="{{ sortie.lieu.longitude }}" readonly>
+                    <label>Longitude : </label>
+                    <strong> {{ sortie.lieu.longitude }}</strong>
                 </div>
-
             </div>
+    </div>
+
+
+    <div class="button">
+        {% if app.user.id == sortie.organisateur.id %}
+            <button class="btn btn-secondary active" href="href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</button>
+        {% else %}
+            {% if sortie.participants | length == 0 %}
+                {{ form_start(inscritForm) }}
+                <button class="btn btn-secondary active" type="submit">S'inscrire</button>
+                {{ form_end(inscritForm) }}
+            {% endif %}
+            {% set particip = false %}
+            {% for participant in sortie.participants %}
+                    {% if app.user.username == participant.username %}
+                        {% set particip = true %}
+                    {% endif %}
+            {% endfor %}
+            {% if particip %}
+                {{ form_start(desinscritForm) }}
+                <button class="btn btn-secondary active" type="submit">Se désister</button>
+                {{ form_end(desinscritForm) }}
+            {% else %}
+                {{ form_start(inscritForm) }}
+                <button class="btn btn-secondary active" type="submit">S'inscrire</button>
+                {{ form_end(inscritForm) }}
+            {% endif %}
+        {% endif %}
+        <button class="btn btn-secondary active" type="reset">Annuler</button>
 
     </div>
 
@@ -67,19 +95,15 @@
             <tr>
                 <th scope="col">Pseudo</th>
                 <th scope="col">Nom</th>
-
             </tr>
             </thead>
             <tbody>
             {% for participant in sortie.participants %}
                 <tr>
-                    <th scope="row">{{ sortie.participant }}</th>
-
-                    <td>{{ sortie.participant.pseudo }}</td>
-                    <td>{{ sortie.participant.nom }}</td>
+                    <td>{{ participant.username }}</td>
+                    <td>{{ participant.nom }}</td>
                 </tr>
             {% endfor %}
-
             </tbody>
         </table>
     </div>
