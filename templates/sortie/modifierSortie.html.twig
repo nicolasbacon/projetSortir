@@ -42,24 +42,14 @@
             {{ form_label(sortieModifForm.lieu, 'Lieu : ') }}
             {{ form_widget(sortieModifForm.lieu) }}
             {{ form_errors(sortieModifForm.lieu) }}
-            <a href="{{ path('lieu_add') }}" title="Ajouter un lieu"><img src="{{ asset('images/plus.png') }}" alt="Ajouter un lieu" class="bouton-plus"></a>
 
-            <div>
-                <label for="rue">Rue : </label>
-                <input type="text" id="rue" value="{{ sortie.lieu.rue }}">
-            </div>
-            <div>
-                <label for="codePostal">Code Postal : </label>
-                <input type="text" id="codePostal" value="{{ sortie.lieu.ville.codePostal }}">
-            </div>
-            <div>
-                <label for="latitude">Latitude : </label>
-                <input type="text" id="latitude" value="{{ sortie.lieu.latitude }}">
-            </div>
-            <div>
-                <label for="longitude">Longitude : </label>
-                <input type="text" id="longitude" value="{{ sortie.lieu.longitude }}">
-            </div>
+            {{ form_start(lieuForm) }}
+            <input type="image" src="{{ asset('images/plus.png') }}" width="25" height="25">
+            {{ form_row(lieuForm.ville) }}
+            {{ form_row(lieuForm.nom) }}
+            {{ form_row(lieuForm.latitude) }}
+            {{ form_row(lieuForm.longitude) }}
+            {{ form_end(lieuForm) }}
 
         </div>
 

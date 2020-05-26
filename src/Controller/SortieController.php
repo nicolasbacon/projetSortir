@@ -91,14 +91,27 @@ class SortieController extends AbstractController
         //récupérer la sortie en BDD:
         $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
         $sortie = $sortieRepository->find($id);
+        $lieu = $sortie->getLieu();
 
         $sortieModifForm = $this->createForm(SortieType::class, $sortie);
+        $lieuForm = $this->createForm(LieuType::class, $lieu);
+
         $sortieModifForm->handleRequest($request);
+        $lieuForm->handleRequest($request);
 
         if (empty($sortie)){
             throw $this->createNotFoundException("Cette sortie n'existe pas!");
         }
         else {
+            if ($sortie->getOrganisateur() != $this->getUser()) throw $this->createAccessDeniedException("Vous n'ète pas l\'organisateur de cette sortie");
+
+            if($lieuForm->isSubmitted() && $lieuForm->isValid()) {
+                $em->persist($lieu);
+                $em->flush();
+                $this->addFlash('success', 'Le lieu a été ajoutée !');
+                $lieux[] = $lieu;
+            }
+
             if($sortieModifForm->isSubmitted() && $sortieModifForm->isValid()) {
                 $etat = new Etat();
                 $etat->setLibelle('Publiée');
@@ -111,6 +124,7 @@ class SortieController extends AbstractController
         return $this->render('sortie/modifierSortie.html.twig', [
             'sortie' => $sortie,
             'sortieModifForm' => $sortieModifForm->createView(),
+            'lieuForm' => $lieuForm->createView(),
         ]);
     }
 
