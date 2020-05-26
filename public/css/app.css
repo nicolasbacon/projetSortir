@@ -182,6 +182,14 @@ label {
     grid-area: 1 / 6 / span 6 / span 3;
 }
 
+.child3AddSortie{
+    margin: 10px auto 10px auto;
+    grid-area: 2 / 6 / span 6 / span 3;
+}
+
+.child3AddSortie > button {
+}
+
 .accueil{
     display: grid;
     grid-template-columns: repeat(4, 1fr);

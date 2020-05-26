@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
+use App\Form\LieuType;
 use App\Form\SortieType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,11 +50,22 @@ class SortieController extends AbstractController
         $sortie = new Sortie();
         $sortie->setEtat($etat);
 
+        $lieu = new Lieu();
+
         $sortie->setOrganisateur($this->getUser());
 
         $sortieForm = $this->createForm(SortieType::class, $sortie);
+        $lieuForm = $this->createForm(LieuType::class, $lieu);
 
         $sortieForm->handleRequest($request);
+        $lieuForm->handleRequest($request);
+
+        if($lieuForm->isSubmitted() && $lieuForm->isValid()) {
+            $em->persist($lieu);
+            $em->flush();
+            $this->addFlash('success', 'Le lieu a été ajoutée !');
+            $lieux[] = $lieu;
+        }
 
         if($sortieForm->isSubmitted() && $sortieForm->isValid()) {
             $em->persist($sortie);
@@ -63,6 +75,7 @@ class SortieController extends AbstractController
         }
         return $this->render('sortie/add.html.twig', [
             'sortieForm' => $sortieForm->createView(),
+            'lieuForm' => $lieuForm->createView(),
             'lieux' => $lieux,
         ]);
     }
