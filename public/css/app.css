@@ -182,12 +182,9 @@ label {
     grid-area: 1 / 6 / span 6 / span 3;
 }
 
-.child3AddSortie{
-    margin: 10px auto 10px auto;
-    grid-area: 2 / 6 / span 6 / span 3;
-}
+.child2AddSortie > input{
 
-.child3AddSortie > button {
+
 }
 
 .accueil{
