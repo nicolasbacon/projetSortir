@@ -81,7 +81,6 @@ class MainController extends AbstractController
             "sorties" => $sorties,
             "allCampus" => $allCampus,
             "researchForm" => $researchForm->createView(),
-            'campus' => $campus,
         ]);
     }
 }
