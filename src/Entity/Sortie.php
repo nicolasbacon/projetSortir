@@ -50,7 +50,7 @@ class Sortie
     private $infosSortie;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $motif;
 
@@ -207,7 +207,7 @@ class Sortie
     /**
      * @return Collection|Participant[]
      */
-    public function getParticipants(): Collection
+    public function getParticipants()
     {
         return $this->participants;
     }
@@ -230,7 +230,7 @@ class Sortie
         return $this;
     }
 
-    public function getOrganisateur(): ?Participant
+    public function getOrganisateur()
     {
         return $this->organisateur;
     }

@@ -8,6 +8,8 @@ use App\Entity\Sortie;
 use App\Form\LieuModifType;
 use App\Form\LieuType;
 use App\Form\SortieAnnuleeType;
+use App\Form\DesinscritType;
+use App\Form\InscritType;
 use App\Form\SortieType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,25 +20,50 @@ class SortieController extends AbstractController
 {
 
     /**
-     * @Route("/sortie/{id}", name="sortie_detail", requirements={"id": "\d+"},
-     *     methods={"GET"})
+     * @Route("/sortie/{id}", name="sortie_detail", requirements={"id": "\d+"})
      */
-    public function detail($id, Request $request)
+    public function detail($id, EntityManagerInterface $em, Request $request)
     {
         //récupérer la sortie en BDD:
         $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
         $sortie = $sortieRepository->find($id);
 
+        //form inscrit
+        $inscritForm = $this->createForm(InscritType::class, $sortie);
+        $inscritForm->handleRequest($request);
+
+        //form desinscrit
+        $desinscritForm = $this->createForm(DesinscritType::class, $sortie);
+        $desinscritForm->handleRequest($request);
+
+        $user = $this->getUser();
+
         if (empty($sortie)){
             throw $this->createNotFoundException("Cette sortie n'existe pas!");
         }
+        //soumettre l'incription
+        if ($inscritForm->isSubmitted()){
+            $sortie->addParticipant($user);
+            $em->persist($sortie);
+            $em->flush();
+            $this->addFlash('success', 'Vous êtes incrit à la sortie !');
+        }
+
+        //soumettre la désinscription
+        if ($desinscritForm->isSubmitted()){
+            $sortie->removeParticipant($user);
+            $em->persist($sortie);
+            $em->flush();
+            $this->addFlash('success', 'Vous êtes désinscrit de la sortie !');
+        }
 
         return $this->render('sortie/sortie.html.twig', [
-            "sortie" => $sortie
+            "sortie" => $sortie,
+            "user" => $user,
+            'inscritForm' => $inscritForm->createView(),
+            'desinscritForm' => $desinscritForm->createView(),
         ]);
     }
-
-
     /**
      * @Route("/sortie/add", name="add_sortie")
      */
@@ -65,7 +92,7 @@ class SortieController extends AbstractController
         if($lieuForm->isSubmitted() && $lieuForm->isValid()) {
             $em->persist($lieu);
             $em->flush();
-            $this->addFlash('success', 'Le lieu a été ajoutée !');
+            $this->addFlash('success', 'Le lieu a été ajouté !');
             $lieux[] = $lieu;
         }
 
@@ -76,19 +103,18 @@ class SortieController extends AbstractController
             return $this->redirectToRoute('add_sortie');
         }
         return $this->render('sortie/add.html.twig', [
+            'sortie' => $sortie,
             'sortieForm' => $sortieForm->createView(),
             'lieuForm' => $lieuForm->createView(),
             'lieux' => $lieux,
         ]);
     }
 
-
     /**
      * @Route("/modifierSortie/{id}", name="modifier_sortie", requirements={"id": "\d+"})
      */
     public function modifierSortie($id, Request $request, EntityManagerInterface $em)
     {
-
         //récupérer la sortie en BDD:
         $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
         $etatRepository = $em->getRepository(Etat::class);
@@ -107,12 +133,12 @@ class SortieController extends AbstractController
             throw $this->createNotFoundException("Cette sortie n'existe pas!");
         }
         else {
-            if ($sortie->getOrganisateur() != $this->getUser()) throw $this->createAccessDeniedException("Vous n'ète pas l\'organisateur de cette sortie");
+            if ($sortie->getOrganisateur() != $this->getUser()) throw $this->createAccessDeniedException("Vous n'êtes pas l\'organisateur de cette sortie");
 
             if($lieuForm->isSubmitted() && $lieuForm->isValid()) {
                 $em->persist($lieu);
                 $em->flush();
-                $this->addFlash('success', 'Le lieu a été ajoutée !');
+                $this->addFlash('success', 'Le lieu a été ajouté !');
                 $lieux[] = $lieu;
             }
 
@@ -150,7 +176,7 @@ class SortieController extends AbstractController
         else {
             if($sortieAnulForm->isSubmitted() && $sortieAnulForm->isValid()) {
                 $etat = new Etat();
-                $etat->setLibelle('Annulée');
+                $etat->setLibelle('Annulee');
                 $sortie->setEtat($etat);
 
                 $em->persist($sortie);
