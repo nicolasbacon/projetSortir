@@ -102,7 +102,7 @@ class SortieController extends AbstractController
             return $this->redirectToRoute('add_sortie');
         }
         return $this->render('sortie/add.html.twig', [
-            'sortie' => $sortie,
+
             'sortieForm' => $sortieForm->createView(),
             'lieuForm' => $lieuForm->createView(),
             'lieux' => $lieux,
