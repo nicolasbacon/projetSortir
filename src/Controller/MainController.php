@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Campus;
 use App\Entity\Sortie;
+use App\Form\ResearchType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Date;
 
 class MainController extends AbstractController
 {
@@ -16,23 +18,9 @@ class MainController extends AbstractController
      */
     public function home(EntityManagerInterface $em, Request $request)
     {
+        //Formulaire de recherche
         $researchForm = $this->createForm(ResearchType::class);
-
         $researchForm->handleRequest($request);
-
-        $organisateur = $request->get('organisateur');
-        var_dump($organisateur);
-        $incrit = $request->get('inscrit');
-        $nonInscrit = $request->get('nonInscrit');
-        $sortiePasse = $request->get('sortiePasse');
-
-        // Recuperation du formulaire de recherche
-        /**
-        $campus = $request->request->get('campus');
-        $researh = $request->request->get('researh');
-        $dateDebut = $request->request->get('dateDebut');
-        $dateFin = $request->request->get('dateFin');
-        **/
 
         //Repository
         $sortieRepo = $em->getRepository(Sortie::class);
@@ -41,29 +29,68 @@ class MainController extends AbstractController
         //Recuperation du user en session
         $user = $this->getUser();
 
-        $sorties = [];
-        $campus = null;
-
         if($researchForm->isSubmitted() && $researchForm->isValid()) {
+            //Recupere les champs du formulaire
             $campus = $researchForm->get('campus')->getData();
+            $research = strtolower($researchForm->get('research')->getData());
+            $dateDebut = $researchForm->get('dateDebut')->getData();
+            $dateFin = $researchForm->get('dateFin')->getData();
 
+            $organisateur = $researchForm->get('organisateur')->getData();
+            $incrit = $researchForm->get('inscrit')->getData();
+            $nonInscrit = $researchForm->get('nonInscrit')->getData();
+            $sortiePasse = $researchForm->get('sortiePasse')->getData();
+
+            //Recherche en fonction du campus
             $sorties = $sortieRepo->findByCampus($campus->getId());
-            if ($organisateur !=null){
-                $sorties=($sortieRepo->findByOrganisateur($organisateur));
+            //Recherche avec la zone de texte si elle n'est pas vide
+            if (!empty($research)) {
+                foreach ($sorties as $key => $sortie) {
+                    if(!preg_match('#'.$research.'#', strtolower($sortie->getNom())) ) unset($sorties[$key]);
+                }
             }
-            if ($incrit !=null){
-                $sorties += $sortieRepo->findByParticipant($incrit);
+            //Recherche par la date
+            if ($dateDebut != null) {
+                foreach ($sorties as $key => $sortie) {
+                    if($dateDebut > $sortie->getDateHeureDebut()) unset($sorties[$key]);
+                }
             }
-            if ($nonInscrit !=null){
-                $sorties += $sortieRepo->findByNonInscrit($nonInscrit);
+            elseif ($dateFin != null) {
+                foreach ($sorties as $key => $sortie) {
+                    if($dateFin < $sortie->getDateHeureDebut()) unset($sorties[$key]);
+                }
             }
-            if ($sortiePasse !=null) {
-                $sorties += $sortieRepo->findBySortiePasse();
+            //Verifie si organisateur
+            if ($organisateur != false){
+                foreach ($sorties as $key => $sortie) {
+                    if ($user =! $sortie->getOrganisateur()) unset($sorties[$key]);
+                }
+            }
+            if ($incrit != false){
+                foreach ($sorties as $key => $sortie) {
+                    $participe = false;
+                    foreach ($sortie->getParticipants() as $participant) {
+                        if ($user == $participant) $participe = true;
+                    }
+                    if ($participe == false) unset($sorties[$key]);
+                }
+            }
+            if ($nonInscrit != false){
+                foreach ($sorties as $key => $sortie) {
+                    $participe = false;
+                    foreach ($sortie->getParticipants() as $participant) {
+                        if ($user == $participant) $participe = true;
+                    }
+                    if ($participe == true) unset($sorties[$key]);
+                }
+            }
+            if ($sortiePasse != false) {
+                $now = new \DateTime();
+                foreach ($sorties as $key => $sortie) {
+                    if ($now > $sortie->getDateHeureDebut()) unset($sorties[$key]);
+                }
             }
         }
-
-
-
 
         //Si il est connecter
         else if ($user != null) {
@@ -77,7 +104,6 @@ class MainController extends AbstractController
         $allCampus = $campusRepo->findAll();
 
         return $this->render('main/accueil.html.twig', [
-            'controller_name' => 'MainController',
             "sorties" => $sorties,
             "allCampus" => $allCampus,
             "researchForm" => $researchForm->createView(),
