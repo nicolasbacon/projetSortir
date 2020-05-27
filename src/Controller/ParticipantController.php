@@ -97,6 +97,8 @@ class ParticipantController extends AbstractController
 
             $em->persist($user);
             $em->flush();
+            $this->addFlash("success", "Le nouveau profil a été créé avec succès !");
+            return $this->redirectToRoute("home");
         }
 
         return $this->render("participant/register.html.twig",[

@@ -1,10 +1,16 @@
 {% extends 'layout.html.twig' %}
 
 {% block main %}
-    {{ form_start(registerForm) }}
-    {{ form_widget(registerForm) }}
-    <button type="submit">Register !</button>
-    {{ form_end(registerForm) }}
+<div class="grid">
+    <div class="afficherProfil">
+        {{ form_start(registerForm) }}
+        {{ form_widget(registerForm) }}
+        <div class="button">
+            <button class="btn btn-secondary active" type="submit">Inscription</button>
+        </div>
+        {{ form_end(registerForm) }}
+    </div>
+</div>
 {% endblock %}
 
 {% block title %}Registration{% endblock %}

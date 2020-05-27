@@ -161,6 +161,8 @@ class SortieController extends AbstractController
                     $em->persist($sortie);
                     $em->flush();
                 }
+                $this->addFlash("success", "Votre sortie a été modifiée avec succès !");
+                return $this->redirectToRoute("home");
             }
         }
         return $this->render('sortie/modifier2.html.twig', [
@@ -193,7 +195,11 @@ class SortieController extends AbstractController
 
                 $em->persist($sortie);
                 $em->flush();
+
+                $this->addFlash("success", "Votre sortie a été annulée avec succès !");
+                return $this->redirectToRoute("home");
             }
+
         }
 
         return $this->render('sortie/annulerSortie.html.twig', [
