@@ -11,6 +11,7 @@ use App\Form\SortieAnnuleeType;
 use App\Form\DesinscritType;
 use App\Form\InscritType;
 use App\Form\SortieType;
+use App\Repository\EtatRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -72,27 +73,27 @@ class SortieController extends AbstractController
      */
     public function addSortie(EntityManagerInterface $em, Request $request)
     {
-        //if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) throw $this->createAccessDeniedException();
+        //Repository
         $lieux = $em->getRepository(Lieu::class)->findAll();
+        $etatRepo = $em->getRepository(Etat::class);
 
-        //@todo : traiter le formulaire
-
-        $etat = new Etat();
-        $etat->setLibelle('Cree');
-
+        //Entité
         $sortie = new Sortie();
-        $sortie->setEtat($etat);
-
         $lieu = new Lieu();
 
+        //Attribution
+        $sortie->setEtat($etatRepo->find(1));
         $sortie->setOrganisateur($this->getUser());
 
+        //Formulaire
         $sortieForm = $this->createForm(SortieType::class, $sortie);
         $lieuForm = $this->createForm(LieuType::class, $lieu);
 
+        //Hydratation formulaire
         $sortieForm->handleRequest($request);
         $lieuForm->handleRequest($request);
 
+        //Traitement formulaire du lieu
         if($lieuForm->isSubmitted() && $lieuForm->isValid()) {
             $em->persist($lieu);
             $em->flush();
@@ -100,18 +101,23 @@ class SortieController extends AbstractController
             $lieux[] = $lieu;
         }
 
+        //Traitement formulaire sortie
         if($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+            if (isset($_POST['publier'])) {
+                $sortie->setEtat($etatRepo->find(2));
+            }
             $em->persist($sortie);
             $em->flush();
             $this->addFlash('success', 'La sortie a été ajoutée !');
             return $this->redirectToRoute('add_sortie');
         }
+
         return $this->render('sortie/add.html.twig', [
 
             'sortieForm' => $sortieForm->createView(),
             'lieuForm' => $lieuForm->createView(),
             'lieux' => $lieux,
-            "sortie" => $sortie,
+            'sortie' => $sortie,
         ]);
     }
 
