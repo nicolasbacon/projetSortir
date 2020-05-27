@@ -39,17 +39,14 @@
              {% if participant.actif %}
                  <td align="center">X</td>
                  <td align="center"><a href="{{ path('desactive_participant', {'id': participant.id}) }}">Désactiver</a>
-                     <!-- <a href="" onclick="alert('Etes vous sûr de vouloir supprimer ce profil ?')">Supprimer</a>
-                       Button trigger modal -->
-                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                         Supprimer
-                     </button>
+                      <!-- lien trigger modal -->
+                     <a href="{{ path('supprime_participant', {'id': participant.id}) }}" data-toggle="modal" data-target="#exampleModal">Supprimer</a>
                  </td>
 
              {% else %}
                  <td> </td>
                  <td align="center"><a href="{{ path('active_participant', {'id': participant.id}) }}">Activer</a>
-                     <a href="{{ path('supprime_participant', {'id': participant.id}) }}">Supprimer</a></td>
+                     <a href="{{ path('supprime_participant', {'id': participant.id}) }}" data-toggle="modal" data-target="#exampleModal">Supprimer</a></td>
              {% endif%}
          </tr>
          <!-- Modal -->
