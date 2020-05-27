@@ -9,10 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/lieu")
+ */
 class LieuController extends AbstractController
 {
     /**
-     * @Route("/addlieu", name="lieu_add")
+     * @Route("/add", name="lieu_add")
      */
     public function index(Request $request, EntityManagerInterface $em)
     {

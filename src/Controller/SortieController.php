@@ -16,11 +16,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/sortie")
+ */
 class SortieController extends AbstractController
 {
 
     /**
-     * @Route("/sortie/{id}", name="sortie_detail", requirements={"id": "\d+"})
+     * @Route("/{id}", name="sortie_detail", requirements={"id": "\d+"})
      */
     public function detail($id, EntityManagerInterface $em, Request $request)
     {
@@ -65,10 +68,11 @@ class SortieController extends AbstractController
         ]);
     }
     /**
-     * @Route("/sortie/add", name="add_sortie")
+     * @Route("/add", name="add_sortie")
      */
     public function addSortie(EntityManagerInterface $em, Request $request)
     {
+        //if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) throw $this->createAccessDeniedException();
         $lieux = $em->getRepository(Lieu::class)->findAll();
 
         //@todo : traiter le formulaire
