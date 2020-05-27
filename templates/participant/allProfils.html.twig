@@ -1,0 +1,60 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block main %}
+    <h1 class="filtreSortie">Liste des participants</h1>
+
+<div class="tableauAffich">
+    <table class="table table-dark table-responsive">
+     <thead>
+     <tr>
+         <th scope="col" align="center">Pseudo</th>
+         <th scope="col" align="center">Nom</th>
+         <th scope="col" align="center">Prénom</th>
+         <th scope="col" align="center">Téléphone</th>
+         <th scope="col" align="center">Mail</th>
+         <th scope="col" align="center">Administrateur</th>
+         <th scope="col" align="center">Actif</th>
+         <th scope="col" align="center">Actions</th>
+     </tr>
+     </thead>
+     <tbody>
+
+     {% for participant in participants %}
+         <tr>
+
+             <th scope="row"  align="center">{{ participant.username }}</th>
+             <td  align="center">{{ participant.nom }}</td>
+             <td  align="center">{{ participant.prenom }}</td>
+             <td  align="center">{{ participant.telephone }}</td>
+             <td  align="center">{{ participant.mail }}</td>
+
+             {% if participant.administrateur %}
+                 <td  align="center">X</td>
+             {% else %}
+                 <td> </td>
+             {% endif%}
+
+             {% if participant.actif %}
+                 <td align="center">X</td>
+                 <td align="center"><a href="">Désactiver</a>
+                     <a href="">Supprimer</a></td>
+
+             {% else %}
+                 <td> </td>
+                 <td align="center"><a href="">Activer</a>
+                     <a href="">Supprimer</a></td>
+             {% endif%}
+
+         </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

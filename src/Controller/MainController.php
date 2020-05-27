@@ -92,7 +92,7 @@ class MainController extends AbstractController
             }
         }
 
-        //Si il est connecter
+        //Si il est connecté
         else if ($user != null) {
             //On recupere les sorties de son campus
             $sorties = $sortieRepo->findByCampus($user->getCampus()->getId());

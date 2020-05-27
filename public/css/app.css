@@ -289,3 +289,34 @@ label {
 .login {
     text-align: center;
 }
+
+.tableauAffich{
+    height: 400px;
+    width:1100px;
+    overflow-y: scroll;
+
+}
+
+
+#ajouterSortie{
+    margin-top: 15px;
+}
+
+td > a{
+    color: white;
+}
+
+/*A REVOIR*/
+.description{
+    width: 200px;
+    border: 1px hidden;
+    padding: 2px 5px;
+
+    /* Nécessaires pour text-overflow */
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+
+

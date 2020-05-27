@@ -13,6 +13,21 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ParticipantController extends AbstractController
 {
+
+    /**
+     * @Route("/login", name="login")
+     */
+    public function login()
+    {
+        return $this->render('participant/login.html.twig', []);
+    }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout(){}
+
+
     /**
      * @Route("/participant/detail/{id}", name="participant_detail",
      *     requirements={"id":"\d+"})
@@ -89,16 +104,31 @@ class ParticipantController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/login", name="login")
+     * @Route("/admin/allProfils", name="all_participant")
      */
-    public function login()
+    public function allProfils(EntityManagerInterface $em)
     {
-        return $this->render('participant/login.html.twig', []);
+
+        $participants = $em->getRepository(Participant::class)->findAll();
+
+        return $this->render('participant/allProfils.html.twig',[
+            "participants" => $participants,
+        ]);
     }
 
     /**
-     * @Route("/logout", name="logout")
+     * @Route("/admin/allProfils", name="all_participant")
      */
-    public function logout(){}
+    public function modifEtatActif(EntityManagerInterface $em)
+    {
+
+        $participants = $em->getRepository(Participant::class)->findAll();
+
+        return $this->render('participant/allProfils.html.twig',[
+            "participants" => $participants,
+        ]);
+    }
+
 }

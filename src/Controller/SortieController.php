@@ -28,7 +28,7 @@ class SortieController extends AbstractController
     public function detail($id, EntityManagerInterface $em, Request $request)
     {
         //récupérer la sortie en BDD:
-        $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortieRepository = $em->getRepository(Sortie::class);
         $sortie = $sortieRepository->find($id);
 
         //form inscrit
@@ -121,13 +121,14 @@ class SortieController extends AbstractController
     public function modifierSortie($id, Request $request, EntityManagerInterface $em)
     {
         //récupérer la sortie en BDD:
-        $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortieRepository = $em->getRepository(Sortie::class);
         $etatRepository = $em->getRepository(Etat::class);
 
         $sortie = $sortieRepository->find($id);
 
         $lieu = $sortie->getLieu();
 
+        //form modifier sortie et form lieu
         $sortieModifForm = $this->createForm(SortieType::class, $sortie);
         $lieuForm = $this->createForm(LieuModifType::class, $lieu);
 
@@ -169,9 +170,10 @@ class SortieController extends AbstractController
     public function annulerSortie($id, Request $request, EntityManagerInterface $em)
     {
         //récupérer la sortie en BDD:
-        $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortieRepository = $em->getRepository(Sortie::class);
         $sortie = $sortieRepository->find($id);
 
+        //form annulation
         $sortieAnulForm = $this->createForm(SortieAnnuleeType::class, $sortie);
         $sortieAnulForm->handleRequest($request);
 

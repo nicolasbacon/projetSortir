@@ -26,7 +26,7 @@
                 </div>
                 <div>
                     <label>Description et infos : </label>
-                    <strong> {{ sortie.infosSortie | capitalize }}</strong>
+                    <strong class="description"><img src="{{ asset('img/quote-left.png') }}"> {{ sortie.infosSortie | capitalize }} <img src="{{ asset('img/quote-right.png') }}"></strong>
                 </div>
             </div>
             <div class="child2AfficherSortie">
@@ -98,7 +98,7 @@
             {% endif %}
 
         {% endif %}
-        <button class="btn btn-secondary active" type="reset">Annuler</button>
+        <button class="btn btn-secondary active" type="submit"><a href="{{ path('home') }}">Annuler</a></button>
 
     </div>
 
