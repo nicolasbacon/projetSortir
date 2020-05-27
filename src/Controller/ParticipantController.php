@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ParticipantController extends AbstractController
 {
     /**
-     * @Route("/detail/{id}", name="participant_detail",
+     * @Route("/participant/detail/{id}", name="participant_detail",
      *     requirements={"id":"\d+"})
      */
     public function detail(EntityManagerInterface $em, $id)
@@ -29,7 +29,7 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/modifier", name="participant_modifier")
+     * @Route("/participant/modifier", name="participant_modifier")
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return \Symfony\Component\HttpFoundation\Response
@@ -64,7 +64,7 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/register", name="register")
+     * @Route("/admin/register", name="register")
      */
     public function register(Request $request,
                              EntityManagerInterface $em,
