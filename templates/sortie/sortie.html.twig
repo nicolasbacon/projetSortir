@@ -69,9 +69,9 @@
             <button class="btn btn-secondary active" ><a href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</a></button>
 
         {% else %}
-            {% set date = false %}
-            {% if sortie.dateLimiteInscription < "now" %}
-                {% set date = true %}
+            {% set date = true %}
+            {% if sortie.dateLimiteInscription | date('Y-m-d')  <= "now" | date('Y-m-d') %}
+                {% set date = false %}
             {% endif%}
 
             {% set nb = false %}
