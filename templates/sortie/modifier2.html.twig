@@ -42,9 +42,11 @@
             </div>
 
             <div class="modifButton">
-                <button class="btn btn-secondary active" type="submit">Enregistrer</button>
-                {% if sortie.etat.libelle == 'Cree' %}
-                    <button class="btn btn-secondary active" type="submit" name="publier" value="publier">Publier la sortie</button>
+                <button class="btn btn-secondary active" type="submit"><a>Enregistrer</a></button>
+                {% if sortie.etat.id == 1 or sortie.etat.id == 5 or sortie.etat.id == 9 %}
+                    <button class="btn btn-secondary active" type="submit" name="publier" value="publier"><a>Publier la sortie</a></button>
+                {% elseif app.user.id == sortie.organisateur.id %}
+                    <button class="btn btn-secondary active"><a href="{{ path('annuler_sortie',{'id':sortie.id}) }}">Annuler la sortie</a></button>
                 {% endif %}
             </div>
 
@@ -67,8 +69,8 @@
             {{ form_row(lieuForm.longitude) }}
             {{ form_end(lieuForm) }}
         </div>
-
     </div>
+
 
 {% endblock %}
 

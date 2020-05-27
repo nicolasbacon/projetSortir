@@ -128,6 +128,7 @@ class SortieController extends AbstractController
     {
         //récupérer la sortie en BDD:
         $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        //récuperer l'état en BDD
         $etatRepository = $em->getRepository(Etat::class);
 
         $sortie = $sortieRepository->find($id);
@@ -176,7 +177,9 @@ class SortieController extends AbstractController
     {
         //récupérer la sortie en BDD:
         $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $etatRepository = $em->getRepository(Etat::class);
         $sortie = $sortieRepository->find($id);
+
 
         $sortieAnulForm = $this->createForm(SortieAnnuleeType::class, $sortie);
         $sortieAnulForm->handleRequest($request);
@@ -186,9 +189,7 @@ class SortieController extends AbstractController
         }
         else {
             if($sortieAnulForm->isSubmitted() && $sortieAnulForm->isValid()) {
-                $etat = new Etat();
-                $etat->setLibelle('Annulee');
-                $sortie->setEtat($etat);
+                $sortie->setEtat($etatRepository->find(5));
 
                 $em->persist($sortie);
                 $em->flush();
@@ -200,5 +201,7 @@ class SortieController extends AbstractController
             'sortieAnulForm' => $sortieAnulForm->createView(),
         ]);
     }
+
+
 
 }

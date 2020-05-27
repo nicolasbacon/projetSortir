@@ -288,3 +288,6 @@ label {
 .login {
     text-align: center;
 }
+button > a {
+    color: black !important;
+}
