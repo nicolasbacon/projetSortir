@@ -46,14 +46,14 @@
     <table class="table table-dark table-responsive">
      <thead>
      <tr>
-         <th scope="col">Nom de la sortie</th>
-         <th scope="col">Date de la sortie</th>
-         <th scope="col">Clôture</th>
-         <th scope="col">Inscrits/Places</th>
-         <th scope="col">Etat</th>
-         <th scope="col">Inscrit</th>
-         <th scope="col">Organisateur</th>
-         <th scope="col">Actions</th>
+         <th scope="col" align="center">Nom de la sortie</th>
+         <th scope="col" align="center">Date de la sortie</th>
+         <th scope="col" align="center">Clôture</th>
+         <th scope="col" align="center">Inscrits/Places</th>
+         <th scope="col" align="center">Etat</th>
+         <th scope="col" align="center">Inscrit</th>
+         <th scope="col" align="center">Organisateur</th>
+         <th scope="col" align="center">Actions</th>
      </tr>
      </thead>
      <tbody>
@@ -61,11 +61,11 @@
      {% for sortie in sorties %}
          <tr>
 
-             <th scope="row">{{ sortie.nom }}</th>
-             <td>{{ sortie.dateHeureDebut | date ('d/m/Y H:i')}}</td>
-             <td>{{ sortie.dateLimiteInscription | date('d/m/Y') }}</td>
-             <td>{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
-             <td>{{ sortie.etat.libelle }}</td>
+             <th scope="row"  align="center">{{ sortie.nom }}</th>
+             <td  align="center">{{ sortie.dateHeureDebut | date ('d/m/Y H:i')}}</td>
+             <td  align="center">{{ sortie.dateLimiteInscription | date('d/m/Y') }}</td>
+             <td  align="center">{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
+             <td  align="center">{{ sortie.etat.libelle }}</td>
              {% set particip = false %}
              {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                  {% for participant in sortie.participants %}
@@ -75,20 +75,20 @@
                  {% endfor %}
              {% endif %}
              {% if particip %}
-                <td> X </td>
+                <td  align="center">X</td>
              {% else %}
                  <td> </td>
              {% endif%}
-             <td>
+             <td  align="center">
                  {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                  <a href="{{ path('participant_detail',{'id':sortie.organisateur.id}) }}">
                      {% endif %}
                      {{ sortie.organisateur.username }}</a></td>
              {% if app.user == sortie.organisateur %}
-                 <td><a href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</a></td>
+                 <td  align="center"><a href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</a></td>
              {% endif %}
              {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                 <td><a href="{{ path('sortie_detail',{'id':sortie.id}) }}">Afficher</a></td>
+                 <td  align="center"><a href="{{ path('sortie_detail',{'id':sortie.id}) }}">Afficher</a></td>
              {% endif %}
 
          </tr>

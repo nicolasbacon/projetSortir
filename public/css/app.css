@@ -175,11 +175,11 @@ label {
 }
 .child1AddSortie{
     margin: 10px auto 10px auto;
-    grid-area: 1 / 1 / span 6 / span 5;
+    grid-area: 1 / 2 / span 7 / span 2;
 }
 .child2AddSortie{
     margin: 10px auto 10px auto;
-    grid-area: 1 / 6 / span 6 / span 3;
+    grid-area: 3 / 4 / span 3 / span 4;
 }
 
 .child2AddSortie > input{
@@ -281,4 +281,11 @@ label {
     border: white;
     background-color: darkred;
     color: white;
+}
+.btn-add {
+    margin: 10px auto 10px auto;
+    grid-area: 7 / 5 / 7 / span 2;
+}
+.login {
+    text-align: center;
 }

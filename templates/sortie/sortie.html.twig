@@ -79,19 +79,17 @@
                     {% endif %}
             {% endfor %}
 
-            {% if particip and nb%}
+            {% if particip %}
                 {{ form_start(desinscritForm) }}
                 <button class="btn btn-secondary active" type="submit">Se désister</button>
                 {{ form_end(desinscritForm) }}
-            {% endif %}
-
-            {% if nb and date %}
+            {% elseif nb and date %}
                 {{ form_start(inscritForm) }}
                 <button class="btn btn-secondary active" type="submit">S'inscrire</button>
                 {{ form_end(inscritForm) }}
             {% endif %}
 
-            {% if nb ==false %}
+            {% if nb ==false and particip == false %}
                 <p class="msgFull">Le nombre d'inscrits pour cette sortie a été atteint</p>
             {% endif %}
 

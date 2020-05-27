@@ -54,9 +54,9 @@
         </div>
 
 
-    <div class="button">
+    <div class="button btn-add">
         <button class="btn btn-secondary active" type="submit">Enregistrer</button>
-        {% if sortie.etat.libelle == 'Cree' %}
+        {% if sortie.etat.libelle == 'En création' %}
             <button class="btn btn-secondary active" type="submit">Publier la sortie</button>
         {% endif %}
         <button class="btn btn-secondary active" type="submit"><a href="{{ path('home') }}">Annuler</a></button>
