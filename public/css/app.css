@@ -174,12 +174,11 @@ label {
     margin-right: 20px;
 }
 .child1AddSortie{
-    margin: 10px auto 10px auto;
-    grid-area: 1 / 2 / span 7 / span 2;
+    margin: 40px auto 10px auto;
+    grid-area: 1 / 1 / span 7 / span 3;
 }
 .child2AddSortie{
-    margin: 10px auto 10px auto;
-    grid-area: 3 / 4 / span 3 / span 4;
+    grid-area: 3 / 5 / span 3 / span 4;
 }
 
 .child2AddSortie > input{
@@ -317,6 +316,6 @@ td > a{
     overflow: hidden;
 }
 
-
-
-
+button > a {
+    color: black !important;
+}

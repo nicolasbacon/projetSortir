@@ -72,27 +72,27 @@ class SortieController extends AbstractController
      */
     public function addSortie(EntityManagerInterface $em, Request $request)
     {
-        //if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) throw $this->createAccessDeniedException();
+        //Repository
         $lieux = $em->getRepository(Lieu::class)->findAll();
+        $etatRepo = $em->getRepository(Etat::class);
 
-        //@todo : traiter le formulaire
-
-        $etat = new Etat();
-        $etat->setLibelle('Cree');
-
+        //Entité
         $sortie = new Sortie();
-        $sortie->setEtat($etat);
-
         $lieu = new Lieu();
 
+        //Attribution
+        $sortie->setEtat($etatRepo->find(1));
         $sortie->setOrganisateur($this->getUser());
 
+        //Formulaire
         $sortieForm = $this->createForm(SortieType::class, $sortie);
         $lieuForm = $this->createForm(LieuType::class, $lieu);
 
+        //Hydratation formulaire
         $sortieForm->handleRequest($request);
         $lieuForm->handleRequest($request);
 
+        //Traitement formulaire du lieu
         if($lieuForm->isSubmitted() && $lieuForm->isValid()) {
             $em->persist($lieu);
             $em->flush();
@@ -100,18 +100,23 @@ class SortieController extends AbstractController
             $lieux[] = $lieu;
         }
 
+        //Traitement formulaire sortie
         if($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+            if (isset($_POST['publier'])) {
+                $sortie->setEtat($etatRepo->find(2));
+            }
             $em->persist($sortie);
             $em->flush();
             $this->addFlash('success', 'La sortie a été ajoutée !');
             return $this->redirectToRoute('add_sortie');
         }
+
         return $this->render('sortie/add.html.twig', [
 
             'sortieForm' => $sortieForm->createView(),
             'lieuForm' => $lieuForm->createView(),
             'lieux' => $lieux,
-            "sortie" => $sortie,
+            'sortie' => $sortie,
         ]);
     }
 
@@ -122,6 +127,7 @@ class SortieController extends AbstractController
     {
         //récupérer la sortie en BDD:
         $sortieRepository = $em->getRepository(Sortie::class);
+        //récuperer l'état en BDD
         $etatRepository = $em->getRepository(Etat::class);
 
         $sortie = $sortieRepository->find($id);
@@ -171,6 +177,7 @@ class SortieController extends AbstractController
     {
         //récupérer la sortie en BDD:
         $sortieRepository = $em->getRepository(Sortie::class);
+        $etatRepository = $em->getRepository(Etat::class);
         $sortie = $sortieRepository->find($id);
 
         //form annulation
@@ -182,9 +189,7 @@ class SortieController extends AbstractController
         }
         else {
             if($sortieAnulForm->isSubmitted() && $sortieAnulForm->isValid()) {
-                $etat = new Etat();
-                $etat->setLibelle('Annulee');
-                $sortie->setEtat($etat);
+                $sortie->setEtat($etatRepository->find(5));
 
                 $em->persist($sortie);
                 $em->flush();
