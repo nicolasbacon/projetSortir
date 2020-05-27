@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Participant;
+use App\Entity\Sortie;
 use App\Form\ParticipantType;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,7 +26,9 @@ class ParticipantController extends AbstractController
     /**
      * @Route("/logout", name="logout")
      */
-    public function logout(){}
+    public function logout()
+    {
+    }
 
 
     /**
@@ -38,7 +41,7 @@ class ParticipantController extends AbstractController
 
         $participant = $repo->find($id);
 
-        return $this->render('participant\afficher.html.twig',[
+        return $this->render('participant\afficher.html.twig', [
             "participant" => $participant,
         ]);
     }
@@ -50,7 +53,7 @@ class ParticipantController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function modifierProfil(
-       UserPasswordEncoderInterface $passwordEncoder, Request $request, EntityManagerInterface $em)
+        UserPasswordEncoderInterface $passwordEncoder, Request $request, EntityManagerInterface $em)
     {
 
 
@@ -75,7 +78,7 @@ class ParticipantController extends AbstractController
             return $this->redirectToRoute("home");
 
         }
-        return $this->render('participant/modifier.html.twig', ["registerForm"=>$registerForm->createView()]);
+        return $this->render('participant/modifier.html.twig', ["registerForm" => $registerForm->createView()]);
     }
 
     /**
@@ -92,7 +95,7 @@ class ParticipantController extends AbstractController
 
         if ($registerForm->isSubmitted() && $registerForm->isValid()) {
             //hasher le mot de passe
-            $hashed = $encoder->encodePassword($user,$user->getPassword());
+            $hashed = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hashed);
 
             $em->persist($user);
@@ -101,7 +104,7 @@ class ParticipantController extends AbstractController
             return $this->redirectToRoute("home");
         }
 
-        return $this->render("participant/register.html.twig",[
+        return $this->render("participant/register.html.twig", [
             'registerForm' => $registerForm->createView()
         ]);
     }
@@ -115,22 +118,76 @@ class ParticipantController extends AbstractController
 
         $participants = $em->getRepository(Participant::class)->findAll();
 
-        return $this->render('participant/allProfils.html.twig',[
+
+        return $this->render('participant/allProfils.html.twig', [
             "participants" => $participants,
         ]);
     }
 
     /**
-     * @Route("/admin/allProfils", name="all_participant")
+     * @Route("/admin/activer/{id}", name="active_participant", requirements={"id":"\d+"})
      */
-    public function modifEtatActif(EntityManagerInterface $em)
+    public function activeParticipant(EntityManagerInterface $em, $id)
     {
 
+        $participant = $em->getRepository(Participant::class)->find($id);
+        if ($participant->getActif() == false) {
+            $participant->setActif(true);
+            $em->persist($participant);
+            $em->flush();
+            $this->addFlash("success", "Le profil a été activé avec succès !");
+            return $this->redirectToRoute('all_participant');
+        } else {
+            $this->addFlash("error", "Le profil a déjà été activé !");
+            return $this->redirectToRoute('all_participant');
+        }
+
+
+    }
+
+    /**
+     * @Route("/admin/desactiver/{id}", name="desactive_participant", requirements={"id":"\d+"})
+     */
+    public function desactiveParticipant(EntityManagerInterface $em, $id)
+    {
+
+        $participant = $em->getRepository(Participant::class)->find($id);
+        if ($participant->getActif() == true) {
+            $participant->setActif(false);
+            $em->persist($participant);
+            $em->flush();
+            $this->addFlash("success", "Le profil a été désactivé avec succès !");
+            return $this->redirectToRoute('all_participant');
+        } else {
+            $this->addFlash("error", "Le profil a déjà été désactivé !");
+            return $this->redirectToRoute('all_participant');
+        }
+
+    }
+
+    /**
+     * @Route("/admin/supprimer/{id}", name="supprime_participant", requirements={"id":"\d+"})
+     */
+    public function supprimeParticipant(EntityManagerInterface $em, $id)
+    {
+        dump($id);
+        /*$participant = $em->getRepository(Participant::class)->find($id);
+        $sorties = $em->getRepository(Sortie::class)->findByOrganisateur($participant);
+
+        foreach ($sorties as $sortie) {
+            $em->remove($sortie);
+        }
+
+        $em->remove($participant);
+        $em->flush();
+        $this->addFlash("success", "Le profil a été supprimé avec succès !");*/
         $participants = $em->getRepository(Participant::class)->findAll();
 
-        return $this->render('participant/allProfils.html.twig',[
+
+        return $this->render('participant/allProfils.html.twig', [
             "participants" => $participants,
         ]);
+
     }
 
 }

@@ -54,6 +54,15 @@ class SortieRepository extends ServiceEntityRepository
         $query = $qb->getQuery();
         return $query->getResult();
     }
+    public function deleteWhere()
+    {
+        $qd = $this->createQueryBuilder('s');
+        $qd->delete()
+            ->andWhere('s.organisateur_id = :id')
+        ;
+        $query = $qd->getQuery();
+        return $query->getResult();
+    }
 
     /*
     public function findOneBySomeField($value): ?Sortie

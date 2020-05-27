@@ -83,6 +83,7 @@ class Participant implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Sortie::class, mappedBy="participants")
+     * @ORM\JoinColumn(onDelete="cascade")
      */
     private $sorties;
 
