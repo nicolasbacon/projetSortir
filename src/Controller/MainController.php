@@ -55,9 +55,9 @@ class MainController extends AbstractController
                     if($dateDebut > $sortie->getDateHeureDebut()) unset($sorties[$key]);
                 }
             }
-            elseif ($dateFin != null) {
+            if ($dateFin != null) {
                 foreach ($sorties as $key => $sortie) {
-                    if(  $dateFin < $sortie->getDateHeureDebut() and $dateFin + 30 < "now")  unset($sorties[$key]);
+                    if(  $dateFin < $sortie->getDateHeureDebut())  unset($sorties[$key]);
                 }
             }
             //Verifie si organisateur
