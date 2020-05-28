@@ -317,3 +317,43 @@ td > a {
 button {
     color: black !important;
 }
+
+.visible-xs{
+    display: none;
+}
+
+
+@media (max-width: 767px) {
+    .container {
+        min-width: 650px;
+        max-width: 1020px;
+        margin: auto;
+        padding: 10px 20px;
+    }
+
+    .hidden-xs {
+        display: none ;
+    }
+
+    nav > ul > li {
+        display: none;
+    }
+
+    .tableauAffich {
+        height: 600px;
+        width: 610px;
+        overflow-y: scroll;
+        text-align: center;
+    }
+
+    .by {
+        margin: inherit;
+        text-align: center;
+        grid-area: 2 / 2 / span 1 / span 3;
+    }
+
+    .visible-xs {
+        display: unset;
+    }
+
+}

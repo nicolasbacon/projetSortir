@@ -12,7 +12,7 @@
             {{ form_errors(sortieForm.nom) }}
 
             {{ form_label(sortieForm.dateHeureDebut, 'Date/heure de la sortie : ') }}
-            {{ form_widget(sortieForm.dateHeureDebut) }}
+            {{ form_widget(sortieForm.dateHeureDebut, { 'attr': { 'class' : 'dateHeureDebut' } }) }}
             {{ form_errors(sortieForm.dateHeureDebut) }}
 
 

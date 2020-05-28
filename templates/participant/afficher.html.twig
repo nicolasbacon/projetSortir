@@ -3,7 +3,7 @@
 {% block main %}
     <div class="grid">
         <h1 class="titrePage">{{ participant.username }}</h1>
-
+        <img class="photoProfil" src="{{ asset('uploads/' ~ participant.imageFilename) }}" alt="Eni Sortie" >
         <div class="afficherProfil">
             <div class="ligne">
                 <label for="prenom">Prenom : </label>

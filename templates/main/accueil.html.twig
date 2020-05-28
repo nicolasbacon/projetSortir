@@ -4,7 +4,7 @@
 
 {% block main %}
     <h1 class="filtreSortie">Filtrer les sorties</h1>
-
+<div class="hidden-xs">
     {{ form_start(researchForm) }}
     <div class="accueil">
         <div class="child1Accueil">
@@ -35,13 +35,15 @@
 
             {{ form_widget(researchForm.sortiePasse) }}
             {{ form_label(researchForm.sortiePasse) }}<br>
-
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <div class="search-button">
                 <button class="btn btn-secondary active" type="submit" value="rechercher">Rechercher</button>
             </div>
+            {% endif %}
         </div>
-        {{ form_end(researchForm) }}
     </div>
+    {{ form_end(researchForm) }}
+</div>
 
 <div class="tableauAffich">
     <table class="table table-dark table-responsive">
@@ -49,23 +51,27 @@
      <tr>
          <th scope="col" align="center">Nom de la sortie</th>
          <th scope="col" align="center">Date de la sortie</th>
-         <th scope="col" align="center">Clôture</th>
-         <th scope="col" align="center">Inscrits/Places</th>
-         <th scope="col" align="center">Etat</th>
-         <th scope="col" align="center">Inscrit</th>
-         <th scope="col" align="center">Organisateur</th>
-         <th scope="col" align="center">Actions</th>
+         <th class="visible-xs" scope="col" align="center">Lieu</th>
+         <th class="hidden-xs" scope="col" align="center">Clôture</th>
+         <th class="hidden-xs" scope="col" align="center">Inscrits/Places</th>
+         <th class="hidden-xs" scope="col" align="center">Etat</th>
+         <th class="hidden-xs" scope="col" align="center">Inscrit</th>
+         <th class="hidden-xs" scope="col" align="center">Organisateur</th>
+         <th class="hidden-xs" scope="col" align="center">Actions</th>
      </tr>
      </thead>
      <tbody>
 
      {% for sortie in sorties %}
          <tr>
+
              <th scope="row"  align="center">{{ sortie.nom }}</th>
              <td  align="center">{{ sortie.dateHeureDebut | date ('d/m/Y H:i')}}</td>
-             <td  align="center">{{ sortie.dateLimiteInscription | date('d/m/Y') }}</td>
-             <td  align="center">{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
-             <td  align="center">{{ sortie.etat.libelle }}</td>
+             <td class="visible-xs" align="center">{{ sortie.lieu.ville.nom | upper}}</td>
+             <td  class="hidden-xs" align="center">{{ sortie.dateLimiteInscription | date('d/m/Y') }}</td>
+             <td  class="hidden-xs" align="center">{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
+             <td  class="hidden-xs" align="center">{{ sortie.etat.libelle }}</td>
+
              {% set particip = false %}
              {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                  {% for participant in sortie.participants %}
@@ -75,33 +81,34 @@
                  {% endfor %}
              {% endif %}
              {% if particip %}
-                <td  align="center">X</td>
+                <td align="center">X</td>
              {% else %}
                  <td> </td>
              {% endif%}
-             <td  align="center">
+             <td align="center">
                  {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                  <a href="{{ path('participant_detail',{'id':sortie.organisateur.id}) }}">{{ sortie.organisateur.username }}</a>
                  {% else %}
                      {{ sortie.organisateur.username }}
                  {% endif %}
              </td>
-
-             <td  align="center">
-             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <a href="{{ path('sortie_detail',{'id':sortie.id}) }}">Afficher</a>
-                {% if app.user == sortie.organisateur %}
-                    <a href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</a>
-                {% endif %}
-             {% endif %}
+             <td class="hidden-xs" align="center">
+                  {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                     <a href="{{ path('sortie_detail',{'id':sortie.id}) }}">Afficher</a>
+                         {% if app.user == sortie.organisateur or app.user.administrateur %}
+                             <a href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</a>
+                         {% endif %}
+                  {% endif %}
              </td>
          </tr>
     {% endfor %}
     </tbody>
     </table>
 </div>
-<div class="add-button">
+<div class="hidden-xs">
+    <div class="add-button">
     <button class="btn btn-secondary active" id="ajouterSortie"><a href="{{ path('add_sortie') }}">Ajouter une sortie</a></button>
+    </div>
 </div>
 {% endblock %}
 

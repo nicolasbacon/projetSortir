@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Participant;
-use App\Entity\Sortie;
 use App\Form\ParticipantType;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -56,17 +58,34 @@ class ParticipantController extends AbstractController
     public function modifierProfil(
         UserPasswordEncoderInterface $passwordEncoder, Request $request, EntityManagerInterface $em)
     {
-
-
         $participant = $this->getUser();
         $registerForm = $this->createForm(ParticipantType::class, $participant);
-
 
         $registerForm->handleRequest($request);
 
         if ($registerForm->isSubmitted() && $registerForm->isValid()) {
             $participant->setActif(true);
 
+            //gestion de l'image
+            $brochureFile = $registerForm->get('image')->getData();
+            if ($brochureFile) {
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+                try {
+                    $brochureFile->move(
+                        $this->getParameter('image_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+
+                }
+                $participant->setImageFilename($newFilename);
+            }
+           /* $participant->setImageFilename(
+                new File($this->getParameter('image_directory').'/'.$participant->getBrochureFilename())
+            );*/
+            //{{ form_row(registerForm.image) }}
 
             $password = $passwordEncoder->encodePassword($participant, $participant->getPassword());
             $participant->setPassword($password);
@@ -79,7 +98,10 @@ class ParticipantController extends AbstractController
             return $this->redirectToRoute("home");
 
         }
-        return $this->render('participant/modifier.html.twig', ["registerForm" => $registerForm->createView()]);
+        return $this->render('participant/modifier.html.twig', [
+            "registerForm" => $registerForm->createView(),
+            "participant" => $participant,
+            ]);
     }
 
     /**
@@ -190,5 +212,6 @@ class ParticipantController extends AbstractController
         ]);
 
     }
+
 
 }
