@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
+use DateInterval;
 
 class MainController extends AbstractController
 {
@@ -55,9 +57,9 @@ class MainController extends AbstractController
                     if($dateDebut > $sortie->getDateHeureDebut()) unset($sorties[$key]);
                 }
             }
-            elseif ($dateFin != null) {
+            if ($dateFin != null) {
                 foreach ($sorties as $key => $sortie) {
-                    if(  $dateFin < $sortie->getDateHeureDebut() and $dateFin + 30 < "now")  unset($sorties[$key]);
+                    if(  $dateFin < $sortie->getDateHeureDebut()) unset($sorties[$key]);
                 }
             }
             //Verifie si organisateur

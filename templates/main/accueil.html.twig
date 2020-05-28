@@ -35,10 +35,11 @@
 
             {{ form_widget(researchForm.sortiePasse) }}
             {{ form_label(researchForm.sortiePasse) }}<br>
-
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <div class="search-button">
                 <button class="btn btn-secondary active" type="submit" value="rechercher">Rechercher</button>
             </div>
+            {% endif %}
         </div>
     </div>
     {{ form_end(researchForm) }}
