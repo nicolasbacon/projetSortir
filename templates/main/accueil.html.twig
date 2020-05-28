@@ -40,8 +40,9 @@
                 <button class="btn btn-secondary active" type="submit" value="rechercher">Rechercher</button>
             </div>
         </div>
+        {{ form_end(researchForm) }}
     </div>
-    {{ form_end(researchForm) }}
+
 <div class="tableauAffich">
     <table class="table table-dark table-responsive">
      <thead>
@@ -60,7 +61,6 @@
 
      {% for sortie in sorties %}
          <tr>
-
              <th scope="row"  align="center">{{ sortie.nom }}</th>
              <td  align="center">{{ sortie.dateHeureDebut | date ('d/m/Y H:i')}}</td>
              <td  align="center">{{ sortie.dateLimiteInscription | date('d/m/Y') }}</td>
@@ -81,27 +81,27 @@
              {% endif%}
              <td  align="center">
                  {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                 <a href="{{ path('participant_detail',{'id':sortie.organisateur.id}) }}">
-                     {% endif %}
-                     {{ sortie.organisateur.username }}</a></td>
+                 <a href="{{ path('participant_detail',{'id':sortie.organisateur.id}) }}">{{ sortie.organisateur.username }}</a>
+                 {% else %}
+                     {{ sortie.organisateur.username }}
+                 {% endif %}
+             </td>
 
-                 <td  align="center">
-                  {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                     <a href="{{ path('sortie_detail',{'id':sortie.id}) }}">Afficher</a>
-                         {% if app.user == sortie.organisateur %}
-                             <a href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</a>
-                         {% endif %}
-                  {% endif %}
-                 </td>
-
-
+             <td  align="center">
+             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <a href="{{ path('sortie_detail',{'id':sortie.id}) }}">Afficher</a>
+                {% if app.user == sortie.organisateur %}
+                    <a href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</a>
+                {% endif %}
+             {% endif %}
+             </td>
          </tr>
     {% endfor %}
     </tbody>
     </table>
 </div>
 <div class="add-button">
-<button class="btn btn-secondary active" id="ajouterSortie"><a href="{{ path('add_sortie') }}">Ajouter une sortie</a></button>
+    <button class="btn btn-secondary active" id="ajouterSortie"><a href="{{ path('add_sortie') }}">Ajouter une sortie</a></button>
 </div>
 {% endblock %}
 

@@ -88,11 +88,11 @@
 
             {% if particip %}
                 {{ form_start(desinscritForm) }}
-                <button class="btn btn-secondary active" type="submit"><a href="/">Se désister</a></button>
+                <button class="btn btn-secondary active" type="submit"><a>Se désister</a></button>
                 {{ form_end(desinscritForm) }}
             {% elseif nb and date %}
                 {{ form_start(inscritForm) }}
-                <button class="btn btn-secondary active" type="submit"><a href="/">S'inscrire</a></button>
+                <button class="btn btn-secondary active" type="submit"><a>S'inscrire</a></button>
                 {{ form_end(inscritForm) }}
             {% endif %}
 
@@ -122,7 +122,7 @@
             <tbody>
             {% for participant in sortie.participants %}
                 <tr>
-                    <td>{{ participant.username }}</td>
+                    <td><a href="{{ path('participant_detail',{'id':participant.id}) }}">{{ participant.username }}</a></td>
                     <td>{{ participant.nom }}</td>
                 </tr>
             {% endfor %}
