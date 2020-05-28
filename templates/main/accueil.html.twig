@@ -43,10 +43,10 @@
         </div>
     </div>
     {{ form_end(researchForm) }}
-</div>
 
-<div class="tableauAffich">
-    <div class="hidden-xs">
+
+    <div class="tableauAffich">
+
     <table class="table table-dark table-responsive">
      <thead>
      <tr>
@@ -67,7 +67,6 @@
 
              <th scope="row"  align="center">{{ sortie.nom }}</th>
              <td align="center">{{ sortie.dateHeureDebut | date ('d/m/Y H:i')}}</td>
-             <td align="center">{{ sortie.lieu.ville.nom | upper}}</td>
              <td align="center">{{ sortie.dateLimiteInscription | date('d/m/Y') }}</td>
              <td align="center">{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
              <td align="center">{{ sortie.etat.libelle }}</td>
@@ -105,9 +104,9 @@
     {% endfor %}
     </tbody>
     </table>
-    </div>
 </div>
-    <div class="visible-xs">
+</div>
+<div class="visible-xs">
         <table class="table table-dark table-responsive">
             <thead>
             <tr>
@@ -135,16 +134,10 @@
             {% endfor %}
             </tbody>
         </table>
-    </div>
-
-             </td>
-         </tr>
-    {% endfor %}
-    </tbody>
-    </table>
 </div>
+
 <div class="hidden-xs">
-    <div class="add-button">
+    <div class="button">
     <button class="btn btn-secondary active" id="ajouterSortie"><a href="{{ path('add_sortie') }}">Ajouter une sortie</a></button>
     </div>
 </div>
