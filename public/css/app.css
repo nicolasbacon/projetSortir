@@ -354,5 +354,15 @@ button > a {
     .visible-xs{
         display: unset;
     }
+    table > tr {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .grid{
+        display: inherit;
+    }
+    label{
+        width: 269px
+    }
 
 }

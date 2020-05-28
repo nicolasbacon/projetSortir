@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="child2AfficherSortie">
-                <div>
+                <div class="hidden-xs">
                     <label>Campus : </label>
                     <strong> {{ sortie.campus.nom  | capitalize}}</strong>
                 </div>
@@ -63,7 +63,7 @@
             </div>
     </div>
 
-
+<div class="hidden-xs">
     <div class="button">
         {% if app.user.id == sortie.organisateur.id %}
             <button class="btn btn-secondary active" ><a href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</a></button>
@@ -108,6 +108,7 @@
         <button class="btn btn-secondary active" type="submit"><a href="{{ path('home') }}">Annuler</a></button>
 
     </div>
+</div>
 
     <br>
     <h2>Liste des participants inscrits</h2>
