@@ -46,7 +46,8 @@ class Participant implements UserInterface
     private $prenom;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Length(max=10, maxMessage="10 chiffres maximum !")
+     * @ORM\Column(type="string", length=10, nullable=true)
      */
     private $telephone;
 
@@ -83,6 +84,7 @@ class Participant implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Sortie::class, mappedBy="participants")
+     * @ORM\JoinColumn(onDelete="cascade")
      */
     private $sorties;
 
@@ -125,7 +127,7 @@ class Participant implements UserInterface
         return $this->telephone;
     }
 
-    public function setTelephone(int $telephone)
+    public function setTelephone(string $telephone)
     {
         $this->telephone = $telephone;
 

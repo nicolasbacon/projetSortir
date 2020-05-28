@@ -35,10 +35,10 @@
             {{ form_errors(sortieForm.infosSortie) }}
         </div>
 
-        <div style="grid-area: 7 / 2 /span 1 / span 1">
-            <button class="btn btn-secondary active" type="submit">Enregistrer</button>
+        <div style="grid-area: 7 / 2 /span 1 / span 1; margin: 10px auto 0px auto">
+            <button class="btn btn-secondary active" type="submit"><a>Enregistrer</a></button>
         </div>
-        <div style="grid-area: 7 / 3 /span 1 / span 2; margin: 0px auto 0px auto">
+        <div style="grid-area: 7 / 3 /span 1 / span 2; margin: 10px auto 0px auto">
             <button class="btn btn-secondary active" type="submit" name="publier"><a>Publier la sortie</a></button>
         </div>
 
@@ -54,7 +54,7 @@
             {{ form_end(sortieForm) }}
 
             {{ form_start(lieuForm) }}
-            <input type="image" src="{{ asset('images/plus.png') }}" width="25" height="25" style="margin-left: 10px">
+            <input type="image" src="{{ asset('img/plus.png') }}" width="25" height="25" style="margin-left: 10px">
             </div>
             {{ form_row(lieuForm.ville) }}
             {{ form_row(lieuForm.nom) }}
