@@ -1,12 +1,13 @@
 {% extends 'layout.html.twig' %}
 
 {% block main %}
+
     <div class="grid">
         <h1 class="titrePage">Votre profil</h1>
+        <img class="photoProfil" src="{{ asset('uploads/' ~ participant.imageFilename) }}" alt="Eni Sortie" >
         <div class="afficherProfil">
             {{ form_start(registerForm) }}
             {{ form_widget(registerForm) }}
-
             <div class="button">
                 <button class="btn btn-secondary active" type="submit">Enregistrer</button>
                 <button class="btn btn-secondary active" type="submit"><a href="{{ path('home') }}">Annuler</a></button>
