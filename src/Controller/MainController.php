@@ -3,13 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Campus;
+use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Form\ResearchType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Date;
 
 class MainController extends AbstractController
 {
@@ -18,6 +18,7 @@ class MainController extends AbstractController
      */
     public function home(EntityManagerInterface $em, Request $request)
     {
+
         //Formulaire de recherche
         $researchForm = $this->createForm(ResearchType::class);
         $researchForm->handleRequest($request);
@@ -43,6 +44,7 @@ class MainController extends AbstractController
 
             //Recherche en fonction du campus
             $sorties = $sortieRepo->findByCampus($campus->getId());
+
             //Recherche avec la zone de texte si elle n'est pas vide
             if (!empty($research)) {
                 foreach ($sorties as $key => $sortie) {
@@ -100,6 +102,30 @@ class MainController extends AbstractController
        else {
            //On recupere toute les sorties
            $sorties = $sortieRepo->findAll();
+           //Modif etat des sorties
+           $etatRepo = $em->getRepository(Etat::class);
+           $etats = $etatRepo->findAll();
+           foreach ($sorties as $sortie) {
+               //Etat Ferme
+               if ($sortie->getDateLimiteInscription() <= new \DateTime()) $sortie->setEtat($etats[2]);
+               //Etat En cour
+               $dateFinSortie = new \DateTime();
+               $dateFinSortie->setTimestamp($sortie->getDateHeureDebut()->getTimestamp() + $sortie->getDuree()->getTimestamp() + 3600);
+
+               if ($sortie->getDateHeureDebut() <= new \DateTime() && $dateFinSortie->getTimestamp() >= time()) $sortie->setEtat($etats[3]);
+               //Etat Termine
+               $dateFinSortie = new \DateTime();
+               $dateFinSortie->setTimestamp($sortie->getDateHeureDebut()->getTimestamp() + $sortie->getDuree()->getTimestamp() + 3600);
+               if ($dateFinSortie->getTimestamp() <= time()) $sortie->setEtat($etats[5]);
+               //Etat Archiver
+               $dateArchivage = new \DateTime(date_format($sortie->getDateHeureDebut(), 'Y-m-d H:i:s'));
+               $dateArchivage->add(new \DateInterval('P30D'));
+               if ($dateArchivage <= new \DateTime()) $sortie->setEtat($etats[6]);
+
+               $em->persist($sortie);
+           }
+           $em->flush();
+
        }
         $allCampus = $campusRepo->findAll();
 

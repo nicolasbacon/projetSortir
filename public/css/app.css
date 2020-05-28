@@ -103,7 +103,6 @@ footer {
     grid-column: 2/3;
     margin: auto auto auto auto;
     font-size: 75px;
-
 }
 
 .by {
@@ -127,15 +126,13 @@ label {
     width: 150px;
 }
 
-.titrePage
-{
+.titrePage {
     margin: 10px auto 10px auto;
     text-align: center;
     grid-column: 3/5;
-
 }
 
-.grid{
+.grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: auto;
@@ -143,20 +140,20 @@ label {
     grid-auto-columns: minmax(200px, auto);
 
 }
-.afficherProfil{
+.afficherProfil {
     margin: 10px auto 10px auto;
     grid-column: 2/6;
     grid-row: 2;
 }
 
-.sortieTitle{
+.sortieTitle {
     margin: 10px auto 10px auto;
     text-align: center;
     grid-column: 3/5;
 }
 
 
-.child1AfficherSortie{
+.child1AfficherSortie {
     margin: 10px auto 10px auto;
     grid-column: 1/4;
     grid-row: 2;
@@ -164,37 +161,36 @@ label {
 
 }
 
-.child2AfficherSortie{
+.child2AfficherSortie {
     margin: 10px auto 10px auto;
     grid-column: 4/7;
     grid-row: 2;
-
 }
 
-.child1AddSortie label{
-
+.child1AddSortie label {
+    width: inherit;
+    margin-right: 20px;
 }
-.child1AddSortie{
+.child1AddSortie {
     margin: 40px auto 10px auto;
     grid-area: 1 / 1 / span 7 / span 3;
 }
-.child2AddSortie{
+.child2AddSortie {
     grid-area: 3 / 5 / span 3 / span 4;
 }
 
-
-.accueil{
+.accueil {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto;
     grid-gap: 10px;
 }
 
-.child1Accueil{
+.child1Accueil {
     grid-area: 1 / 1 / span 3 / span 2;
 }
 
-.dateSortie{
+.dateSortie {
     grid-column: 1 / span 2;
     grid-row-start: 1 ;
     grid-row-end: span 1;
@@ -204,29 +200,29 @@ label {
     width: inherit;
 }
 
-.dateSortie > input{
+.dateSortie > input {
     width: 120px;
 }
 
-.research > input{
+.research > input {
     width: 140px;
 }
 
-.child2Accueil{
+.child2Accueil {
     grid-area: 1 / 3 / span 4 / span 2;
 }
 
-.filtreSortie{
+.filtreSortie {
     margin-bottom: 40px;
 }
 
-.search-button > button{
+.search-button > button {
     color: #000 !important;
     grid-area: 1 / 3 / span 1 / span 1;
     margin-bottom: 15px;
     margin-left: 350px;
 }
-.grid2{
+.grid2 {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: auto;
@@ -234,7 +230,7 @@ label {
     grid-auto-columns: minmax(200px, auto);
 
 }
-.button > button{
+.button > button {
     color: #000 !important;
 }
 
@@ -242,7 +238,7 @@ label {
     text-align: center;
 }
 
-.annulerSortie{
+.annulerSortie {
     margin: 10px auto 10px auto;
     grid-column: 2/6;
     grid-row: 2;
@@ -252,7 +248,6 @@ label {
     display: grid;
     grid-template-areas:    "colLeft colRight"
                             "button button";
-
 }
 
 .modifCol1 {
@@ -273,40 +268,43 @@ label {
     grid-area: button;
 }
 
-.msgFull{
+.msgFull {
     border: white;
     background-color: darkred;
     color: white;
 }
+
 .btn-add {
     margin: 10px auto 10px auto;
     grid-area: 7 / 5 / 7 / span 2;
 }
+
 .login {
     text-align: center;
 }
 
-.tableauAffich{
+.tableauAffich {
     height: 400px;
     width: 1050px;
     overflow-y: scroll;
     text-align: center;
 }
+
 ::-webkit-scrollbar {
     display: none;
 }
 
 
-#ajouterSortie{
+#ajouterSortie {
     margin-top: 15px;
 }
 
-td > a{
+td > a {
     color: white;
 }
 
 /*A REVOIR*/
-.description{
+.description {
     width: 200px;
     border: 1px hidden;
     padding: 2px 5px;
@@ -316,7 +314,7 @@ td > a{
     overflow: hidden;
 }
 
-button > a {
+button {
     color: black !important;
 }
 
@@ -336,10 +334,12 @@ button > a {
     .hidden-xs {
         display: none ;
     }
-    nav > ul > li{
+
+    nav > ul > li {
         display: none;
     }
-    .tableauAffich{
+
+    .tableauAffich {
         height: 600px;
         width: 610px;
         overflow-y: scroll;
@@ -351,7 +351,8 @@ button > a {
         text-align: center;
         grid-area: 2 / 2 / span 1 / span 3;
     }
-    .visible-xs{
+
+    .visible-xs {
         display: unset;
     }
     table > tr {

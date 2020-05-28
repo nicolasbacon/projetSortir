@@ -87,6 +87,23 @@ class Participant implements UserInterface
      * @ORM\JoinColumn(onDelete="cascade")
      */
     private $sorties;
+    /**
+     * @ORM\Column(type="string")
+     */
+    //@ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
+    private $imageFilename;
+
+    public function getImageFilename()
+    {
+        return $this->imageFilename;
+    }
+
+    public function setImageFilename($imageFilename)
+    {
+        $this->imageFilename = $imageFilename;
+
+        return $this;
+    }
 
     public function __construct()
     {

@@ -145,7 +145,7 @@ class SortieController extends AbstractController
             throw $this->createNotFoundException("Cette sortie n'existe pas!");
         }
         else {
-            if ($sortie->getOrganisateur() != $this->getUser()) throw $this->createAccessDeniedException("Vous n'êtes pas l\'organisateur de cette sortie");
+            if ($sortie->getOrganisateur() != $this->getUser() && $this->getUser()->getAdministrateur() == false ) throw $this->createAccessDeniedException("Vous n'êtes pas l\'organisateur de cette sortie");
 
             if($lieuForm->isSubmitted() && $lieuForm->isValid()) {
                 $em->persist($lieu);

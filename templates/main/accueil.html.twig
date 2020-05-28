@@ -88,15 +88,15 @@
              <td align="center">
                  {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                  <a href="{{ path('participant_detail',{'id':sortie.organisateur.id}) }}">{{ sortie.organisateur.username }}</a>
-                     {% else %}
-                         <div class="hidden-xs">{{ sortie.organisateur.username }}</div>
+                 {% else %}
+                     {{ sortie.organisateur.username }}
                  {% endif %}
              </td>
 
                  <td align="center">
                   {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                      <a href="{{ path('sortie_detail',{'id':sortie.id}) }}">Afficher</a>
-                         {% if app.user == sortie.organisateur %}
+                         {% if app.user == sortie.organisateur or app.user.administrateur %}
                              <a href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</a>
                          {% endif %}
                   {% endif %}
@@ -137,6 +137,12 @@
         </table>
     </div>
 
+             </td>
+         </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+</div>
 <div class="hidden-xs">
     <div class="add-button">
     <button class="btn btn-secondary active" id="ajouterSortie"><a href="{{ path('add_sortie') }}">Ajouter une sortie</a></button>

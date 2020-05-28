@@ -7,16 +7,22 @@ security:
                 property: username
 
     firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
         main:
             remember_me:
                 secret:   '%kernel.secret%'
-                path:     /
-            pattern: ^/
+#                path:     /
+#            pattern: ^/
             provider: our_db_provider
             anonymous: ~
             form_login:
                 login_path: login
                 check_path: login
+                default_target_path: home
+                always_use_default_target_path: true
+                use_referer: true
 
             logout:
                 path: logout
@@ -27,7 +33,7 @@ security:
             algorithm: 'bcrypt'
 
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/sortie, roles: IS_AUTHENTICATED_REMEMBERED }
-        - { path: ^/participant, roles: IS_AUTHENTICATED_REMEMBERED }
-        - { path: ^/lieu, roles: IS_AUTHENTICATED_REMEMBERED }
+            - { path: ^/admin, roles: ROLE_ADMIN }
+            - { path: ^/sortie, roles: IS_AUTHENTICATED_REMEMBERED }
+            - { path: ^/participant, roles: IS_AUTHENTICATED_REMEMBERED }
+            - { path: ^/lieu, roles: IS_AUTHENTICATED_REMEMBERED }
