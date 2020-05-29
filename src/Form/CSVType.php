@@ -14,7 +14,7 @@ class CSVType extends AbstractType
     {
         $builder
             ->add('csv', FileType::class, [
-                'label' => 'Ajouter utilisateur par (CSV)',
+                'label' => 'Ajouter utilisateurs par (CSV)',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
