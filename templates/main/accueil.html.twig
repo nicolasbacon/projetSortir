@@ -44,7 +44,11 @@
     </div>
     {{ form_end(researchForm) }}
 </div>
-
+    <div class="hidden-xs">
+        <div class="add-button">
+            <button class="btn border active z" id="ajouterSortie"><a href="{{ path('add_sortie') }}">Ajouter une sortie</a></button>
+        </div>
+    </div>
 <div class="tableauAffich">
     <table class="table  table-responsive">
      <thead>
@@ -134,11 +138,7 @@
             </tbody>
         </table>
 </div>
-<div class="hidden-xs">
-    <div class="add-button">
-    <button class="btn border active" id="ajouterSortie"><a href="{{ path('add_sortie') }}">Ajouter une sortie</a></button>
-    </div>
-</div>
+
 {% endblock %}
 
 {% block script %}
