@@ -26,11 +26,11 @@
                 </div>
                 <div class="infosSortie">
                     <label>Description et infos : </label>
-                    <strong class="description"><img src="{{ asset('img/quote-left.png') }}"> {{ sortie.infosSortie | capitalize }} <img src="{{ asset('img/quote-right.png') }}"></strong>
+                    <strong class="description"><blockquote><img src="{{ asset('img/quote-left.png') }}"> {{ sortie.infosSortie | capitalize }} <img src="{{ asset('img/quote-right.png') }}"></blockquote></strong>
                 </div>
             </div>
             <div class="child2AfficherSortie">
-                <div>
+                <div class="hidden-xs">
                     <label>Campus : </label>
                     <strong> {{ sortie.campus.nom  | capitalize}}</strong>
                 </div>
@@ -72,7 +72,7 @@
             </div>
     </div>
 
-
+<div class="hidden-xs">
     <div class="button">
         {% if app.user.id == sortie.organisateur.id %}
             <button class="btn border active" ><a href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</a></button>
@@ -97,11 +97,15 @@
 
             {% if particip %}
                 {{ form_start(desinscritForm) }}
-                <button class="btn border active" type="submit"><a href="/">Se désister</a></button>
+                <div class="button">
+                <button class="btn border active" type="submit">Se désister</button>
+                </div>
                 {{ form_end(desinscritForm) }}
             {% elseif nb and date %}
                 {{ form_start(inscritForm) }}
-                <button class="btn border active" type="submit"><a href="/">S'inscrire</a></button>
+                <div class="button">
+                <button class="btn border active" type="submit">S'inscrire</button>
+                </div>
                 {{ form_end(inscritForm) }}
             {% endif %}
 
@@ -117,6 +121,7 @@
         <button class="btn border active" type="submit"><a href="{{ path('home') }}">Annuler</a></button>
 
     </div>
+</div>
 
     <br>
     <h2>Liste des participants inscrits</h2>
@@ -124,14 +129,14 @@
         <table class="table table-dark ">
             <thead>
             <tr>
-                <th scope="col">Pseudo</th>
-                <th scope="col">Nom</th>
+                <th class="list-participants" scope="col">Pseudo</th>
+                <th class="list-participants" scope="col">Nom</th>
             </tr>
             </thead>
             <tbody>
             {% for participant in sortie.participants %}
                 <tr>
-                    <td>{{ participant.username }}</td>
+                    <td><a href="{{ path('participant_detail',{'id':participant.id}) }}">{{ participant.username }}</a></td>
                     <td>{{ participant.nom }}</td>
                 </tr>
             {% endfor %}

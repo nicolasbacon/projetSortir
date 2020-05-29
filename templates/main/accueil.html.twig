@@ -51,13 +51,12 @@
      <tr>
          <th scope="col" align="center">Nom de la sortie</th>
          <th scope="col" align="center">Date de la sortie</th>
-         <th class="visible-xs" scope="col" align="center">Lieu</th>
-         <th class="hidden-xs" scope="col" align="center">Clôture</th>
-         <th class="hidden-xs" scope="col" align="center">Inscrits/Places</th>
-         <th class="hidden-xs" scope="col" align="center">Etat</th>
-         <th class="hidden-xs" scope="col" align="center">Inscrit</th>
-         <th class="hidden-xs" scope="col" align="center">Organisateur</th>
-         <th class="hidden-xs" scope="col" align="center">Actions</th>
+         <th scope="col" align="center">Clôture</th>
+         <th scope="col" align="center">Inscrits/Places</th>
+         <th scope="col" align="center">Etat</th>
+         <th scope="col" align="center">Inscrit</th>
+         <th scope="col" align="center">Organisateur</th>
+         <th scope="col" align="center">Actions</th>
      </tr>
      </thead>
      <tbody>
@@ -65,12 +64,11 @@
      {% for sortie in sorties %}
          <tr>
 
-             <th scope="row"  align="center">{{ sortie.nom }}</th>
-             <td  class="x" align="center">{{ sortie.dateHeureDebut | date ('d/m/Y H:i')}}</td>
-             <td class="visible-xs x" align="center"><p class="x">{{ sortie.lieu.ville.nom | upper}}</p></td>
-             <td  class="hidden-xs x" align="center"><p class="x">{{ sortie.dateLimiteInscription | date('d/m/Y') }}</p></td>
-             <td  class="hidden-xs x" align="center"><p class="x">{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</p></td>
-             <td  class="hidden-xs x" align="center"><p class="x">{{ sortie.etat.libelle }}</p></td>
+             <th class="x" scope="row"  align="center">{{ sortie.nom }}</th>
+             <td class="x" align="center">{{ sortie.dateHeureDebut | date ('d/m/Y H:i')}}</td>
+             <td class="x" align="center">{{ sortie.dateLimiteInscription | date('d/m/Y') }}</td>
+             <td class="x" align="center">{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
+             <td class="x" align="center">{{ sortie.etat.libelle }}</td>
 
              {% set particip = false %}
              {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
@@ -93,7 +91,7 @@
                  {% endif %}
              </td>
 
-                 <td class="hidden-xs" align="center">
+                 <td align="center">
                   {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                      <a href="{{ path('sortie_detail',{'id':sortie.id}) }}">Afficher</a>
                          {% if app.user == sortie.organisateur or app.user.administrateur %}
@@ -101,13 +99,40 @@
                          {% endif %}
                   {% endif %}
                  </td>
-
-
-
          </tr>
     {% endfor %}
     </tbody>
     </table>
+</div>
+</div>
+<div class="visible-xs">
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th scope="col" align="center">Nom de la sortie</th>
+                <th scope="col" align="center">Date de la sortie</th>
+                <th scope="col" align="center">Lieu</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for sortie in sorties %}
+                <tr>
+
+                    <th scope="row" align="center">
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <a href="{{ path('sortie_detail',{'id':sortie.id}) }}">{{ sortie.nom }}</a>
+                        {% else %}
+                            {{ sortie.nom }}
+                        {% endif %}
+                    </th>
+
+                    <td align="center">{{ sortie.dateHeureDebut | date ('d/m/Y H:i')}}</td>
+                    <td align="center">{{ sortie.lieu.ville.nom | upper}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 </div>
 <div class="hidden-xs">
     <div class="add-button">

@@ -34,6 +34,7 @@ class ParticipantController extends AbstractController
      */
     public function logout()
     {
+        $this->addFlash('sucess', 'Mauvais mot de passe !');
     }
 
 

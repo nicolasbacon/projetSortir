@@ -33,7 +33,7 @@ security:
             algorithm: 'bcrypt'
 
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/sortie, roles: IS_AUTHENTICATED_REMEMBERED }
-        - { path: ^/participant, roles: IS_AUTHENTICATED_REMEMBERED }
-        - { path: ^/lieu, roles: IS_AUTHENTICATED_REMEMBERED }
+            - { path: ^/admin, roles: ROLE_ADMIN }
+            - { path: ^/sortie, roles: IS_AUTHENTICATED_REMEMBERED }
+            - { path: ^/participant, roles: IS_AUTHENTICATED_REMEMBERED }
+            - { path: ^/lieu, roles: IS_AUTHENTICATED_REMEMBERED }
