@@ -5,9 +5,9 @@ body {
     background-size: cover;
 }
 
-@media (min-width: 768px) and (max-width:1600px){
+@media (min-width: 768px) and (max-width:1600px) {
     .container {
-        background: radial-gradient(ellipse at center top,darkseagreen,darkolivegreen);
+        background: radial-gradient(ellipse at center top, darkseagreen, darkolivegreen);
         min-width: 360px;
         max-width: 1075px;
         margin: auto;
@@ -18,12 +18,13 @@ body {
         background-color: darkolivegreen;
         opacity: 0.92;
     }
+
     td {
         background-color: darkolivegreen;
         opacity: 0.82;
     }
 
-    .grid{
+    .grid {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         grid-template-rows: auto;
@@ -32,7 +33,8 @@ body {
 
 
     }
-    .gridX{
+
+    .gridX {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         grid-template-rows: repeat(3, 1fr);
@@ -41,13 +43,14 @@ body {
 
 
     }
+
     .afficherProfil {
         margin: 10px auto 10px auto;
         grid-column: 2/6;
         grid-row: 2;
     }
 
-    .visible-xs{
+    .visible-xs {
         display: none;
     }
 
@@ -134,7 +137,8 @@ main
     h1 {
         margin: 0;
     }
-    .photoProfil{
+
+    .photoProfil {
         margin-top: 10px;
         width: 175px;
         height: auto;
@@ -145,6 +149,7 @@ main
 
 
     }
+
     /**
    footer
     */
@@ -157,7 +162,8 @@ main
         grid-area: 7 / 3 /span 1 / span 2;
         margin: 5px auto 0px 60px;
     }
-    .btn-save{
+
+    .btn-save {
         grid-area: 7 / 2 /span 1 / span 1;
         margin: 5px auto 0px 60px;
     }
@@ -168,7 +174,7 @@ main
         margin-left: 350px;
     }
 
-    button{
+    button {
         color: #000 !important;
         margin: 5px;
     }
@@ -203,17 +209,17 @@ main
     }
 
     .child1AddSortie label {
-        padding-top:5px;
+        padding-top: 5px;
         width: inherit;
         margin-right: 20px;
     }
-
 
 
     .child1AddSortie {
         margin: 40px auto 10px auto;
         grid-area: 1 / 1 / span 7 / span 3;
     }
+
     .child2AddSortie {
         grid-area: 3 / 5 / span 3 / span 4;
     }
@@ -230,7 +236,7 @@ main
         grid-row: 2;
     }
 
-    .description{
+    .description {
         text-indent: 6em;
     }
 
@@ -253,7 +259,7 @@ main
 
     .dateSortie {
         grid-column: 1 / span 2;
-        grid-row-start: 1 ;
+        grid-row-start: 1;
         grid-row-end: span 1;
     }
 
@@ -295,18 +301,12 @@ main
 
     .modif {
         display: grid;
-        grid-template-areas:    "colLeft colRight"
-        "button button";
+        grid-template-areas: "colLeft colRight" "button button";
     }
 
     .modifCol1 {
         grid-area: colLeft;
-        grid-template-areas:    "nom"
-        "dateSortie"
-        "dateInsc"
-        "nbrPlace"
-        "duree"
-        "desc";
+        grid-template-areas: "nom" "dateSortie" "dateInsc" "nbrPlace" "duree" "desc";
     }
 
     .modifCol2 {
@@ -346,16 +346,18 @@ main
     #ajouterSortie {
         margin-top: 15px;
     }
-td th {
-    background-size: auto;
-}
-.x {
-    color: white;
-}
 
-#ajouterSortie{
-    margin-top: 15px;
-}
+    td th {
+        background-size: auto;
+    }
+
+    .x {
+        color: white;
+    }
+
+    #ajouterSortie {
+        margin-top: 15px;
+    }
 
     td > a {
         color: white;
@@ -370,160 +372,168 @@ td th {
         color: #000;
         text-align: center;
         display: block;
-        margin : auto;
-    }
-
-
-button > .btn .active  {
-    color: black ;
-    background-color: darkolivegreen;
-    border-color: #333333;
-}
-
-
-
-@media (max-width: 767px) {
-    .container {
-        min-width: 650px;
-        max-width: 1020px;
         margin: auto;
-        padding: 10px 20px;
-    }
-
-    .hidden-xs {
-        display: none ;
-    }
-
-    .titre {
-        margin: auto auto auto auto;
-        font-size: 75px;
-    }
-
-    .titreLogo {
-        display: grid;
-    }
-
-    .imageLogo {
-        grid-column: 1/3;
-        margin: auto 10px auto;
-        width: 7em;
-        height: 8em;
-
-
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    nav > ul > li {
-        display: none;
-    }
-
-    .tableauAffich {
-        height: 600px;
-        width: 610px;
-        overflow-y: scroll;
-        text-align: center;
-    }
-
-    ::-webkit-scrollbar {
-        display: none;
-    }
-
-    .by {
-        margin: inherit;
-        text-align: center;
-        font-size: 1.5em;
-        font-style: italic;
-        grid-area: 2 / 2 / span 1 / span 3;
-    }
-
-    .visible-xs {
-        display: unset;
-        font-size: 1.3em;
-    }
-
-    table{
-        margin-top: 5em;
-    }
-
-    table thead{
-        text-align: center;
-    }
-
-    .grid{
-        display: inherit;
-    }
-
-    label{
-        width: 269px
-    }
-
-    button{
-        color: #000 !important;
-
-    }
-    main .login .button button{
-        font-size: 1em;
-        margin-top: 1.5em;
-    }
-    .login{
-        margin-top: 4.5em;
-        font-size: 1.75em;
-    }
-    .login input{
-       margin-top: 0.50em;
-        margin-bottom: 1.3em;
-    }
-
-    .ck-box-login{
-        font-size: 0.75em;
-    }
-    .filtreSortie{
-        margin-top: 1.5em;
-    }
-
-    .child1AfficherSortie{
-        font-size: 1.3em;
-    }
-
-    .child1AfficherSortie label{width: 275px}
-
-    .child2AfficherSortie{
-        font-size: 1.3em;
-    }
-
-    .child2AfficherSortie label{width: 275px}
-
-    .list-participants{
-        font-size: 1.3em;
-    }
-    .description{
-        font-style: italic;
-        font-size: 0.90em;
-        text-indent: 8em;
-    }
-
-    .sortieTitle{
-        margin-bottom: 1em;
-        text-align: center;
-    }
-
-    .login {
-        text-align: center;
     }
 
 
-
-    /**
-   footer
-    */
-    footer {
-        margin-top: 2em;
-        font-size: 1em;
-        padding: 20px 0;
-        text-align: center;
+    button > .btn .active {
+        color: black;
+        background-color: darkolivegreen;
+        border-color: #333333;
     }
 
+
+    @media (max-width: 767px) {
+        .container {
+            min-width: 650px;
+            max-width: 1020px;
+            margin: auto;
+            padding: 10px 20px;
+        }
+
+        .hidden-xs {
+            display: none;
+        }
+
+        .titre {
+            margin: auto auto auto auto;
+            font-size: 75px;
+        }
+
+        .titreLogo {
+            display: grid;
+        }
+
+        .imageLogo {
+            grid-column: 1/3;
+            margin: auto 10px auto;
+            width: 7em;
+            height: 8em;
+
+
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        nav > ul > li {
+            display: none;
+        }
+
+        .tableauAffich {
+            height: 600px;
+            width: 610px;
+            overflow-y: scroll;
+            text-align: center;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        .by {
+            margin: inherit;
+            text-align: center;
+            font-size: 1.5em;
+            font-style: italic;
+            grid-area: 2 / 2 / span 1 / span 3;
+        }
+
+        .visible-xs {
+            display: unset;
+            font-size: 1.3em;
+        }
+
+        table {
+            margin-top: 5em;
+        }
+
+        table thead {
+            text-align: center;
+        }
+
+        .grid {
+            display: inherit;
+        }
+
+        label {
+            width: 269px
+        }
+
+        button {
+            color: #000 !important;
+
+        }
+
+        main .login .button button {
+            font-size: 1em;
+            margin-top: 1.5em;
+        }
+
+        .login {
+            margin-top: 4.5em;
+            font-size: 1.75em;
+        }
+
+        .login input {
+            margin-top: 0.50em;
+            margin-bottom: 1.3em;
+        }
+
+        .ck-box-login {
+            font-size: 0.75em;
+        }
+
+        .filtreSortie {
+            margin-top: 1.5em;
+        }
+
+        .child1AfficherSortie {
+            font-size: 1.3em;
+        }
+
+        .child1AfficherSortie label {
+            width: 275px
+        }
+
+        .child2AfficherSortie {
+            font-size: 1.3em;
+        }
+
+        .child2AfficherSortie label {
+            width: 275px
+        }
+
+        .list-participants {
+            font-size: 1.3em;
+        }
+
+        .description {
+            font-style: italic;
+            font-size: 0.90em;
+            text-indent: 8em;
+        }
+
+        .sortieTitle {
+            margin-bottom: 1em;
+            text-align: center;
+        }
+
+        .login {
+            text-align: center;
+        }
+
+
+        /**
+       footer
+        */
+        footer {
+            margin-top: 2em;
+            font-size: 1em;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+    }
 }
