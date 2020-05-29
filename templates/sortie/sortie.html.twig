@@ -54,6 +54,15 @@
                     <label>Longitude : </label>
                     <strong> {{ sortie.lieu.longitude }}</strong>
                 </div>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <div>
+                        <label><strong>By </strong> </label>
+                        <a href="{{ path('participant_detail',{'id':sortie.organisateur.id}) }}">{{ sortie.organisateur.username | capitalize}}</a>
+                    </div>
+
+                {% else %}
+                    {{ sortie.organisateur.username }}
+                {% endif %}
                 {% if sortie.etat.id == 5 or sortie.etat.id == 9 %}
                 <div>
                     <label>Motif d'annulation : </label>
@@ -66,7 +75,7 @@
 
     <div class="button">
         {% if app.user.id == sortie.organisateur.id %}
-            <button class="btn btn-secondary active" ><a href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</a></button>
+            <button class="btn border active" ><a href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</a></button>
 
         {% else %}
             {% set date = true %}
@@ -88,11 +97,11 @@
 
             {% if particip %}
                 {{ form_start(desinscritForm) }}
-                <button class="btn btn-secondary active" type="submit"><a href="/">Se désister</a></button>
+                <button class="btn border active" type="submit"><a href="/">Se désister</a></button>
                 {{ form_end(desinscritForm) }}
             {% elseif nb and date %}
                 {{ form_start(inscritForm) }}
-                <button class="btn btn-secondary active" type="submit"><a href="/">S'inscrire</a></button>
+                <button class="btn border active" type="submit"><a href="/">S'inscrire</a></button>
                 {{ form_end(inscritForm) }}
             {% endif %}
 
@@ -105,7 +114,7 @@
             {% endif %}
 
         {% endif %}
-        <button class="btn btn-secondary active" type="submit"><a href="{{ path('home') }}">Annuler</a></button>
+        <button class="btn border active" type="submit"><a href="{{ path('home') }}">Annuler</a></button>
 
     </div>
 

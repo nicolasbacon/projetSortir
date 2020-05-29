@@ -63,7 +63,7 @@ class MainController extends AbstractController
             //Verifie si organisateur
             if ($organisateur){
                 foreach ($sorties as $key => $sortie) {
-                    if ($user =! $sortie->getOrganisateur()) unset($sorties[$key]);
+                    if ($user != $sortie->getOrganisateur()) unset($sorties[$key]);
                 }
             }
             if ($incrit){

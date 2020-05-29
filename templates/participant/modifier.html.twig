@@ -4,7 +4,7 @@
 
     <div class="grid">
         <h1 class="titrePage">Votre profil</h1>
-        <img class="photoProfil" src="{{ asset('uploads/' ~ participant.imageFilename) }}" alt="Eni Sortie" >
+        <img class="photoProfil border border-success " src="{{ asset('uploads/' ~ participant.imageFilename) }}" alt="Eni Sortie" >
         <div class="afficherProfil">
             {{ form_start(registerForm) }}
             {{ form_widget(registerForm) }}
