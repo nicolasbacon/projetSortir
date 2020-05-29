@@ -1,359 +1,539 @@
 body {
     margin: 0;
     font-family: 'DM Mono', monospace;
-    background-color: dodgerblue;
-}
-.container {
-    min-width: 360px;
-    max-width: 1075px;
-    margin: auto;
-    padding: 10px 20px;
+    background-image: url('../img/parc.jpg');
+    background-size: cover;
 }
 
-a {
-    text-decoration: none;
-    color: #000;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/**
-header
- */
-.site-title {
-    display: flex;
-    align-items: center;
-    font-size: 48px;
-}
-
-.site-title img {
-    height: 48px;
-    display: block;
-    margin-right: 5px;
-}
-
-header nav ul {
-    margin: 5px 0;
-    display: flex;
-    list-style: none;
-    padding-left: 0;
-}
-
-header nav a {
-    display: block;
-    padding: 5px 8px;
-    margin-right: 10px;
-}
-
-/**
-main
- */
-main {
-    padding: 30px 0;
-    border-top: 1px solid #D3D3D3;
-    border-bottom: 1px solid #D3D3D3;
-}
-
-h1 {
-    margin: 0;
-}
-
-/**
-footer
- */
-footer {
-    padding: 20px 0;
-    text-align: center;
-}
-
-.flash {
-    padding: 20px;
-    display: block;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.flash-success {
-    background-color: #6b9311;
-    color: #333333;
-}
-
-.flash-error {
-    background-color: red;
-    color: black;
-}
-
-.titreLogo {
-    display: grid;
-}
-
-.imageLogo {
-    grid-column: 1/3;
-    margin: auto 10px auto;
-    width: 100px;
-    max-width: 100px;
-    min-width: 100px;
-    height: 110px;
-
-}
-
-.titre {
-    grid-column: 2/3;
-    margin: auto auto auto auto;
-    font-size: 75px;
-}
-
-.by {
-    grid-column: 3/3;
-    font-size: small;
-    margin: 70px auto auto auto;
-    font-style: italic;
-}
-
-
-.bouton-plus {
-    width: 25px;
-}
-
-
-.afficherProfil > label {
-    width: 120px;
-}
-
-label {
-    width: 150px;
-}
-
-.titrePage {
-    margin: 10px auto 10px auto;
-    text-align: center;
-    grid-column: 3/5;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: auto;
-    grid-auto-rows: minmax(100px, auto);
-    grid-auto-columns: minmax(200px, auto);
-
-}
-.afficherProfil {
-    margin: 10px auto 10px auto;
-    grid-column: 2/6;
-    grid-row: 2;
-}
-
-.sortieTitle {
-    margin: 10px auto 10px auto;
-    text-align: center;
-    grid-column: 3/5;
-}
-
-
-.child1AfficherSortie {
-    margin: 10px auto 10px auto;
-    grid-column: 1/4;
-    grid-row: 2;
-
-
-}
-
-.child2AfficherSortie {
-    margin: 10px auto 10px auto;
-    grid-column: 4/7;
-    grid-row: 2;
-}
-
-.child1AddSortie label {
-    width: inherit;
-    margin-right: 20px;
-}
-.child1AddSortie {
-    margin: 40px auto 10px auto;
-    grid-area: 1 / 1 / span 7 / span 3;
-}
-.child2AddSortie {
-    grid-area: 3 / 5 / span 3 / span 4;
-}
-
-.accueil {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto;
-    grid-gap: 10px;
-}
-
-.child1Accueil {
-    grid-area: 1 / 1 / span 3 / span 2;
-}
-
-.dateSortie {
-    grid-column: 1 / span 2;
-    grid-row-start: 1 ;
-    grid-row-end: span 1;
-}
-
-.accueil label {
-    width: inherit;
-}
-
-.dateSortie > input {
-    width: 120px;
-}
-
-.research > input {
-    width: 140px;
-}
-
-.child2Accueil {
-    grid-area: 1 / 3 / span 4 / span 2;
-}
-
-.filtreSortie {
-    margin-bottom: 40px;
-}
-
-.search-button > button {
-    color: #000 !important;
-    grid-area: 1 / 3 / span 1 / span 1;
-    margin-bottom: 15px;
-    margin-left: 350px;
-}
-.grid2 {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: auto;
-    grid-auto-rows: minmax(100px, auto);
-    grid-auto-columns: minmax(200px, auto);
-
-}
-.button > button {
-    color: #000 !important;
-}
-
-.button {
-    text-align: center;
-}
-
-.annulerSortie {
-    margin: 10px auto 10px auto;
-    grid-column: 2/6;
-    grid-row: 2;
-}
-
-.modif {
-    display: grid;
-    grid-template-areas:    "colLeft colRight"
-                            "button button";
-}
-
-.modifCol1 {
-    grid-area: colLeft;
-    grid-template-areas:    "nom"
-                            "dateSortie"
-                            "dateInsc"
-                            "nbrPlace"
-                            "duree"
-                            "desc";
-}
-
-.modifCol2 {
-    grid-area: colRight;
-}
-
-.modifButton {
-    grid-area: button;
-}
-
-.msgFull {
-    border: white;
-    background-color: darkred;
-    color: white;
-}
-
-.btn-add {
-    margin: 10px auto 10px auto;
-    grid-area: 7 / 5 / 7 / span 2;
-}
-
-.login {
-    text-align: center;
-}
-
-.tableauAffich {
-    height: 400px;
-    width: 1050px;
-    overflow-y: scroll;
-    text-align: center;
-}
-
-::-webkit-scrollbar {
-    display: none;
-}
-
-
-#ajouterSortie {
-    margin-top: 15px;
-}
-
-td > a {
-    color: white;
-}
-
-/*A REVOIR*/
-.description {
-    width: 200px;
-    border: 1px hidden;
-    padding: 2px 5px;
-
-    /* Nécessaires pour text-overflow */
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-button {
-    color: black !important;
-}
-
-.visible-xs{
-    display: none;
-}
-
-
-@media (max-width: 767px) {
+@media (min-width: 768px) and (max-width:1600px) {
     .container {
-        min-width: 650px;
-        max-width: 1020px;
+        background: radial-gradient(ellipse at center top, darkseagreen, darkolivegreen);
+        min-width: 360px;
+        max-width: 1075px;
         margin: auto;
         padding: 10px 20px;
     }
 
-    .hidden-xs {
-        display: none ;
+    th {
+        background-color: darkolivegreen;
+        opacity: 0.92;
     }
 
-    nav > ul > li {
+    td {
+        background-color: darkolivegreen;
+        opacity: 0.82;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: auto;
+        grid-auto-rows: minmax(100px, auto);
+        grid-auto-columns: minmax(200px, auto);
+
+
+    }
+
+    .gridX {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-auto-rows: minmax(auto, auto);
+        grid-auto-columns: minmax(200px, auto);
+
+
+    }
+
+    .afficherProfil {
+        margin: 10px auto 10px auto;
+        grid-column: 2/6;
+        grid-row: 2;
+    }
+
+    .visible-xs {
         display: none;
     }
 
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /**
+    header
+     */
+    .site-title {
+        display: flex;
+        align-items: center;
+        font-size: 48px;
+    }
+
+    .site-title img {
+        height: 48px;
+        display: block;
+        margin-right: 5px;
+    }
+
+    header nav ul {
+        margin: 5px 0;
+        display: flex;
+        list-style: none;
+        padding-left: 0;
+    }
+
+    header nav a {
+        display: block;
+        padding: 5px 8px;
+        margin-right: 10px;
+    }
+
+    .by {
+        grid-column: 3/3;
+        font-size: small;
+        margin: 70px auto auto auto;
+        font-style: italic;
+    }
+
+    .titre {
+        grid-column: 2/3;
+        margin: auto auto auto auto;
+        font-size: 75px;
+    }
+
+    .titreLogo {
+        display: grid;
+        height: 125px;
+    }
+
+    .imageLogo {
+        grid-column: 1/3;
+        margin: auto 10px auto;
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        height: 125px;
+
+    }
+
+    .sortieTitle {
+        margin: 10px auto 10px auto;
+        text-align: center;
+        grid-column: 3/5;
+    }
+
+    /**
+main
+ */
+    main {
+        padding: 30px 0;
+        border-top: 1px solid #D3D3D3;
+        border-bottom: 1px solid #D3D3D3;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    .photoProfil {
+        margin-top: 10px;
+        width: 175px;
+        height: auto;
+        grid-column: 1/span 2;
+        grid-row: 1/1;
+        align-content: center;
+        margin-left: 30%;
+
+
+    }
+
+    /**
+   footer
+    */
+    footer {
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    .btn-publierSortie {
+        grid-area: 7 / 3 /span 1 / span 2;
+        margin: 5px auto 0px 60px;
+    }
+
+    .btn-save {
+        grid-area: 7 / 2 /span 1 / span 1;
+        margin: 5px auto 0px 60px;
+    }
+
+    .search-button > button {
+        grid-area: 1 / 3 / span 1 / span 1;
+        margin-bottom: 15px;
+        margin-left: 350px;
+    }
+
+    button {
+        color: #000 !important;
+        margin: 5px;
+    }
+
+    .bouton-plus {
+        width: 25px;
+    }
+
+    .afficherProfil > label {
+        width: 120px;
+    }
+
+    label {
+        width: 150px;
+    }
+
+    .flash {
+        padding: 20px;
+        display: block;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .flash-success {
+        background-color: #6b9311;
+        color: #333333;
+    }
+
+    .flash-error {
+        background-color: red;
+        color: black;
+    }
+
+    .child1AddSortie label {
+        padding-top: 5px;
+        width: inherit;
+        margin-right: 20px;
+    }
+
+
+    .child1AddSortie {
+        margin: 40px auto 10px auto;
+        grid-area: 1 / 1 / span 7 / span 3;
+    }
+
+    .child2AddSortie {
+        grid-area: 3 / 5 / span 3 / span 4;
+    }
+
+    .child1AfficherSortie {
+        margin: 10px auto 10px auto;
+        grid-column: 1/4;
+        grid-row: 2;
+    }
+
+    .child2AfficherSortie {
+        margin: 10px auto 10px auto;
+        grid-column: 4/7;
+        grid-row: 2;
+    }
+
+    .description {
+        text-indent: 6em;
+    }
+
+    .accueil {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        grid-gap: 10px;
+    }
+
+    .titrePage {
+        margin: 10px auto 10px auto;
+        text-align: center;
+        grid-column: 3/5;
+    }
+
+    .child1Accueil {
+        grid-area: 1 / 1 / span 3 / span 2;
+    }
+
+    .dateSortie {
+        grid-column: 1 / span 2;
+        grid-row-start: 1;
+        grid-row-end: span 1;
+    }
+
+    .accueil label {
+        width: inherit;
+    }
+
+    .dateSortie > input {
+        width: 120px;
+    }
+
+    .research > input {
+        width: 140px;
+    }
+
+    .child2Accueil {
+        grid-area: 1 / 3 / span 4 / span 2;
+    }
+
+    .filtreSortie {
+        margin-bottom: 40px;
+    }
+
+    .grid2 {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: auto;
+        grid-auto-rows: minmax(100px, auto);
+        grid-auto-columns: minmax(200px, auto);
+
+    }
+
+
+    .annulerSortie {
+        margin: 10px auto 10px auto;
+        grid-column: 2/6;
+        grid-row: 2;
+    }
+
+    .modif {
+        display: grid;
+        grid-template-areas: "colLeft colRight" "button button";
+    }
+
+    .modifCol1 {
+        grid-area: colLeft;
+        grid-template-areas: "nom" "dateSortie" "dateInsc" "nbrPlace" "duree" "desc";
+    }
+
+    .modifCol2 {
+        grid-area: colRight;
+    }
+
+    .modifButton {
+        grid-area: button;
+    }
+
+    .msgFull {
+        border: white;
+        background-color: darkred;
+        color: white;
+    }
+
+    .btn-add {
+        margin: 10px auto 10px auto;
+        grid-area: 7 / 5 / 7 / span 2;
+    }
+
+    .login {
+        text-align: center;
+    }
+
     .tableauAffich {
-        height: 600px;
-        width: 610px;
+        height: 400px;
+        width: 1050px;
         overflow-y: scroll;
         text-align: center;
     }
 
-    .by {
-        margin: inherit;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    #ajouterSortie {
+        margin-top: 15px;
+    }
+
+    td th {
+        background-size: auto;
+    }
+
+    .x {
+        color: white;
+    }
+
+    #ajouterSortie {
+        margin-top: 15px;
+    }
+
+    td > a {
+        color: white;
+    }
+
+    button {
+        color: black;
+        margin: 5px;
+    }
+
+    .button > button {
+        color: #000;
         text-align: center;
-        grid-area: 2 / 2 / span 1 / span 3;
+        display: block;
+        margin: auto;
     }
 
-    .visible-xs {
-        display: unset;
+
+    button > .btn .active {
+        color: black;
+        background-color: darkolivegreen;
+        border-color: #333333;
     }
 
+
+    @media (max-width: 767px) {
+        .container {
+            min-width: 650px;
+            max-width: 1020px;
+            margin: auto;
+            padding: 10px 20px;
+        }
+
+        .hidden-xs {
+            display: none;
+        }
+
+        .titre {
+            margin: auto auto auto auto;
+            font-size: 75px;
+        }
+
+        .titreLogo {
+            display: grid;
+        }
+
+        .imageLogo {
+            grid-column: 1/3;
+            margin: auto 10px auto;
+            width: 7em;
+            height: 8em;
+
+
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        nav > ul > li {
+            display: none;
+        }
+
+        .tableauAffich {
+            height: 600px;
+            width: 610px;
+            overflow-y: scroll;
+            text-align: center;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        .by {
+            margin: inherit;
+            text-align: center;
+            font-size: 1.5em;
+            font-style: italic;
+            grid-area: 2 / 2 / span 1 / span 3;
+        }
+
+        .visible-xs {
+            display: unset;
+            font-size: 1.3em;
+        }
+
+        table {
+            margin-top: 5em;
+        }
+
+        table thead {
+            text-align: center;
+        }
+
+        .grid {
+            display: inherit;
+        }
+
+        label {
+            width: 269px
+        }
+
+        button {
+            color: #000 !important;
+
+        }
+
+        main .login .button button {
+            font-size: 1em;
+            margin-top: 1.5em;
+        }
+
+        .login {
+            margin-top: 4.5em;
+            font-size: 1.75em;
+        }
+
+        .login input {
+            margin-top: 0.50em;
+            margin-bottom: 1.3em;
+        }
+
+        .ck-box-login {
+            font-size: 0.75em;
+        }
+
+        .filtreSortie {
+            margin-top: 1.5em;
+        }
+
+        .child1AfficherSortie {
+            font-size: 1.3em;
+        }
+
+        .child1AfficherSortie label {
+            width: 275px
+        }
+
+        .child2AfficherSortie {
+            font-size: 1.3em;
+        }
+
+        .child2AfficherSortie label {
+            width: 275px
+        }
+
+        .list-participants {
+            font-size: 1.3em;
+        }
+
+        .description {
+            font-style: italic;
+            font-size: 0.90em;
+            text-indent: 8em;
+        }
+
+        .sortieTitle {
+            margin-bottom: 1em;
+            text-align: center;
+        }
+
+        .login {
+            text-align: center;
+        }
+
+
+        /**
+       footer
+        */
+        footer {
+            margin-top: 2em;
+            font-size: 1em;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+    }
 }
