@@ -13,6 +13,14 @@
         margin: auto;
         padding: 10px 20px;
     }
+    .z {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .td-mail {
+        max-width: 60px;
+    }
 
     th {
         background-color: darkolivegreen;
@@ -22,6 +30,7 @@
     td {
         background-color: darkolivegreen;
         opacity: 0.82;
+        max-height: max-content;
     }
 
     .grid {
@@ -61,6 +70,10 @@
 
     a:hover {
         text-decoration: underline;
+        color: #0b2e13;
+    }
+    .btn>a {
+        text-decoration: none;
     }
 
     /**
