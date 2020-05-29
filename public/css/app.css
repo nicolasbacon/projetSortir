@@ -1,4 +1,5 @@
-@media (min-width: 768px) and (max-width:1600px) {
+
+@media (min-width: 1025px) {
     body {
         margin: 0;
         font-family: 'DM Mono', monospace;
@@ -13,6 +14,7 @@
         margin: auto;
         padding: 10px 20px;
     }
+
     .z {
         text-align: center;
         margin-bottom: 20px;
@@ -39,8 +41,6 @@
         grid-template-rows: auto;
         grid-auto-rows: minmax(100px, auto);
         grid-auto-columns: minmax(200px, auto);
-
-
     }
 
     .gridX {
@@ -49,8 +49,6 @@
         grid-template-rows: repeat(3, 1fr);
         grid-auto-rows: minmax(auto, auto);
         grid-auto-columns: minmax(200px, auto);
-
-
     }
 
     .afficherProfil {
@@ -72,7 +70,8 @@
         text-decoration: underline;
         color: #0b2e13;
     }
-    .btn>a {
+
+    .btn > a {
         text-decoration: none;
     }
 
@@ -159,17 +158,8 @@ main
         grid-row: 1/1;
         align-content: center;
         margin-left: 30%;
-
-
     }
 
-    /**
-   footer
-    */
-    footer {
-        padding: 20px 0;
-        text-align: center;
-    }
 
     .btn-publierSortie {
         grid-area: 7 / 3 /span 1 / span 2;
@@ -185,11 +175,6 @@ main
         grid-area: 1 / 3 / span 1 / span 1;
         margin-bottom: 15px;
         margin-left: 350px;
-    }
-
-    button {
-        color: #000 !important;
-        margin: 5px;
     }
 
     .bouton-plus {
@@ -345,6 +330,10 @@ main
         text-align: center;
     }
 
+    main .login .button button {
+        margin-bottom: 1em;
+    }
+
     .tableauAffich {
         height: 400px;
         width: 1050px;
@@ -395,27 +384,471 @@ main
         border-color: #333333;
     }
 
+    /**
+footer
+ */
+    footer {
+        padding: 20px 0;
+        text-align: center;
+    }
+
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    body {
+        margin: 0;
+        font-family: 'DM Mono', monospace;
+        background: radial-gradient(ellipse at center top, darkseagreen, darkolivegreen);
+    }
+
+    .container {
+        min-width: 360px;
+        max-width: 1075px;
+        margin: auto;
+        padding: 10px 20px;
+    }
+
+    .z {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .td-mail {
+        max-width: 60px;
+    }
+
+    th {
+        background-color: darkolivegreen;
+        opacity: 0.92;
+    }
+
+    td {
+        background-color: darkolivegreen;
+        opacity: 0.82;
+        max-height: max-content;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: auto;
+        grid-auto-rows: minmax(100px, auto);
+        grid-auto-columns: minmax(200px, auto);
+    }
+
+    .gridX {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-auto-rows: minmax(auto, auto);
+        grid-auto-columns: minmax(200px, auto);
+    }
+
+    .afficherProfil {
+        margin: 10px auto 10px auto;
+        grid-column: 2/6;
+        grid-row: 2;
+    }
+
+    .visible-xs {
+        display: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        color: #0b2e13;
+    }
+
+    .btn > a {
+        text-decoration: none;
+    }
+
+    /**
+    header
+     */
+    .site-title {
+        display: flex;
+        align-items: center;
+        font-size: 48px;
+    }
+
+    .site-title img {
+        height: 48px;
+        display: block;
+        margin-right: 5px;
+    }
+
+    header nav ul {
+        margin: 5px 0;
+        display: flex;
+        list-style: none;
+        padding-left: 0;
+    }
+
+    header nav a {
+        display: block;
+        padding: 5px 8px;
+        margin-right: 10px;
+    }
+
+
+
+    .by {
+        text-align: center;
+        font-size: 1em;
+        font-style: italic;
+        grid-area: 2 / 2 / span 1 / span 3;
+    }
+
+
+    nav > ul > li {
+        margin-top: 1.5em;
+        font-size: 1em;
+    }
+
+    .titre {
+        grid-column: 2/3;
+        margin: auto auto auto auto;
+        font-size: 75px;
+    }
+
+    .titreLogo {
+        display: grid;
+        height: 125px;
+    }
+
+    .imageLogo {
+        grid-column: 1/3;
+        margin: auto 10px auto;
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        height: 125px;
+
+    }
+
+    .sortieTitle {
+        margin: 10px auto 10px auto;
+        text-align: center;
+        grid-column: 3/5;
+    }
+
+    /**
+main
+ */
+    main {
+        padding: 30px 0;
+        border-top: 1px solid #D3D3D3;
+        border-bottom: 1px solid #D3D3D3;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    .photoProfil {
+        margin-top: 10px;
+        width: 175px;
+        height: auto;
+        grid-column: 1/span 2;
+        grid-row: 1/1;
+        align-content: center;
+        margin-left: 30%;
+    }
+
+
+    .btn-publierSortie {
+        grid-area: 7 / 3 /span 1 / span 2;
+        margin: 5px auto 0px 60px;
+    }
+
+    .btn-save {
+        grid-area: 7 / 2 /span 1 / span 1;
+        margin: 5px auto 0px 60px;
+    }
+
+    .bouton-plus {
+        width: 25px;
+    }
+
+    .afficherProfil > label {
+        width: 120px;
+    }
+
+    label {
+        width: 150px;
+    }
+
+    .flash {
+        padding: 20px;
+        display: block;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .flash-success {
+        background-color: #6b9311;
+        color: #333333;
+    }
+
+    .flash-error {
+        background-color: red;
+        color: black;
+    }
+
+    .child1AddSortie label {
+        padding-top: 5px;
+        width: inherit;
+        margin-right: 20px;
+    }
+
+
+    .child1AddSortie {
+        margin: 40px auto 10px auto;
+        grid-area: 1 / 1 / span 7 / span 3;
+    }
+
+    .child2AddSortie {
+        grid-area: 3 / 5 / span 3 / span 4;
+    }
+
+    .child1AfficherSortie {
+        margin: 10px auto 10px auto;
+        grid-column: 1/4;
+        grid-row: 2;
+    }
+
+    .child2AfficherSortie {
+        margin: 10px auto 10px auto;
+        grid-column: 4/7;
+        grid-row: 2;
+    }
+
+    .description {
+        text-indent: 6em;
+    }
+
+    .accueil {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        grid-gap: 10px;
+    }
+
+    .titrePage {
+        margin: 10px auto 10px auto;
+        text-align: center;
+        grid-column: 3/5;
+    }
+
+    .child1Accueil {
+        grid-area: 1 / 1 / span 3 / span 3;
+    }
+
+    .dateSortie {
+        grid-column: 1 / span 2;
+        grid-row-start: 1;
+        grid-row-end: span 1;
+    }
+
+    .accueil label {
+        width: inherit;
+    }
+
+    .dateSortie > input {
+        width: 130px;
+    }
+
+    .research > input {
+        width: 140px;
+    }
+
+    .child2Accueil {
+        grid-area: 4 / 1 / span 4 / span 4;
+    }
+
+    .filtreSortie {
+        margin-bottom: 40px;
+    }
+
+    .grid2 {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: auto;
+        grid-auto-rows: minmax(100px, auto);
+        grid-auto-columns: minmax(200px, auto);
+
+    }
+
+
+    .annulerSortie {
+        margin: 10px auto 10px auto;
+        grid-column: 2/6;
+        grid-row: 2;
+    }
+
+    .modif {
+        display: grid;
+        grid-template-areas: "colLeft colRight" "button button";
+    }
+
+    .modifCol1 {
+        grid-area: colLeft;
+        grid-template-areas: "nom" "dateSortie" "dateInsc" "nbrPlace" "duree" "desc";
+    }
+
+    .modifCol2 {
+        grid-area: colRight;
+    }
+
+    .modifButton {
+        grid-area: button;
+    }
+
+    .msgFull {
+        border: white;
+        background-color: darkred;
+        color: white;
+    }
+
+    .btn-add {
+        margin: 10px auto 10px auto;
+        grid-area: 7 / 5 / 7 / span 2;
+    }
+
+    main .login .button button {
+        font-size: 0.90em;
+        margin-top: 1.5em;
+        margin-bottom: 1em;
+    }
+
+    .login {
+        text-align: center;
+        margin-top: 3em;
+        font-size: 1.5em;
+    }
+
+    .login label{
+        width: 10em;
+    }
+    .login input {
+        width: 8em;
+        margin-top: 0.50em;
+        margin-bottom: 1.3em;
+    }
+
+    .ck-box-login {
+        font-size: 0.75em;
+    }
+
+
+    main .login .button button {
+        margin-bottom: 1em;
+    }
+
+    .tableauAffich {
+        height: 400px;
+        width: 700px;
+        overflow-y: scroll;
+        text-align: center;
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    #ajouterSortie {
+        margin-top: 15px;
+    }
+
+    td th {
+        background-size: auto;
+    }
+
+    .x {
+        color: white;
+    }
+
+    td > a {
+        color: white;
+    }
+
+    button {
+        color: black;
+        margin: 5px;
+    }
+
+    .button > button {
+        color: #000;
+        text-align: center;
+        display: block;
+        margin: auto;
+    }
+
+
+    button > .btn .active {
+        color: black;
+        background-color: darkolivegreen;
+        border-color: #333333;
+    }
+
+    /**
+footer
+ */
+    footer {
+        padding: 20px 0;
+        text-align: center;
+    }
+
+}
+
 
     @media (max-width: 767px) {
         body {
             margin: 0;
             font-family: 'DM Mono', monospace;
+            background: radial-gradient(ellipse at center top, darkseagreen, darkolivegreen);
         }
 
 
         .container {
-            background: radial-gradient(ellipse at center top, darkseagreen, darkolivegreen);
+
             min-width: 650px;
             max-width: 1020px;
             margin: auto;
             padding: 10px 20px;
         }
 
-
-
         .hidden-xs {
             display: none;
         }
+
+        .z {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .td-mail {
+            max-width: 60px;
+        }
+
+        th {
+            background-color: darkolivegreen;
+            opacity: 0.92;
+        }
+
+        td {
+            background-color: darkolivegreen;
+            opacity: 0.82;
+            max-height: max-content;
+        }
+
 
         .titre {
             margin: auto auto auto auto;
@@ -433,12 +866,14 @@ main
             height: 8em;
         }
 
-
-
-
+        a {
+            text-decoration: none;
+            color: #000;
+        }
 
         a:hover {
             text-decoration: underline;
+            color: #0b2e13;
         }
 
         nav > ul > li {
@@ -493,6 +928,7 @@ main
         main .login .button button {
             font-size: 1em;
             margin-top: 1.5em;
+            margin-bottom: 1em;
         }
 
         .login {
@@ -529,8 +965,13 @@ main
             width: 275px
         }
 
+
         .list-participants {
             font-size: 1.3em;
+            margin-bottom: 3em;
+        }
+        h2{
+            margin-top: 1em;
         }
 
         .description {
@@ -540,6 +981,7 @@ main
         }
 
         .sortieTitle {
+            margin-top: 2em;
             margin-bottom: 1em;
             text-align: center;
         }
@@ -559,5 +1001,4 @@ main
             text-align: center;
         }
 
-    }
 }

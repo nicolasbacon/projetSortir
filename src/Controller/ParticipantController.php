@@ -319,8 +319,8 @@ class ParticipantController extends AbstractController
             }
 
             $transport = (new \Swift_SmtpTransport('smtp.live.com', 25))
-                ->setUsername('urbman78@hotmail.fr')
-                ->setPassword('Choset78')
+                ->setUsername('')
+                ->setPassword('')
             ;
 
             // Create the Mailer using your created Transport

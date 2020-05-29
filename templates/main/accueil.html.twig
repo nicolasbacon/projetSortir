@@ -43,71 +43,69 @@
         </div>
     </div>
     {{ form_end(researchForm) }}
-</div>
-    <div class="hidden-xs">
-        <div class="add-button">
-            <button class="btn border active z" id="ajouterSortie"><a href="{{ path('add_sortie') }}">Ajouter une sortie</a></button>
-        </div>
+    <div class="add-button">
+        <button class="btn border active z" id="ajouterSortie"><a href="{{ path('add_sortie') }}">Ajouter une sortie</a></button>
     </div>
-<div class="tableauAffich">
-    <table class="table  table-responsive">
-     <thead>
-     <tr>
-         <th scope="col" align="center">Nom de la sortie</th>
-         <th scope="col" align="center">Date de la sortie</th>
-         <th scope="col" align="center">Clôture</th>
-         <th scope="col" align="center">Inscrits/Places</th>
-         <th scope="col" align="center">Etat</th>
-         <th scope="col" align="center">Inscrit</th>
-         <th scope="col" align="center">Organisateur</th>
-         <th scope="col" align="center">Actions</th>
-     </tr>
-     </thead>
-     <tbody>
 
-     {% for sortie in sorties %}
+    <div class="tableauAffich">
+        <table class="table  table-responsive">
+         <thead>
          <tr>
-
-             <th class="x" scope="row"  align="center">{{ sortie.nom }}</th>
-             <td class="x" align="center">{{ sortie.dateHeureDebut | date ('d/m/Y H:i')}}</td>
-             <td class="x" align="center">{{ sortie.dateLimiteInscription | date('d/m/Y') }}</td>
-             <td class="x" align="center">{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
-             <td class="x" align="center">{{ sortie.etat.libelle }}</td>
-
-             {% set particip = false %}
-             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                 {% for participant in sortie.participants %}
-                     {% if app.user.username == participant.username %}
-                         {% set particip = true %}
-                     {% endif %}
-                 {% endfor %}
-             {% endif %}
-             {% if particip %}
-                <td align="center">X</td>
-             {% else %}
-                 <td> </td>
-             {% endif%}
-             <td align="center">
-                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                 <a href="{{ path('participant_detail',{'id':sortie.organisateur.id}) }}">{{ sortie.organisateur.username }}</a>
-                     {% else %}
-                         {{ sortie.organisateur.username }}
-                 {% endif %}
-             </td>
-
-                 <td align="center">
-                  {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                     <a href="{{ path('sortie_detail',{'id':sortie.id}) }}">Afficher</a>
-                         {% if app.user == sortie.organisateur or app.user.administrateur %}
-                             <a href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</a>
-                         {% endif %}
-                  {% endif %}
-                 </td>
+             <th scope="col" align="center">Nom de la sortie</th>
+             <th scope="col" align="center">Date de la sortie</th>
+             <th scope="col" align="center">Clôture</th>
+             <th scope="col" align="center">Inscrits/Places</th>
+             <th scope="col" align="center">Etat</th>
+             <th scope="col" align="center">Inscrit</th>
+             <th scope="col" align="center">Organisateur</th>
+             <th scope="col" align="center">Actions</th>
          </tr>
-    {% endfor %}
-    </tbody>
-    </table>
-</div>
+         </thead>
+         <tbody>
+
+         {% for sortie in sorties %}
+             <tr>
+
+                 <th class="x" scope="row"  align="center">{{ sortie.nom }}</th>
+                 <td class="x" align="center">{{ sortie.dateHeureDebut | date ('d/m/Y H:i')}}</td>
+                 <td class="x" align="center">{{ sortie.dateLimiteInscription | date('d/m/Y') }}</td>
+                 <td class="x" align="center">{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
+                 <td class="x" align="center">{{ sortie.etat.libelle }}</td>
+
+                 {% set particip = false %}
+                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                     {% for participant in sortie.participants %}
+                         {% if app.user.username == participant.username %}
+                             {% set particip = true %}
+                         {% endif %}
+                     {% endfor %}
+                 {% endif %}
+                 {% if particip %}
+                    <td align="center">X</td>
+                 {% else %}
+                     <td> </td>
+                 {% endif%}
+                 <td align="center">
+                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                     <a href="{{ path('participant_detail',{'id':sortie.organisateur.id}) }}">{{ sortie.organisateur.username }}</a>
+                         {% else %}
+                             {{ sortie.organisateur.username }}
+                     {% endif %}
+                 </td>
+
+                     <td align="center">
+                      {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                         <a href="{{ path('sortie_detail',{'id':sortie.id}) }}">Afficher</a>
+                             {% if app.user == sortie.organisateur or app.user.administrateur %}
+                                 <a href="{{ path('modifier_sortie',{'id':sortie.id}) }}">Modifier</a>
+                             {% endif %}
+                      {% endif %}
+                     </td>
+             </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
 </div>
 <div class="visible-xs">
         <table class="table table-responsive">

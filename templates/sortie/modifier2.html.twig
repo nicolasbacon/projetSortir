@@ -42,13 +42,13 @@
             </div>
 
             <div class="modifButton">
-                <button class="btn btn-secondary active" type="submit"><a>Enregistrer</a></button>
+                <button class="btn border active" type="submit"><a>Enregistrer</a></button>
                 {% if app.user.administrateur %}
-                    <button class="btn btn-secondary active"><a href="{{ path('annuler_sortie',{'id':sortie.id}) }}">Annuler la sortie</a></button>
+                    <button class="btn border active"><a href="{{ path('annuler_sortie',{'id':sortie.id}) }}">Annuler la sortie</a></button>
                 {% elseif sortie.etat.id == 1 or sortie.etat.id == 5 %}
-                    <button class="btn btn-secondary active" type="submit" name="publier" value="publier"><a>Publier la sortie</a></button>
+                    <button class="btn border active" type="submit" name="publier" value="publier"><a>Publier la sortie</a></button>
                 {% elseif app.user.id == sortie.organisateur.id  %}
-                    <button class="btn btn-secondary active"><a href="{{ path('annuler_sortie',{'id':sortie.id}) }}">Annuler la sortie</a></button>
+                    <button class="btn border active"><a href="{{ path('annuler_sortie',{'id':sortie.id}) }}">Annuler la sortie</a></button>
                 {% endif %}
             </div>
 
