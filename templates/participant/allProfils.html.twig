@@ -79,6 +79,8 @@
         {{ form_widget(CSVForm) }}
         <button class="btn border active" type="submit" >Soumettre</button>
     {{ form_start(CSVForm) }}
+
+    <button class="btn border active" type="submit" ><a href="{{ path('register') }}">Ajouter un utilisateur</a></button>
 </div>
 
 {% endblock %}

@@ -88,10 +88,6 @@ class ParticipantController extends AbstractController
                 }
                 $participant->setImageFilename($newFilename);
             }
-           /* $participant->setImageFilename(
-                new File($this->getParameter('image_directory').'/'.$participant->getBrochureFilename())
-            );*/
-            //{{ form_row(registerForm.image) }}
 
             $password = $passwordEncoder->encodePassword($participant, $participant->getPassword());
             $participant->setPassword($password);
@@ -301,7 +297,7 @@ class ParticipantController extends AbstractController
                 $this->addFlash('danger', 'Cette adresse e-mail est inconnue');
 
                 // On retourne sur la page de connexion
-                return $this->redirectToRoute('app_login');
+                return $this->redirectToRoute('login');
             }
 
             // On génère un token
@@ -315,12 +311,12 @@ class ParticipantController extends AbstractController
                 $entityManager->flush();
             } catch (\Exception $e) {
                 $this->addFlash('warning', $e->getMessage());
-                return $this->redirectToRoute('app_login');
+                return $this->redirectToRoute('login');
             }
 
-            $transport = (new \Swift_SmtpTransport('smtp.live.com', 25))
-                ->setUsername('')
-                ->setPassword('')
+            $transport = (new \Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
+                ->setUsername('nicolasbacon.nb@gmail.com')
+                ->setPassword('uphajnxisbhreqkj')
             ;
 
             // Create the Mailer using your created Transport
@@ -331,22 +327,30 @@ class ParticipantController extends AbstractController
 
             // On génère l'e-mail
             $message = (new \Swift_Message('Mot de passe oublié'))
-                ->setFrom('urbman78@hotmail.fr')
-                ->setTo($participant->getMail())
+                ->setFrom(['nicolasbacon.nb@gmail.com' => 'Nicolas BACON'])
+                ->setTo([$participant->getMail()])
                 ->setBody(
                     "Bonjour,<br><br>Une demande de réinitialisation de mot de passe a été effectuée. Veuillez cliquer sur le lien suivant : " . $url,
                     'text/html'
                 )
             ;
 
-            // On envoie l'e-mail
-            $mailer->send($message);
+            try{
+                // On envoie l'e-mail
+                $mailer->send($message);
 
-            // On crée le message flash de confirmation
-            $this->addFlash('message', 'E-mail de réinitialisation du mot de passe envoyé !');
+                $transport = new \Swift_SendmailTransport('/usr/sbin/sendmail -bs');
+                // On crée le message flash de confirmation
+                $this->addFlash('message', 'E-mail de réinitialisation du mot de passe envoyé !');
 
-            // On redirige vers la page de login
-            return $this->redirectToRoute('login');
+            } catch (\Exception $e) {
+                $this->addFlash('warning', $e->getMessage());
+
+            } finally {
+                // On redirige vers la page de login
+                return $this->redirectToRoute('login');
+            }
+
         }
 
         // On envoie le formulaire à la vue
@@ -365,7 +369,7 @@ class ParticipantController extends AbstractController
         if ($user === null) {
             // On affiche une erreur
             $this->addFlash('danger', 'Token Inconnu');
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('login');
         }
 
         // Si le formulaire est envoyé en méthode post
@@ -385,7 +389,7 @@ class ParticipantController extends AbstractController
             $this->addFlash('message', 'Mot de passe mis à jour');
 
             // On redirige vers la page de connexion
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('login');
         }else {
             // Si on n'a pas reçu les données, on affiche le formulaire
             return $this->render('security/reset_password.html.twig', ['token' => $token]);
