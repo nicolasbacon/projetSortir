@@ -88,9 +88,8 @@ class Participant implements UserInterface
      */
     private $sorties;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
-    //@ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
     private $imageFilename;
 
     public function getImageFilename()
@@ -169,7 +168,7 @@ class Participant implements UserInterface
     }
 
 
-    public function setMotPasse($motPasse): void
+    public function setMotPasse($motPasse)
     {
         $this->motPasse = $motPasse;
     }
@@ -180,11 +179,12 @@ class Participant implements UserInterface
         return $this->administrateur;
     }
 
-    public function setAdministrateur($administrateur)
+    /**
+     * @param mixed $administrateur
+     */
+    public function setAdministrateur($administrateur): void
     {
         $this->administrateur = $administrateur;
-
-        return $this;
     }
 
     public function getActif()

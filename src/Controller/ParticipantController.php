@@ -2,15 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\Participant;
+use App\Entity\Sortie;
+use App\Form\CSVType;
 use App\Form\ParticipantType;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
+use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -136,14 +138,72 @@ class ParticipantController extends AbstractController
     /**
      * @Route("/admin/allProfils", name="all_participant")
      */
-    public function allProfils(EntityManagerInterface $em)
+    public function allProfils(EntityManagerInterface $em, Request $request)
     {
 
         $participants = $em->getRepository(Participant::class)->findAll();
 
+        $CSVForm = $this->createForm(CSVType::class);
+
+        $CSVForm->handleRequest($request);
+
+        if ($CSVForm->isSubmitted() && $CSVForm->isValid()) {
+            $file = $CSVForm->get('csv')->getData();
+            if ($file) {
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+                try {
+                    $file->move(
+                        $this->getParameter('csv_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+
+                }
+
+                //load the CSV document from a file path
+                $csv = Reader::createFromPath('../public/csv/'.$newFilename, 'r');
+                $csv->setHeaderOffset(0);
+
+                $records = $csv->getRecords(); //returns all the CSV records as an Iterator object
+
+                $campus = $em->getRepository(Campus::class)->findAll();
+
+
+                foreach ($records as $record) {
+
+                    $participant = new Participant();
+                    $participant
+                        ->setCampus($campus[intval($record['campus_id'])-1])
+                        ->setUsername($record['username'])
+                        ->setNom($record['nom'])
+                        ->setPrenom($record['prenom'])
+                        ->setTelephone($record['telephone'])
+                        ->setMail($record['mail'])
+                        ->setMotPasse($record['mot_passe'])
+                    ;
+
+                    $participant->setAdministrateur(intval($record['administrateur']));
+                    $participant->setActif(intval($record['actif']));
+
+                    $em->persist($participant);
+                }
+
+                $em->flush();
+                $records = null;
+                $csv = null;
+                if( file_exists ( '../public/csv/'.$newFilename))
+                    unlink( '../public/csv/'.$newFilename ) ;
+
+            }
+
+
+            }
 
         return $this->render('participant/allProfils.html.twig', [
             "participants" => $participants,
+            "CSVForm" => $CSVForm->createView(),
         ]);
     }
 
@@ -193,8 +253,8 @@ class ParticipantController extends AbstractController
      */
     public function supprimeParticipant(EntityManagerInterface $em, $id)
     {
-        dump($id);
-        /*$participant = $em->getRepository(Participant::class)->find($id);
+
+        $participant = $em->getRepository(Participant::class)->find($id);
         $sorties = $em->getRepository(Sortie::class)->findByOrganisateur($participant);
 
         foreach ($sorties as $sortie) {
@@ -203,13 +263,10 @@ class ParticipantController extends AbstractController
 
         $em->remove($participant);
         $em->flush();
-        $this->addFlash("success", "Le profil a été supprimé avec succès !");*/
-        $participants = $em->getRepository(Participant::class)->findAll();
+        $this->addFlash("success", "Le profil a été supprimé avec succès !");
 
 
-        return $this->render('participant/allProfils.html.twig', [
-            "participants" => $participants,
-        ]);
+        return $this->redirectToRoute('all_participant');
 
     }
 

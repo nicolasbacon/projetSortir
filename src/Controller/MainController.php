@@ -65,7 +65,7 @@ class MainController extends AbstractController
             //Verifie si organisateur
             if ($organisateur){
                 foreach ($sorties as $key => $sortie) {
-                    if ($user =! $sortie->getOrganisateur()) unset($sorties[$key]);
+                    if ($user != $sortie->getOrganisateur()) unset($sorties[$key]);
                 }
             }
             if ($incrit){
@@ -93,7 +93,6 @@ class MainController extends AbstractController
                 }
             }
         }
-
         //Si il est connecté
         else if ($user != null) {
             //On recupere les sorties de son campus

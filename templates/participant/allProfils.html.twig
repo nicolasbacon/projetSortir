@@ -40,17 +40,18 @@
                  <td align="center">X</td>
                  <td align="center"><a href="{{ path('desactive_participant', {'id': participant.id}) }}">Désactiver</a>
                       <!-- lien trigger modal -->
-                     <a href="{{ path('supprime_participant', {'id': participant.id}) }}" data-toggle="modal" data-target="#exampleModal">Supprimer</a>
+                     <a href="{{ path('supprime_participant', {'id': participant.id}) }}" data-toggle="modal" data-target="#exampleModal{{ participant.username }}">Supprimer</a>
                  </td>
 
              {% else %}
                  <td> </td>
                  <td align="center"><a href="{{ path('active_participant', {'id': participant.id}) }}">Activer</a>
-                     <a href="{{ path('supprime_participant', {'id': participant.id}) }}" data-toggle="modal" data-target="#exampleModal">Supprimer</a></td>
+                     <a href="{{ path('supprime_participant', {'id': participant.id}) }}" data-toggle="modal" data-target="#exampleModal{{ participant.id }}">Supprimer</a>
+                 </td>
              {% endif%}
          </tr>
          <!-- Modal -->
-         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal fade" id="exampleModal{{ participant.username }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
              <div class="modal-dialog">
                  <div class="modal-content">
                      <div class="modal-header">
@@ -72,6 +73,12 @@
     {% endfor %}
     </tbody>
     </table>
+</div>
+<div>
+    {{ form_start(CSVForm) }}
+        {{ form_widget(CSVForm) }}
+        <button class="btn btn-secondary active" type="submit" >Soumettre</button>
+    {{ form_start(CSVForm) }}
 </div>
 
 {% endblock %}
