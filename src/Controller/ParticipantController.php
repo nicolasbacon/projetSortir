@@ -170,7 +170,6 @@ class ParticipantController extends AbstractController
 
                 $campus = $em->getRepository(Campus::class)->findAll();
 
-
                 foreach ($records as $record) {
 
                     $participant = new Participant();
@@ -198,8 +197,8 @@ class ParticipantController extends AbstractController
 
             }
 
-
-            }
+            return $this->redirectToRoute("all_participant");
+        }
 
         return $this->render('participant/allProfils.html.twig', [
             "participants" => $participants,
@@ -376,7 +375,6 @@ class ParticipantController extends AbstractController
         if ($request->isMethod('POST')) {
             // On supprime le token
             $user->setResetToken(null);
-
             // On chiffre le mot de passe
             $user->setPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
 
